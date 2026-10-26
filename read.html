@@ -16,7 +16,7 @@
     <p class="eyebrow">kawauso の投資まんが</p>
     <h1>オルカンに勝てん！</h1>
     <p class="byline">作：kawauso <span aria-hidden="true">／</span> 全107ページ</p>
-    <p class="instructions">下へスクロールして読めます。<br class="mobile-break">文字が小さいときは、ページごとの「拡大」を。</p>
+    <p class="instructions">PCでは画像をクリックして拡大できます。<br class="mobile-break">スマホではピンチで拡大できます。</p>
     <div class="book-actions">
       <button id="open-contents" type="button" disabled>目次から読む <span aria-hidden="true">↗</span></button>
       <a class="download-link" id="pdf-download" href="https://github.com/kawauso9991/orukan-manga/releases/download/v9/orukan-v9-high-quality.pdf" download="orukan-v9-high-quality.pdf">高画質PDFをダウンロード <span id="pdf-size">（約245.2 MB）</span><span aria-hidden="true"> ↓</span></a>
@@ -51,8 +51,10 @@
           <label for="fit-mode" class="sr-only">画面に合わせる方向</label><select id="fit-mode"><option value="height">高さに合わせる</option><option value="width">幅に合わせる</option></select>
           <button id="size-out" type="button" aria-label="表示を縮小">−</button><label for="size-slider" class="sr-only">表示倍率</label><input type="range" id="size-slider" min="50" max="300" step="5" value="100"><output id="size-level" for="size-slider">100%</output><button id="size-in" type="button" aria-label="表示を拡大">＋</button>
         </div>
-        <button id="open-references" type="button" aria-expanded="false" aria-controls="reference-panel">出典・参照 (0)</button>
+        <div id="fullscreen-control-group" class="fullscreen-control-group">
+        <button id="open-references" type="button" aria-expanded="false" aria-controls="reference-panel" hidden>出典・参照</button>
         <button id="toggle-fullscreen" type="button" aria-pressed="false">全画面</button>
+        </div>
       </div>
       <p id="reader-message" role="status"></p>
       <div class="progress-track" aria-hidden="true"><div id="reading-progress"></div></div>
@@ -88,13 +90,8 @@
     <nav aria-label="すべての章と資料"><ol id="contents-list"></ol></nav>
   </dialog>
 
-  <dialog id="zoom-dialog" class="zoom-dialog" aria-labelledby="zoom-title">
-    <div class="zoom-toolbar">
-      <h2 id="zoom-title">ページの拡大</h2><button type="button" id="close-zoom" aria-label="拡大を閉じる">閉じる ×</button>
-      <div class="zoom-controls" role="group" aria-label="拡大率"><button type="button" id="zoom-out" aria-label="縮小">−</button><output id="zoom-level" aria-live="polite">100%</output><button type="button" id="zoom-in" aria-label="拡大">＋</button><button type="button" id="zoom-fit">幅に合わせる</button></div>
-      <p class="zoom-hint">スクロールやドラッグで移動できます。Escで閉じます。</p>
-    </div>
-    <button id="zoom-show-references" class="zoom-show-references" type="button" aria-expanded="false" aria-controls="reference-panel">出典・参照</button>
+  <dialog id="zoom-dialog" class="zoom-dialog" aria-label="ページの拡大">
+    <button type="button" id="close-zoom" class="zoom-close" aria-label="拡大を閉じる">×</button>
     <div class="zoom-viewport" id="zoom-viewport" tabindex="0" aria-label="拡大したページ。上下左右にスクロールできます。"><div class="zoom-canvas" id="zoom-canvas"><img id="zoom-image" alt=""><div id="zoom-links" class="source-links"></div></div></div>
     <p class="zoom-message" id="zoom-message" role="status" hidden></p>
   </dialog>

@@ -51,6 +51,13 @@ export function canTurnWheel({desktop,mode,ctrlKey,metaKey,excluded,pannable,del
   return Boolean(desktop && mode !== 'vertical' && !ctrlKey && !metaKey && !excluded && !pannable && Math.abs(deltaY) > Math.abs(deltaX));
 }
 export function keyDirection(key) { return ({ArrowLeft:1,ArrowDown:1,ArrowRight:-1,ArrowUp:-1,PageDown:1,PageUp:-1})[key] ?? 0; }
+export function chapterLabel(pages,chapters) {
+  return [...new Set(pages.map(page=>chapters.filter(chapter=>chapter.page<=page).at(-1)?.title).filter(Boolean))].join(' → ');
+}
+export function fullscreenReferenceWidth(width,rootFontSize=16) {
+  const font=Number.isFinite(rootFontSize)?Math.max(16,rootFontSize):16;
+  return Math.min(width*.4,Math.max(11.25*font,Math.min(width*.2,17.5*font)));
+}
 export function pageSizes(pages, width, height, fit, scale) {
   const ratioSum = pages.reduce((sum,page)=>sum + page.width / page.height,0);
   const fittedHeight = Math.max(1, fit === 'width' ? width / ratioSum : Math.min(height, width / ratioSum)) * scale;
@@ -60,7 +67,7 @@ export function pageSizes(pages, width, height, fit, scale) {
 // never a width subtracted before fitting the art.
 export function presentationGeometry(pages, width, height, {fullscreen=false,fit='height',scale=1,rootFontSize=16,captionHeight=48}={}) {
   const padding=fullscreen?2:12, gap=fullscreen?4:12;
-  const sizes=pageSizes(pages,Math.max(1,width-padding*2-gap*(pages.length-1)),Math.max(1,height-(fullscreen?4:Math.max(48,captionHeight)+18)),fit,scale);
+  const sizes=pageSizes(pages,Math.max(1,width-padding*2-gap*(pages.length-1)),Math.max(1,height-(fullscreen?4:Math.max(0,captionHeight)+18)),fit,scale);
   const artWidth=sizes.reduce((sum,size)=>sum+size.width,0)+gap*(pages.length-1);
   const room=Math.floor((width-artWidth)/2-8);
   const textScale=Math.max(1,Number.isFinite(rootFontSize)?rootFontSize/16:1);

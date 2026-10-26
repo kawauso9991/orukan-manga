@@ -1,4 +1,4 @@
-import { visiblePages, stepPage, effectiveMode, readPreferences, writePreferences, createWheelIntent, canTurnWheel, keyDirection, presentationGeometry, referenceGroups, createFullscreenController } from './presentation.mjs';
+import { visiblePages, stepPage, effectiveMode, readPreferences, writePreferences, createWheelIntent, canTurnWheel, keyDirection, presentationGeometry, fullscreenReferenceWidth, referenceGroups, createFullscreenController } from './presentation.mjs';
 
 // Presentation never owns the active logical page; navigation/history do.
 export function createPresentationUI({book,figures,images,getPage,getStorage,go,makeLink,reflow,persist,loadPage,observeScroll}) {
@@ -10,6 +10,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   let fullscreenActive=false, fullscreenPreferences=null, windowedAnchor=null, transitionPending=false, transitionGeneration=0;
   let railWidth=0, referenceChoice=null, autoReferences=false, chromeVisible=true, chromeTimer=null, suppressTouchClickUntil=0, relocatedFocus=null;
   let chromeHiddenByUser=false, topEdgeHover=false, toolbarHover=false, keyboardChrome=false;
+  let referenceCount=0;
   const toolbar=$('reader-toolbar'), rail=$('navigation-rail');
   const view=()=>fullscreenPreferences??preferences;
   const transitioning=()=>transitionPending||(document.fullscreenElement===shell)!==fullscreenActive;
@@ -24,19 +25,23 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     stage.scrollTop=anchor.y*deck.scrollHeight-stage.clientHeight/2;
   }
   function pannable() { return paginated() && (stage.scrollWidth>stage.clientWidth+2 || stage.scrollHeight>stage.clientHeight+2); }
-  function docked() { return railWidth>0 && paginated() && panel.parentElement=== $('reading-body'); }
+  const desktopFullscreen=()=>fullscreenActive&&window.innerWidth>=1024;
+  const pinnedReferences=()=>window.innerWidth>=1024&&panel.parentElement===$('reading-body')&&(fullscreenActive||referenceCount>0);
+  function docked() { return window.innerWidth>=1024&&panel.parentElement===$('reading-body'); }
   function panelModal() { return !panel.hidden && !docked(); }
   function layoutRails() {
-    const available=paginated()&&railWidth>0;
+    const available=desktopFullscreen()&&paginated()&&railWidth>0;
     const mobile=window.innerWidth<1024;
     const focused=document.activeElement;
     shell.style.setProperty('--rail-width',`${railWidth}px`);
     rail.hidden=!available;
     const home=available?rail:$('toolbar-navigation-home');
     const destinations=[['reading-status',mobile?$('mobile-menu-actions'):home],
-      ['navigation-controls',mobile?$('mobile-navigation'):home],
+      ['navigation-controls',mobile?$('mobile-navigation'):desktopFullscreen()?$('toolbar-navigation-home'):home],
       ['toolbar-contents',mobile?$('mobile-menu-actions'):$('navigation-controls')],
-      ['open-references',mobile?$('mobile-menu-actions'):$('presentation-controls')]];
+      ['open-references',mobile?$('mobile-menu-actions'):$('fullscreen-control-group')],
+      ['toggle-fullscreen',mobile&&fullscreenActive?$('fullscreen-affordance'):$('fullscreen-control-group')],
+      ['reveal-controls',desktopFullscreen()?$('presentation-controls'):$('fullscreen-affordance')]];
     for(const [id,target] of destinations) if($(id).parentElement!==target) {
       if($(id).contains(focused)) relocatedFocus=focused;
       target.append($(id));
@@ -45,15 +50,18 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     toolbar.hidden=mobile;
     $('toggle-fullscreen').hidden=mobile&&!fullscreenActive;
     $('reveal-controls').hidden=mobile;
+    $('fullscreen-affordance').hidden=!fullscreenActive||desktopFullscreen();
+    $('open-references').hidden=referenceCount===0&&!pinnedReferences();
+    $('open-references').disabled=referenceCount===0;
+    $('close-references').hidden=pinnedReferences();
     $('previous').textContent=mobile?'←':'← 前へ';
     $('next').textContent=mobile?'→':'次へ →';
     if(!mobile&&focused===$('mobile-menu-toggle'))relocatedFocus=$('page-number');
     document.documentElement.style.setProperty('--mobile-nav-height',mobile?`${$('mobile-navigation').getBoundingClientRect().height}px`:'0px');
-    if(fullscreenActive&&docked()&&referenceChoice===null&&panel.hidden) {
+    if(pinnedReferences()&&panel.hidden) {
       panel.hidden=false;autoReferences=true;
     }
     $('open-references').setAttribute('aria-expanded',String(!panel.hidden));
-    $('zoom-show-references').setAttribute('aria-expanded',String(!panel.hidden));
   }
   function layoutPanel({opening=false}={}) {
     shell.classList.toggle('references-open',!panel.hidden && docked());
@@ -73,9 +81,13 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
       }
       if(!panel.contains(document.activeElement)) $('close-references').focus({preventScroll:true});
     }
+    if(!modal&&pinnedReferences()&&document.activeElement===$('close-references'))panel.focus({preventScroll:true});
     if(!modal&&relocatedFocus) {
-      if(!fullscreenActive||keyboardChrome||(!chromeHiddenByUser&&chromeVisible)) setChrome(true);
-      relocatedFocus.focus({preventScroll:true});
+      if(fullscreenActive&&!chromeVisible&&toolbar.contains(relocatedFocus)) stage.focus({preventScroll:true});
+      else {
+        if(!fullscreenActive||keyboardChrome||(!chromeHiddenByUser&&chromeVisible)) setChrome(true);
+        relocatedFocus.focus({preventScroll:true});
+      }
     }
     relocatedFocus=null;
     modalActive=modal;
@@ -85,6 +97,15 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     if(paginated() && displayed && !pendingAnchor) pendingAnchor=lastAnchor??panAnchor();
     mode=effectiveMode(view().mode,window.innerWidth);
     shell.dataset.mode=mode;
+    shell.classList.toggle('desktop-fullscreen',desktopFullscreen());
+    shell.classList.toggle('desktop-windowed',window.innerWidth>=1024&&!fullscreenActive);
+    const font=parseFloat(window.getComputedStyle(document.documentElement).fontSize)||16;
+    shell.style.setProperty('--fullscreen-reference-width',`${fullscreenReferenceWidth(window.innerWidth,font)}px`);
+    if(pinnedReferences()&&panel.hidden){panel.hidden=false;autoReferences=true;}
+    else if(window.innerWidth<1024&&autoReferences){
+      if(panel.contains(document.activeElement))relocatedFocus=$('mobile-menu-toggle');
+      panel.hidden=true;autoReferences=false;
+    }
     renderPages(true);layoutPanel({opening});
     $('display-mode').value=view().mode;
     $('display-mode').disabled=window.innerWidth<1024;
@@ -96,12 +117,14 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     $('size-in').disabled=view().scale>=3;
     $('size-controls').hidden=!paginated();
     if(!paginated()) pendingAnchor=null;
-    document.documentElement.style.setProperty('--toolbar-height',`${$('reader-toolbar').getBoundingClientRect().height}px`);
+    document.documentElement.style.setProperty('--toolbar-height','0px');
   }
   function renderPages(force=false) {
     const selected=pages(), key=`${mode}:${selected.join(',')}`;
     shell.dataset.page=String(getPage());
     for(let i=0;i<figures.length;i++) {
+      if(window.innerWidth>=1024){images[i].setAttribute('role','button');images[i].setAttribute('tabindex','0');images[i].setAttribute('aria-label',`${images[i].alt??''}を拡大`);}
+      else {images[i].removeAttribute('role');images[i].removeAttribute('tabindex');images[i].removeAttribute('aria-label');}
       figures[i].classList.toggle('active-page',i+1===getPage());
       if(i+1===getPage()) figures[i].setAttribute('aria-current','page'); else figures[i].removeAttribute('aria-current');
     }
@@ -115,27 +138,25 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     }
     if(paginated()) {
       railWidth=Infinity;
-      // Mask only the cover's verified blank columns (28/1200 per side).
+      // Mask only the cover's verified blank columns (29/1200 per side).
       const displayPages=selected.map(number=>{
         const item=book.pages[number-1];
-        return number===1?{...item,width:item.width*1144/1200}:item;
+        return number===1?{...item,width:item.width*1142/1200}:item;
       });
       // Moving the single navigation block can change the windowed toolbar's
       // height. Settle that layout in bounded passes; don't oscillate a rail at
       // the threshold by lending it the space created by hiding itself.
-      const captionHeight=()=>Math.max(48,...selected.map(n=>figures[n-1].firstElementChild?.getBoundingClientRect().height??0));
       for(let pass=0;pass<3;pass++) {
         const width=stage.clientWidth,height=stage.clientHeight;
         const rootFontSize=parseFloat(window.getComputedStyle(document.documentElement).fontSize)||16;
-        const caption=captionHeight();
-        const geometry=presentationGeometry(displayPages,width,height,{...view(),fullscreen:fullscreenActive,rootFontSize,captionHeight:caption});
+        const geometry=presentationGeometry(displayPages,width,height,{...view(),fullscreen:fullscreenActive,rootFontSize,captionHeight:0});
         railWidth=Math.min(railWidth,geometry.railWidth);
         selected.forEach((number,index)=>{
           const figure=figures[number-1], size=geometry.sizes[index];
           figure.style.width=`${size.width}px`;figure.style.flexBasis=`${size.width}px`;
         });
         layoutRails();
-        if(width===stage.clientWidth&&height===stage.clientHeight&&(fullscreenActive||caption===captionHeight()))break;
+        if(width===stage.clientWidth&&height===stage.clientHeight)break;
       }
       selected.forEach(number=>{
         loadPage(number);
@@ -165,8 +186,12 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   function references() {
     const numbers=visibleReferencePages();
     const groups=referenceGroups(numbers,book.links), count=groups.reduce((sum,group)=>sum+group.links.length,0);
-    $('open-references').textContent=`出典・参照 (${count})`;
-    $('zoom-show-references').textContent=`出典・参照 (${count})`;
+    referenceCount=count;
+    $('open-references').textContent=count?`出典・参照 (${count})`:'出典・参照';
+    $('open-references').hidden=count===0&&!pinnedReferences();
+    $('open-references').disabled=count===0;
+    if(pinnedReferences()&&panel.hidden){panel.hidden=false;autoReferences=true;resize();reflow();}
+    if(!count&&!pinnedReferences()&&!panel.hidden)setPanel(false,undefined,{intentional:false});
     const key=numbers.join(','); if(referenceKey===key) return;
     referenceKey=key;
     const content=$('reference-content'), focused=document.activeElement;
@@ -183,19 +208,19 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     }
     content.replaceChildren(fragment);
     // Updating a spread must never unexpectedly focus the panel.
-    if(focusWasLink) $('close-references').focus({preventScroll:true});
+    if(focusWasLink) (pinnedReferences()?panel:$('close-references')).focus({preventScroll:true});
   }
   function setPanel(open,trigger,{intentional=true}={}) {
+    if(!open&&pinnedReferences())return;
     if(intentional) {referenceChoice=open;autoReferences=false;}
     if(open===!panel.hidden) return;
     if(paginated()) pendingAnchor=panAnchor();
     panel.hidden=!open;
     $('open-references').setAttribute('aria-expanded',String(open));
-    $('zoom-show-references').setAttribute('aria-expanded',String(open));
     if(open) opener=trigger??document.activeElement;
     resize({opening:open}); reflow(); references();
     if(open) $('close-references').focus({preventScroll:true});
-    else (opener??$('open-references')).focus({preventScroll:true});
+    else (opener&&!opener.hidden?opener:$('open-references').hidden?stage:$('open-references')).focus({preventScroll:true});
   }
   function changePreference(change) {
     persist();
@@ -211,8 +236,9 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   $('size-out').addEventListener('click',()=>changePreference({scale:Math.max(.5,Math.round((view().scale-.25)*100)/100)}));
   $('size-in').addEventListener('click',()=>changePreference({scale:Math.min(3,Math.round((view().scale+.25)*100)/100)}));
   $('size-slider').addEventListener('input',event=>changePreference({scale:Number(event.target.value)/100}));
-  $('open-references').addEventListener('click',event=>setPanel(panel.hidden,event.currentTarget));
-  $('zoom-show-references').addEventListener('click',event=>setPanel(panel.hidden,event.currentTarget));
+  $('open-references').addEventListener('click',event=>{
+    if(pinnedReferences())panel.focus({preventScroll:true});else setPanel(panel.hidden,event.currentTarget);
+  });
   $('close-references').addEventListener('click',()=>setPanel(false));
   function setChrome(visible) {
     const editing=Boolean(document.activeElement?.matches?.('input,select,textarea,[contenteditable]:not([contenteditable="false"])'));
@@ -235,7 +261,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   $('reveal-controls').addEventListener('click',event=>{
     if(chromeVisible) {
       chromeHiddenByUser=true;keyboardChrome=false;clearTimeout(chromeTimer);setChrome(false);
-      if(event.detail>0) stage.focus({preventScroll:true});
+      if(event.detail>0||toolbar.contains(event.currentTarget??event.target)) stage.focus({preventScroll:true});
     }
     else {chromeHiddenByUser=false;revealChrome(true);}
   });
@@ -268,8 +294,8 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     if(event.key==='Tab'&&fullscreenActive&&!panelModal()&&!document.querySelector('dialog[open]')) {
       keyboardChrome=true;revealChrome();
     }
-    if(event.key==='Escape'&&!panel.hidden&&!$('contents-dialog').open) {event.preventDefault();setPanel(false);return;}
-    if(event.key==='Escape'&&!event.defaultPrevented&&panel.hidden&&document.fullscreenElement===shell&&!document.querySelector('dialog[open]')) {
+    if(event.key==='Escape'&&!panel.hidden&&!pinnedReferences()&&!$('contents-dialog').open) {event.preventDefault();setPanel(false);return;}
+    if(event.key==='Escape'&&!event.defaultPrevented&&(panel.hidden||pinnedReferences())&&document.fullscreenElement===shell&&!document.querySelector('dialog[open]')) {
       event.preventDefault();fullscreen.toggle();return;
     }
     if(event.key==='Tab'&&panelModal()) {
@@ -357,11 +383,9 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
       }
       fullscreenActive=active;
       $('toggle-fullscreen').textContent=active?'全画面を終了':'全画面';$('toggle-fullscreen').setAttribute('aria-pressed',String(active));
-      (active?$('fullscreen-affordance'):$('presentation-controls')).append($('toggle-fullscreen'));
-      $('fullscreen-affordance').hidden=!active;
       topEdgeHover=false;toolbarHover=false;clearTimeout(chromeTimer);setChrome(!active);
       resize();reflow();references();
-      if(recoverFocus&&!panelModal()) $('toggle-fullscreen').focus({preventScroll:true});
+      if(recoverFocus&&!panelModal()) (desktopFullscreen()?stage:$('toggle-fullscreen')).focus({preventScroll:true});
       settleFullscreen(generation);
     },
     onError:()=>{transitionPending=false;pendingAnchor=null;$('reader-message').textContent='全画面表示を変更できませんでした。このままお読みいただけます。';}});

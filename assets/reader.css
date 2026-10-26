@@ -143,11 +143,44 @@ button{min-width:44px}
 .reader-shell[data-page="1"] .navigation-rail .reader-author{display:block;order:-1;font-size:.7rem;color:var(--muted)}
 .reader-shell[data-page="1"] .navigation-rail #current-chapter{font-size:1.02rem;font-weight:600;margin-top:10px}
 .reader-shell[data-page="1"] .navigation-rail #current-position{order:1;width:100%;border-top:1px solid #e7b46a;padding-top:10px;margin-top:4px;font-size:.78rem}
-/* P1 has 29 fully blank columns per side at normal resolution. Mask 28
-   columns conservatively, also inside the HQ image's verified blank area.
+/* P1 has 29 blank columns per side at normal resolution; its remaining
+   antialiasing fringe belongs to the image. Preserve every artwork pixel.
    Mobile and other pages retain their complete image boxes, and enlargement
    still opens the original. */
 @media(min-width:1024px){
-  .reader-shell #page-1 .page-art{aspect-ratio:1144 / 1698;overflow:hidden}
-  .reader-shell #page-1 .page-image{width:104.895105%;max-width:none;margin-left:-2.447552%}
+  .reader-shell #page-1 .page-art{aspect-ratio:1142 / 1698;overflow:hidden}
+  .reader-shell #page-1 .page-image{width:105.078809%;max-width:none;margin-left:-2.539405%}
 }
+
+.fullscreen-control-group{display:contents}
+.reader-shell .page-image{background:#fff}
+.reader-shell .page-image:focus-visible{outline-offset:-3px}
+.reader-shell:fullscreen.desktop-fullscreen .fullscreen-control-group{display:flex;flex-direction:column;align-items:stretch;gap:4px}
+.reader-shell:fullscreen.desktop-fullscreen>.reading-body>.reference-panel{position:relative;inset:auto;flex:0 0 var(--fullscreen-reference-width);width:var(--fullscreen-reference-width);max-height:100%;border-radius:0;box-shadow:none}
+.reader-shell:fullscreen.desktop-fullscreen>.reading-body>.reference-panel .reference-content{min-height:0}
+.reader-shell:fullscreen.desktop-fullscreen .navigation-rail{bottom:12px}
+
+/* Windowed desktop keeps every operation in a fixed left column. The
+   fullscreen toolbar remains a separate hover-only overlay. */
+@media(min-width:1024px){
+  .reader-shell.desktop-windowed{display:flex;flex-direction:row;align-items:stretch;min-height:100dvh}
+  .reader-shell.desktop-windowed>.reader-toolbar{position:sticky;top:0;align-self:flex-start;flex:0 0 var(--fullscreen-reference-width);width:var(--fullscreen-reference-width);height:100dvh;max-height:100dvh;overflow:auto;border-radius:0;box-shadow:none}
+  .reader-shell.desktop-windowed .toolbar-inner{display:flex;flex-direction:column;gap:12px;padding:12px;max-width:none}
+  .reader-shell.desktop-windowed .reading-status{flex-direction:column;align-items:flex-start;gap:8px;white-space:normal}
+  .reader-shell.desktop-windowed #current-chapter{white-space:normal;overflow-wrap:anywhere}
+  .reader-shell.desktop-windowed .toolbar-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .reader-shell.desktop-windowed #page-form,.reader-shell.desktop-windowed #toolbar-contents{grid-column:1/-1}
+  .reader-shell.desktop-windowed .page-form{justify-content:center}
+  .reader-shell.desktop-windowed .presentation-controls{flex-direction:column;align-items:stretch;gap:10px;margin:0}
+  .reader-shell.desktop-windowed .size-controls{justify-content:center}
+  .reader-shell.desktop-windowed .presentation-controls>label{justify-content:space-between;flex-wrap:wrap}
+  .reader-shell.desktop-windowed .fullscreen-control-group{display:flex;flex-direction:column;gap:6px}
+  .reader-shell.desktop-windowed>.reading-body{display:flex;flex:1;min-width:0;min-height:0}
+  .reader-shell.desktop-windowed .reading-stage{flex:1;min-width:0}
+  .reader-shell.desktop-windowed>.reading-body>.reference-panel{position:sticky;inset:auto;top:0;align-self:flex-start;flex:0 0 var(--fullscreen-reference-width);width:var(--fullscreen-reference-width);height:100dvh;max-height:100dvh;border-radius:0;box-shadow:none}
+  .reader-shell.desktop-windowed .reference-content{min-height:0}
+  .reader-shell.desktop-windowed .page{scroll-margin-top:0}
+}
+.reader-shell .zoom-close{position:absolute;z-index:12;right:8px;top:8px;width:44px;height:44px;padding:0;border-radius:50%;background:#171b21bb;border-color:#ffffff66;color:#fff;font-size:1.4rem;line-height:1}
+.reader-shell .zoom-canvas.cover-view{background:#0d1014}
+.reader-shell .zoom-canvas.cover-view img{clip-path:inset(0 2.5%)}
