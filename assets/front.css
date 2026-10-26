@@ -1,0 +1,239 @@
+/* オルカンに勝てん！ フロントページ
+   表紙の「夕暮れの丸の内」から、ビューアの「紙」の色へつながる配色。外部フォント・外部スクリプトなし。 */
+:root {
+  color-scheme: light;
+  --dusk: #1f1d33;        /* 表紙の空の濃紺 */
+  --dusk-2: #2c2a48;
+  --lamp: #e7b46a;        /* 街灯の金色 */
+  --lamp-ink: #2a1e10;
+  --cream: #f7eedd;       /* 夕暮れの文字色 */
+  --cream-dim: #cdbfa8;
+  --paper: #f6f4ed;       /* ビューアと同じ紙色 */
+  --ink: #243746;         /* ビューアと同じ文字色 */
+  --muted: #62707a;
+  --line: #d7d9d4;
+  --blue: #1f43b8;        /* 怜先生のブラウスの青 */
+  --mincho: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "Noto Serif JP", "Noto Serif CJK JP", serif;
+  --gothic: system-ui, -apple-system, "Segoe UI", "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  font-family: var(--gothic);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink);
+  background: var(--paper);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); }
+img { display: block; max-width: 100%; height: auto; }
+[hidden] { display: none !important; }
+a { color: var(--blue); text-underline-offset: .22em; }
+a:focus-visible { outline: 3px solid var(--lamp); outline-offset: 3px; border-radius: 4px; }
+
+.skip {
+  position: absolute; left: 12px; top: -60px; z-index: 10;
+  background: var(--lamp); color: var(--lamp-ink); padding: 10px 16px; border-radius: 6px; font-weight: 700;
+}
+.skip:focus { top: 12px; }
+
+/* ───────── 夕暮れの帯（ヘッダー＋表紙） ───────── */
+.masthead, .hero { background: var(--dusk); color: var(--cream); }
+.masthead { padding: 18px 20px 0; }
+.masthead-label {
+  max-width: 1040px; margin: 0 auto;
+  font-size: .78rem; letter-spacing: .18em; color: var(--cream-dim);
+}
+
+.hero {
+  position: relative;
+  padding: 28px 20px 64px;
+  background:
+    radial-gradient(120% 70% at 50% 108%, rgba(231,180,106,.38), transparent 60%),
+    linear-gradient(180deg, var(--dusk) 0%, var(--dusk-2) 62%, #4a3a4a 100%);
+  display: grid;
+  gap: 36px;
+  justify-items: center;
+}
+/* 紙へ移るところを、本の小口のように細い線で区切る */
+.hero::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 6px;
+  background: linear-gradient(180deg, rgba(231,180,106,.55), rgba(231,180,106,0));
+}
+
+.hero-book {
+  display: flex; align-items: flex-start; gap: 18px;
+  width: 100%; max-width: 440px; justify-content: center;
+}
+.cover {
+  flex: 0 1 300px;
+  border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(255,255,255,.08), 0 24px 50px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.06);
+  transition: transform .25s ease, box-shadow .25s ease;
+  animation: arrive .7s ease-out both;
+}
+/* 表紙画像の左右の白い余白（各31px/1200px）を隠す */
+.cover { display: block; overflow: hidden; aspect-ratio: 1138 / 1698; }
+.cover img { width: 105.45%; max-width: none; margin-left: -2.72%; }
+.cover:hover { transform: translateY(-3px); box-shadow: 0 30px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(231,180,106,.35); }
+
+/* 表紙の横に置く縦書きのキャッチコピー */
+.catch {
+  margin: 4px 0 0;
+  writing-mode: vertical-rl;
+  font-family: var(--mincho);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 5.4vw, 1.75rem);
+  line-height: 1.75;
+  letter-spacing: .14em;
+  color: var(--cream);
+  text-shadow: 0 1px 12px rgba(0,0,0,.35);
+  animation: arrive .7s .15s ease-out both;
+}
+
+.catch-flat {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.hero-text { width: 100%; max-width: 440px; }
+.hero h1 {
+  font-family: var(--mincho);
+  font-size: clamp(1.9rem, 7vw, 2.6rem);
+  font-weight: 800; line-height: 1.3; letter-spacing: .03em;
+  margin: 0 0 6px;
+}
+.meta { margin: 0 0 26px; font-size: .86rem; color: var(--cream-dim); }
+.meta span { padding: 0 .4em; opacity: .7; }
+
+.actions { display: grid; gap: 12px; scroll-margin-top: 16px; }
+.btn {
+  display: grid; gap: 2px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background .2s ease, border-color .2s ease, transform .15s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-label { font-weight: 700; font-size: 1.06rem; letter-spacing: .04em; }
+.btn-note { font-size: .78rem; line-height: 1.6; }
+
+.btn-primary { background: var(--lamp); color: var(--lamp-ink); box-shadow: 0 8px 24px rgba(231,180,106,.25); }
+.btn-primary .btn-label::after { content: "  →"; }
+.btn-primary .btn-note { color: #5a4326; }
+.btn-primary:hover { background: #f0c27e; }
+
+.btn-quiet {
+  padding: 8px 4px; color: var(--cream);
+}
+.btn-quiet .btn-label { font-size: .88rem; font-weight: 600; text-decoration: underline; text-underline-offset: .25em; }
+
+.btn-secondary {
+  border: 1px solid rgba(247,238,221,.35);
+  color: var(--cream);
+  background: rgba(255,255,255,.03);
+}
+.btn-secondary .btn-label { font-size: .96rem; }
+.btn-secondary .btn-label::after { content: "  ↓"; color: var(--lamp); }
+.btn-secondary .btn-note { color: var(--cream-dim); }
+.btn-secondary:hover { border-color: var(--lamp); background: rgba(231,180,106,.08); }
+
+/* ───────── 紙のセクション ───────── */
+main > section:not(.hero) {
+  max-width: 760px; margin: 0 auto; padding: 56px 20px 0;
+}
+.section-title {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--mincho);
+  font-size: 1.25rem; font-weight: 700; letter-spacing: .08em;
+  margin: 0 0 18px;
+}
+.section-title::before {
+  content: ""; width: 22px; height: 2px; background: var(--lamp); flex: none;
+}
+
+.about-text p, .note-text p { margin: 0 0 1em; }
+.about-text { font-size: 1.02rem; }
+.about-text p:first-child {
+  font-family: var(--mincho); font-size: 1.12rem; line-height: 1.9;
+}
+.about-text .about-question {
+  font-family: var(--mincho); font-weight: 700; font-size: 1.3rem; letter-spacing: .06em;
+  margin: 1.4em 0; padding-left: .2em;
+}
+
+/* 最初の数ページ */
+.peek-row {
+  list-style: none; margin: 0; padding: 4px 2px 12px;
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(150px, 1fr);
+  gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
+}
+.peek-row li { scroll-snap-align: start; }
+.peek-row a { display: block; text-decoration: none; color: var(--muted); }
+.peek-row img {
+  background: #fff; border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(36,55,70,.08), 0 8px 22px rgba(36,55,70,.10);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.peek-row a:hover img { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(36,55,70,.16); }
+.peek-row span { display: block; margin-top: 8px; font-size: .78rem; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
+.peek-more { margin: 6px 0 0; text-align: right; font-weight: 600; }
+
+/* 目次 */
+.toc-cols { display: grid; gap: 28px; }
+.toc h3 {
+  font-size: .8rem; letter-spacing: .16em; color: var(--muted); font-weight: 600; margin: 0 0 4px;
+}
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc li { border-bottom: 1px solid var(--line); }
+.toc li a {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  padding: 11px 2px; min-height: 48px;
+  color: var(--ink); text-decoration: none; font-size: .93rem; line-height: 1.5;
+}
+.toc li a:hover { color: var(--blue); }
+.toc small { color: var(--muted); font-size: .76rem; font-variant-numeric: tabular-nums; flex: none; }
+.toc-note { font-size: .8rem; color: var(--muted); margin: 14px 0 0; }
+
+/* 作者から */
+.note-text {
+  font-family: var(--mincho);
+  font-size: 1.02rem; line-height: 2;
+  padding-left: 18px; border-left: 2px solid var(--line);
+}
+.sign { text-align: right; font-family: var(--mincho); font-weight: 700; letter-spacing: .12em; margin: 4px 0 0; }
+
+/* フッター */
+.footer {
+  margin-top: 72px; padding: 32px 20px 48px;
+  border-top: 1px solid var(--line);
+  text-align: center; font-size: .78rem; color: var(--muted);
+}
+.footer p { margin: 6px auto; max-width: 640px; }
+.footer-read { font-size: .92rem; margin-bottom: 18px !important; }
+.footer-read span { padding: 0 .6em; }
+
+/* ───────── 広い画面 ───────── */
+@media (min-width: 880px) {
+  .masthead { padding: 26px 40px 0; }
+  .hero {
+    grid-template-columns: auto minmax(0, 400px);
+    justify-content: center; align-items: center;
+    gap: 64px; padding: 36px 40px 84px;
+  }
+  .hero-book { max-width: none; width: auto; gap: 26px; }
+  .cover { flex-basis: 360px; width: 360px; }
+  .catch { font-size: 1.9rem; margin-top: 10px; }
+  .hero-text { max-width: 400px; }
+  main > section:not(.hero) { padding-top: 76px; }
+  .toc-cols { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .peek-row { grid-auto-columns: 1fr; overflow: visible; }
+}
+
+/* とても狭い画面：縦書きが窮屈なら表紙の下へ */
+@media (max-width: 340px) {
+  .hero-book { flex-direction: column; align-items: center; }
+  .catch { writing-mode: horizontal-tb; text-align: center; }
+  .catch br { display: none; }
+}
+
+@keyframes arrive { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

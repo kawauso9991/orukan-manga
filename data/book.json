@@ -2679,5 +2679,12 @@
     "filename": "orukan-v8.pdf",
     "bytes": 90478119,
     "sha256": "b1a9bc0baa9421c73d88926ec1b595fb3e76f5c39f76366757144a96f1c7c0ec"
+  },
+  "highQualityDownload": {
+    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v8-hq/orukan-v8-high-quality.pdf",
+    "filename": "orukan-v8-high-quality.pdf",
+    "bytes": 250020270,
+    "sha256": "be62a3e519d83dfc9f7ceb0f18ee4bfe53c70527c4acd47c52f6ef829b578389",
+    "pages": 107
   }
 }

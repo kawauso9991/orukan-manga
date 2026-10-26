@@ -34,7 +34,7 @@ jobs:
       - name: Stage reader files
         run: |
           mkdir -p _site
-          cp -r -- index.html assets data pages downloads README.md SHA256SUMS _site/
+          cp -r -- index.html read.html assets data pages downloads README.md SHA256SUMS _site/
           cd _site
           sha256sum --check SHA256SUMS
       - uses: actions/configure-pages@v5

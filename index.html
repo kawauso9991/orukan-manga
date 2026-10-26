@@ -4,71 +4,175 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f4ed">
-  <meta name="description" content="kawauso 作『オルカンに勝てん！』全107ページを、縦スクロールで読めます。">
-  <title>オルカンに勝てん！｜kawauso</title>
+  <title>オルカンに勝てん！｜kawauso の投資まんが</title>
+  <meta name="description" content="kawauso 作の投資まんが『オルカンに勝てん！』全107ページ。Webで無料で読めます。">
+  <meta property="og:title" content="オルカンに勝てん！">
+  <meta property="og:description" content="投資で勝つって、どういうこと？ 全107ページの投資まんが。Webで無料で読めます。">
+  <meta property="og:type" content="book">
+  <meta property="og:image" content="https://kawauso9991.github.io/orukan-manga/pages/normal/p001.webp">
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="assets/reader.css">
-  <script type="module" src="assets/reader.mjs"></script>
+  <link rel="stylesheet" href="assets/front.css">
+
+  <!--
+    ▼ リンク先の設定
+    data-reader … 漫画ビューアのURL（例：read.html）。ページ指定は末尾に #p=番号 が付きます。
+    data-pdf    … PDFのURL
+    ここを書き換えれば、ページ内のすべてのリンクに反映されます。
+  -->
+  <script id="front-config" type="application/json">
+    { "reader": "read.html", "pdf": "https://github.com/kawauso9991/orukan-manga/releases/download/v8-hq/orukan-v8-high-quality.pdf", "pdfSize": "約250.0MB", "version": "v8" }
+  </script>
+  <script>
+    // 以前のURL（…/orukan-manga/#p=12 など）で来た人は、そのままビューアの該当ページへ。
+    (function () {
+      try {
+        var cfg = JSON.parse(document.getElementById('front-config').textContent);
+        if (/^#p=/.test(location.hash)) {
+          var page = /^#p=[1-9]\d*$/.test(location.hash) ? Number(location.hash.slice(3)) : 0;
+          location.replace(cfg.reader + '#p=' + (Number.isSafeInteger(page) && page >= 1 && page <= 107 ? page : 1));
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
-  <a class="skip-link" href="#reader">本文へ進む</a>
-  <header class="introduction" id="top">
-    <p class="eyebrow">kawauso の投資まんが</p>
-    <h1>オルカンに勝てん！</h1>
-    <p class="byline">作：kawauso <span aria-hidden="true">／</span> 全107ページ</p>
-    <p class="instructions">下へスクロールして読めます。<br class="mobile-break">文字が小さいときは、ページごとの「拡大」を。</p>
-    <div class="book-actions">
-      <button id="open-contents" type="button" disabled>目次から読む <span aria-hidden="true">↗</span></button>
-      <a class="download-link" id="pdf-download" href="downloads/orukan-v8.pdf" download="orukan-v8.pdf">PDFをダウンロード <span id="pdf-size">（約90.5 MB）</span><span aria-hidden="true"> ↓</span></a>
-    </div>
-    <p class="download-note">公開用PDFには添付ファイルを含みません。</p>
+  <a class="skip" href="#start">読み始める</a>
+
+  <header class="masthead">
+    <p class="masthead-label">kawauso の投資まんが</p>
   </header>
 
-  <noscript><div class="notice">読むにはJavaScriptを有効にしてください。<a href="downloads/orukan-v8.pdf" download="orukan-v8.pdf">全107ページのPDFをダウンロード</a>して読むこともできます。公開用PDFには添付ファイルを含みません。</div></noscript>
-  <div class="notice" id="startup-message" role="status">まんがを準備しています… <a href="">読み込めないときは再読み込み</a></div>
-
-  <nav class="reader-toolbar" aria-label="読書ナビゲーション" id="reader-toolbar" hidden>
-    <div class="toolbar-inner">
-      <div class="reading-status"><span id="current-position">1 / 107 ページ</span><span id="current-chapter">表紙</span></div>
-      <div class="toolbar-controls">
-        <button type="button" id="previous" aria-label="前のページ">← 前へ</button>
-        <form id="page-form" class="page-form">
-          <label for="page-number" class="sr-only">移動するページ（1から107）</label>
-          <input id="page-number" name="page" type="number" min="1" max="107" step="1" inputmode="numeric" value="1" required>
-          <span class="page-total" aria-hidden="true">/ 107</span>
-          <button type="submit">移動</button>
-        </form>
-        <button type="button" id="next" aria-label="次のページ">次へ →</button>
-        <button type="button" id="toolbar-contents">目次</button>
+  <main>
+    <!-- ───────── 表紙とキャッチコピー ───────── -->
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-book">
+        <a class="cover" data-page="1" href="read.html#p=1" aria-label="表紙から読む">
+          <img src="pages/normal/p001.webp" width="1200" height="1698" alt="『オルカンに勝てん！』表紙" fetchpriority="high">
+        </a>
+        <p class="catch" aria-hidden="true">投資で勝つって、<br>どういうこと？</p>
       </div>
-      <div class="progress-track" aria-hidden="true"><div id="reading-progress"></div></div>
-    </div>
-  </nav>
 
-  <main id="reader" class="reader" tabindex="-1" aria-label="オルカンに勝てん！ 本文"></main>
-  <footer class="site-footer" id="site-footer" hidden>
-    <p class="end-mark" aria-hidden="true">おしまい</p>
-    <p>『オルカンに勝てん！』 作：kawauso</p>
-    <p>作品の権利・利用条件は、<a href="#p=107" data-page="107">107ページの記載</a>をご確認ください。</p>
-    <a href="#p=1" data-page="1">最初のページへ ↑</a>
+      <div class="hero-text">
+        <p class="catch-flat">投資で勝つって、どういうこと？</p>
+        <h1 id="title">オルカンに勝てん！</h1>
+        <p class="meta">作：kawauso<span aria-hidden="true">／</span>全107ページ<span aria-hidden="true">／</span>無料で読めます</p>
+
+        <div class="actions" id="start">
+          <!-- 再訪した人には、ここが「続きから読む」に変わります（JSが使えるときのみ） -->
+          <a class="btn btn-primary" id="read-link" data-page="1" href="read.html#p=1">
+            <span class="btn-label" id="read-label">Webで読む</span>
+            <span class="btn-note" id="read-note">ブラウザでそのまま読めます。小さな文字はページごとに拡大できます。</span>
+          </a>
+          <a class="btn btn-quiet" id="restart-link" data-page="1" href="read.html#p=1" hidden>
+            <span class="btn-label">最初から読む</span>
+          </a>
+          <a class="btn btn-secondary" data-pdf href="https://github.com/kawauso9991/orukan-manga/releases/download/v8-hq/orukan-v8-high-quality.pdf" download>
+            <span class="btn-label">高画質PDFをダウンロード</span>
+            <span class="btn-note">全107ページの高画質PDF（<span data-pdf-size>約250.0MB</span>）。保存してじっくり読みたい方へ。</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── 紹介文 ───────── -->
+    <section class="about" aria-labelledby="about-title">
+      <h2 id="about-title" class="section-title">この漫画について</h2>
+      <!-- ▼ 紹介文（差し替えはこの <div> の中だけ） -->
+      <div class="about-text">
+        <p>「この株なら上がる」「今度こそ市場に勝てる」――投資を始めると、そんな気持ちが芽生えるかもしれません。けれど、過去の成績がよかった方法は、未来にも通用するのでしょうか。</p>
+        <p>世界の株式に広く投資する「オルカン」は、なぜこれほど手ごわいのか。個人投資家や運用の現場で働く人たちの選択を追ううちに、もう一つの問いが浮かびます。</p>
+        <p class="about-question">――勝てば、それでいいのか。</p>
+        <p>難しい理論も、会話や図を交えながらたどっていきます。投資に詳しくなくても、まずは最初の数ページからどうぞ。</p>
+      </div>
+    </section>
+
+    <!-- ───────── 最初の数ページ ───────── -->
+    <section class="peek" aria-labelledby="peek-title">
+      <h2 id="peek-title" class="section-title">最初の数ページ</h2>
+      <ol class="peek-row">
+        <li><a data-page="2" href="read.html#p=2"><img src="pages/normal/p002.webp" width="1200" height="1698" loading="lazy" alt="2ページ 序章「それでも、売るんですか」"><span>2　序章</span></a></li>
+        <li><a data-page="3" href="read.html#p=3"><img src="pages/normal/p003.webp" width="1200" height="1698" loading="lazy" alt="3ページ 第1章「1週間だけの王様」"><span>3　第1章</span></a></li>
+        <li><a data-page="4" href="read.html#p=4"><img src="pages/normal/p004.webp" width="1200" height="1698" loading="lazy" alt="4ページ"><span>4</span></a></li>
+      </ol>
+      <p class="peek-more"><a data-page="2" href="read.html#p=2">このまま続きを読む →</a></p>
+    </section>
+
+    <!-- ───────── 目次 ───────── -->
+    <section class="toc" aria-labelledby="toc-title">
+      <h2 id="toc-title" class="section-title">目次</h2>
+      <div class="toc-cols">
+        <div>
+          <h3>物語</h3>
+          <ol>
+            <li><a data-page="2" href="read.html#p=2">序章　それでも、売るんですか<small>2</small></a></li>
+            <li><a data-page="3" href="read.html#p=3">第1章　1週間だけの王様<small>3</small></a></li>
+            <li><a data-page="12" href="read.html#p=12">第2章　強い会社だけなら、勝てる？<small>12</small></a></li>
+            <li><a data-page="20" href="read.html#p=20">第3章　それでも、確かめたい<small>20</small></a></li>
+            <li><a data-page="29" href="read.html#p=29">第4章　約束した日に、払うために<small>29</small></a></li>
+            <li><a data-page="42" href="read.html#p=42">第5章　先生にも、後悔がある<small>42</small></a></li>
+            <li><a data-page="53" href="read.html#p=53">第6章　来月、このお金がいる<small>53</small></a></li>
+            <li><a data-page="60" href="read.html#p=60">終章　ご飯が冷める前に<small>60</small></a></li>
+          </ol>
+        </div>
+        <div>
+          <h3>理論と資料</h3>
+          <ol>
+            <li><a data-page="65" href="read.html#p=65">理論編<small>65</small></a></li>
+            <li><a data-page="93" href="read.html#p=93">巻末資料　数字と出典を確かめる<small>93</small></a></li>
+            <li><a data-page="97" href="read.html#p=97">巻末補足　九つの考え方<small>97</small></a></li>
+            <li><a data-page="98" href="read.html#p=98">理論補足別冊<small>98</small></a></li>
+            <li><a data-page="107" href="read.html#p=107">あとがき<small>107</small></a></li>
+          </ol>
+          <p class="toc-note">数字と出典は、各ページの「このページの出典・参照」から元の資料までたどれます。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── 作者から ───────── -->
+    <section class="note" aria-labelledby="note-title">
+      <h2 id="note-title" class="section-title">作者から</h2>
+      <!-- ▼ 作者の一言（差し替えはこの <div> の中だけ） -->
+      <div class="note-text">
+        <p>投資の世界には「この方法なら市場に勝てる」という話がたくさんあります。でも、本当にそんなに簡単でしょうか。</p>
+        <p>私が伝えたかったのは、自分で発見した新理論ではなく、長い時間をかけて積み上げられた研究や実証の面白さです。</p>
+        <p>難しい文章を読むのは私自身も疲れるので、少しでも分かりやすく届けたくて、AIたちと試行錯誤しながら漫画にしました。</p>
+      </div>
+      <p class="sign">kawauso</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer-read"><a data-page="1" href="read.html#p=1">表紙から読む</a><span aria-hidden="true">／</span><a data-pdf href="https://github.com/kawauso9991/orukan-manga/releases/download/v8-hq/orukan-v8-high-quality.pdf" download>PDF（<span data-pdf-size>約250.0MB</span>）</a></p>
+    <p>本作は情報提供を目的としたもので、特定の金融商品の売買をすすめるものではありません。</p>
+    <p>『オルカンに勝てん！』作：kawauso。作品の権利・利用条件は<a data-page="107" href="read.html#p=107">107ページ</a>をご確認ください。</p>
   </footer>
 
-  <dialog id="contents-dialog" class="contents-dialog" aria-labelledby="contents-title">
-    <div class="dialog-heading"><div><p class="eyebrow">全107ページ</p><h2 id="contents-title">目次</h2></div><button type="button" id="close-contents" aria-label="目次を閉じる">閉じる ×</button></div>
-    <div class="chapter-select"><label for="chapter-select">章を選ぶ</label><select id="chapter-select"><option value="">章・資料を選択…</option></select></div>
-    <nav aria-label="すべての章と資料"><ol id="contents-list"></ol></nav>
-  </dialog>
+  <script>
+  (function () {
+    var cfg;
+    try { cfg = JSON.parse(document.getElementById('front-config').textContent); } catch (e) { return; }
 
-  <dialog id="zoom-dialog" class="zoom-dialog" aria-labelledby="zoom-title">
-    <div class="zoom-toolbar">
-      <h2 id="zoom-title">ページの拡大</h2><button type="button" id="close-zoom" aria-label="拡大を閉じる">閉じる ×</button>
-      <div class="zoom-controls" role="group" aria-label="拡大率"><button type="button" id="zoom-out" aria-label="縮小">−</button><output id="zoom-level" aria-live="polite">100%</output><button type="button" id="zoom-in" aria-label="拡大">＋</button><button type="button" id="zoom-fit">幅に合わせる</button></div>
-      <p class="zoom-hint">スクロールやドラッグで移動できます。Escで閉じます。</p>
-    </div>
-    <details id="zoom-references" class="zoom-references references" hidden><summary>このページの出典・参照</summary><ol id="zoom-reference-list"></ol></details>
-    <div class="zoom-viewport" id="zoom-viewport" tabindex="0" aria-label="拡大したページ。上下左右にスクロールできます。"><div class="zoom-canvas" id="zoom-canvas"><img id="zoom-image" alt=""><div id="zoom-links" class="source-links"></div></div></div>
-    <p class="zoom-message" id="zoom-message" role="status" hidden></p>
-  </dialog>
-  <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+    // リンク先を設定値にそろえる
+    document.querySelectorAll('[data-page]').forEach(function (a) {
+      a.href = cfg.reader + '#p=' + a.getAttribute('data-page');
+    });
+    document.querySelectorAll('[data-pdf]').forEach(function (a) { a.href = cfg.pdf; });
+    document.querySelectorAll('[data-pdf-size]').forEach(function (s) { s.textContent = cfg.pdfSize; });
+
+    // 前回の読書位置（ビューアが保存しているもの）があれば「続きから読む」に
+    var saved = null;
+    try { saved = JSON.parse(localStorage.getItem('orukan-manga:reading') || 'null'); } catch (e) {}
+    if (saved && saved.version === cfg.version && Number.isInteger(saved.page) && saved.page >= 1 && saved.page <= 107 && typeof saved.offset === 'number' && Number.isFinite(saved.offset) && saved.offset >= 0 && saved.offset <= 1 && (saved.page > 1 || saved.offset > 0)) {
+      var chapters = [[2,'序章'],[3,'第1章'],[12,'第2章'],[20,'第3章'],[29,'第4章'],[42,'第5章'],[53,'第6章'],[60,'終章'],[65,'理論編'],[93,'巻末資料'],[98,'理論補足別冊'],[107,'あとがき']];
+      var where = '';
+      chapters.forEach(function (c) { if (saved.page >= c[0]) where = c[1]; });
+      var link = document.getElementById('read-link');
+      link.href = cfg.reader; // ページ指定なしで開くと、ビューアが保存位置（ページ内のスクロール位置まで）から再開する
+      document.getElementById('read-label').textContent = '続きから読む';
+      document.getElementById('read-note').textContent = saved.page + 'ページ' + (where ? '（' + where + '）' : '') + 'から再開します。';
+      document.getElementById('restart-link').hidden = false;
+    }
+  })();
+  </script>
 </body>
 </html>

@@ -3,6 +3,8 @@ import { createNavigation } from './navigation.mjs';
 import { createScrollThrottle } from './scroll.mjs';
 import { installPageControl } from './controls.mjs';
 import { createLayoutRestorer } from './layout.mjs';
+import { createPresentationUI } from './presentation-ui.mjs';
+import { renderDownloadLinks } from './presentation.mjs';
 
 const $ = id => document.getElementById(id);
 const documentURL = document.URL;
@@ -16,11 +18,12 @@ const zoomViewport = $('zoom-viewport');
 const zoomCanvas = $('zoom-canvas');
 const zoomImage = $('zoom-image');
 let book, navigation, pageControl, layoutRestorer, currentPage = 1;
-const scrollWork = createScrollThrottle(() => { if (!zoomDialog.open && !contentsDialog.open) navigation.passive(); });
+const scrollWork = createScrollThrottle(() => { if (!zoomDialog.open && !contentsDialog.open && !presentation?.transitioning) navigation.passive(); });
 let images = [], figures = [], pageLinks = new Map();
 let zoomPage = null, zoomScale = 1, zoomOpener, pendingZoomPage = null;
 let contentsOpener, pendingContentsPage = null;
 let skipZoomRestore = false;
+let presentation;
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -69,7 +72,7 @@ function makeLink(link, hotspot = false) {
     const [x, y, width, height] = link.rect;
     Object.assign(anchor.style, { left: `${x * 100}%`, top: `${y * 100}%`, width: `${width * 100}%`, height: `${height * 100}%` });
     anchor.setAttribute('aria-label', name);
-    // The same destinations have full-size keyboard-accessible rows below.
+    // The same destinations have full-size keyboard-accessible sidebar rows.
     anchor.tabIndex = -1;
     anchor.setAttribute('aria-hidden', 'true');
   } else {
@@ -128,18 +131,6 @@ function renderPages() {
       art.append(hotspots);
     }
     figure.append(caption, art, loadError);
-    if (links.length) {
-      const references = element('details', 'references');
-      const summary = element('summary', '', `このページの出典・参照（${links.length}件）`);
-      const list = element('ol');
-      for (const link of links) {
-        const item = element('li');
-        item.append(makeLink(link));
-        list.append(item);
-      }
-      references.append(summary, list);
-      figure.append(references);
-    }
     fragment.append(figure);
     figures.push(figure);
     images.push(image);
@@ -171,9 +162,11 @@ function loadNeighborhood(page) {
   for (let number = Math.max(1, page - 1); number <= Math.min(book.totalPages, page + 1); number++) loadPage(number);
 }
 
-function headerOffset() { return toolbar.getBoundingClientRect().height + 16; }
+function headerOffset() { return presentation?.fullscreen ? 16 : toolbar.getBoundingClientRect().height + 16; }
 
 function positionAtScroll() {
+  const paginated = presentation?.readPosition();
+  if (paginated) return paginated;
   const line = headerOffset();
   let low = 0, high = images.length - 1;
   while (low < high) {
@@ -188,6 +181,7 @@ function positionAtScroll() {
 function moveTo(position, settled) {
   scrollWork.cancel();
   loadNeighborhood(position.page);
+  if (presentation?.moveTo(position)) { requestAnimationFrame(() => requestAnimationFrame(settled)); return; }
   const image = images[position.page - 1];
   const top = figures[position.page - 1].getBoundingClientRect().top;
   window.scrollTo({ top: Math.max(0, window.scrollY + top + image.getBoundingClientRect().height * position.offset - headerOffset()), behavior: 'instant' });
@@ -196,10 +190,16 @@ function moveTo(position, settled) {
 
 function updatePosition(position) {
   currentPage = position.page;
+  presentation?.changed(position);
   $('current-position').textContent = `${position.page} / ${book.totalPages} ページ${book.pages[position.page - 1].label === String(position.page) ? '' : ` · 補足 ${book.pages[position.page - 1].label}`}`;
   pageControl.update(position.page);
+  const spread = presentation?.mode === 'spread';
   $('previous').disabled = position.page === 1;
-  $('next').disabled = position.page === book.totalPages;
+  $('next').disabled = spread ? position.page >= book.totalPages - 1 : position.page === book.totalPages;
+  if (spread && position.page !== 1) {
+    const right = position.page - position.page % 2;
+    $('current-position').textContent = `${right}・${right + 1} / ${book.totalPages} ページ（選択 ${position.page}）`;
+  }
   $('reading-progress').style.width = `${((position.page - 1 + position.offset) / book.totalPages) * 100}%`;
   const chapter = book.chapters.filter(chapter => chapter.page <= position.page).at(-1);
   $('current-chapter').textContent = chapter?.title ?? '';
@@ -261,14 +261,8 @@ function openZoom(page, opener) {
   zoomImage.height = item.height;
   $('zoom-links').replaceChildren();
   addHotspots($('zoom-links'), pageLinks.get(page) ?? []);
-  const references = $('zoom-references');
-  const links = pageLinks.get(page) ?? [];
-  references.hidden = !links.length;
-  references.open = false;
-  $('zoom-reference-list').replaceChildren();
-  for (const link of links) {
-    const row = element('li'); row.append(makeLink(link)); $('zoom-reference-list').append(row);
-  }
+  presentation.zoomReferences(page);
+  presentation.openZoomPanel(zoomDialog);
   document.documentElement.style.overflow = 'hidden';
   zoomDialog.showModal();
   zoomLayout();
@@ -277,8 +271,8 @@ function openZoom(page, opener) {
 }
 
 function installEvents() {
-  $('previous').addEventListener('click', () => go(currentPage - 1));
-  $('next').addEventListener('click', () => go(currentPage + 1));
+  $('previous').addEventListener('click', () => presentation.turn(-1));
+  $('next').addEventListener('click', () => presentation.turn(1));
   pageControl = installPageControl({ form: $('page-form'), input: $('page-number'), totalPages: book.totalPages, onNavigate: go });
   $('open-contents').addEventListener('click', event => openContents(event.currentTarget));
   $('toolbar-contents').addEventListener('click', event => openContents(event.currentTarget));
@@ -302,7 +296,7 @@ function installEvents() {
     else go(page);
   });
   window.addEventListener('scroll', () => {
-    if (zoomDialog.open || contentsDialog.open) return;
+    if (zoomDialog.open || contentsDialog.open || presentation?.transitioning) return;
     navigation.observe();
     scrollWork.schedule();
   }, { passive: true });
@@ -322,18 +316,12 @@ function installEvents() {
   });
   window.addEventListener('pagehide', () => { if (!zoomDialog.open) navigation.persist(); });
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && !zoomDialog.open) navigation.persist(); });
-  document.addEventListener('keydown', event => {
-    if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || zoomDialog.open || contentsDialog.open ||
-        event.target.closest('input,select,textarea,button,a,summary,[contenteditable="true"]')) return;
-    if (event.key === 'ArrowRight') { event.preventDefault(); go(currentPage + 1); }
-    if (event.key === 'ArrowLeft') { event.preventDefault(); go(currentPage - 1); }
-  });
   $('close-zoom').addEventListener('click', () => zoomDialog.close());
   zoomDialog.addEventListener('close', () => {
     scrollWork.cancel();
     zoomImage.removeAttribute('src');
     $('zoom-links').replaceChildren();
-    $('zoom-reference-list').replaceChildren();
+    presentation.closeZoomPanel();
     zoomPage = null;
     document.documentElement.style.overflow = '';
     zoomOpener?.focus({ preventScroll: true });
@@ -382,9 +370,7 @@ async function start() {
     document.title = `${book.title}｜kawauso`;
     renderPages();
     renderContents();
-    $('pdf-download').href = assetURL(book.download.url, documentURL);
-    $('pdf-download').download = book.download.filename;
-    $('pdf-size').textContent = `（約${(book.download.bytes / 1e6).toFixed(1)} MB）`;
+    renderDownloadLinks(book,{primary:$('pdf-download'),secondary:$('pdf-light-download'),size:$('pdf-size')},documentURL);
     $('startup-message').hidden = true;
     toolbar.hidden = false;
     $('site-footer').hidden = false;
@@ -396,10 +382,14 @@ async function start() {
       save: position => writeProgress(getStorage, storageKey, book.version, position, book.totalPages), onChange: updatePosition });
     layoutRestorer = createLayoutRestorer({ navigation, cancelPassive: () => scrollWork.cancel(),
       updateLayout: () => {
+        presentation.resize();
         document.documentElement.style.setProperty('--toolbar-height', `${toolbar.getBoundingClientRect().height}px`);
         if (zoomDialog.open) zoomLayout(true);
       }, readScrollY: () => window.scrollY,
       restoreScrollY: top => window.scrollTo({top, behavior:'instant'}) });
+    presentation = createPresentationUI({book,figures,images,getPage:()=>currentPage,getStorage,go,makeLink,
+      reflow:()=>navigation.reflow(),persist:()=>navigation.persist(),loadPage,
+      observeScroll:()=>{navigation.observe();scrollWork.schedule();}});
     installEvents();
     const initialHash = location.hash;
     const saved = readProgress(getStorage, storageKey, book.version, book.totalPages);
