@@ -918,10 +918,11 @@
       "label": "92",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p092.webp",
-      "bytes": 357198,
-      "zoom": "pages/hq/p092.webp",
-      "zoomBytes": 953642
+      "src": "pages/normal/p092-v10.webp",
+      "bytes": 397302,
+      "zoom": "pages/hq/p092-v10.webp",
+      "zoomBytes": 1088870,
+      "title": "それぞれの目標に、世界の力を"
     },
     {
       "number": 93,
@@ -2687,5 +2688,6 @@
     "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v9/orukan-v9-high-quality.pdf",
     "pages": 107
   },
-  "revision": "v9-theory-subtitles"
+  "revision": "v10-p92"
 }
+
