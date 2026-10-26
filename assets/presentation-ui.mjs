@@ -27,14 +27,27 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   function panelModal() { return !panel.hidden && !docked(); }
   function layoutRails() {
     const available=paginated()&&railWidth>0;
+    const mobile=window.innerWidth<1024;
     const focused=document.activeElement;
     shell.style.setProperty('--rail-width',`${railWidth}px`);
     rail.hidden=!available;
     const home=available?rail:$('toolbar-navigation-home');
-    for(const id of ['reading-status','navigation-controls']) if($(id).parentElement!==home) {
+    const destinations=[['reading-status',mobile?$('mobile-menu-actions'):home],
+      ['navigation-controls',mobile?$('mobile-navigation'):home],
+      ['toolbar-contents',mobile?$('mobile-menu-actions'):$('navigation-controls')],
+      ['open-references',mobile?$('mobile-menu-actions'):$('presentation-controls')]];
+    for(const [id,target] of destinations) if($(id).parentElement!==target) {
       if($(id).contains(focused)) relocatedFocus=focused;
-      home.append($(id));
+      target.append($(id));
     }
+    $('mobile-navigation').hidden=!mobile;
+    toolbar.hidden=mobile;
+    $('toggle-fullscreen').hidden=mobile&&!fullscreenActive;
+    $('reveal-controls').hidden=mobile;
+    $('previous').textContent=mobile?'←':'← 前へ';
+    $('next').textContent=mobile?'→':'次へ →';
+    if(!mobile&&focused===$('mobile-menu-toggle'))relocatedFocus=$('page-number');
+    document.documentElement.style.setProperty('--mobile-nav-height',mobile?`${$('mobile-navigation').getBoundingClientRect().height}px`:'0px');
     if(fullscreenActive&&docked()&&referenceChoice===null&&panel.hidden) {
       panel.hidden=false;autoReferences=true;
     }
@@ -100,16 +113,19 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
       // Moving the single navigation block can change the windowed toolbar's
       // height. Settle that layout in bounded passes; don't oscillate a rail at
       // the threshold by lending it the space created by hiding itself.
+      const captionHeight=()=>Math.max(48,...selected.map(n=>figures[n-1].firstElementChild?.getBoundingClientRect().height??0));
       for(let pass=0;pass<3;pass++) {
         const width=stage.clientWidth,height=stage.clientHeight;
-        const geometry=presentationGeometry(selected.map(n=>book.pages[n-1]),width,height,{...view(),fullscreen:fullscreenActive});
+        const rootFontSize=parseFloat(window.getComputedStyle(document.documentElement).fontSize)||16;
+        const caption=captionHeight();
+        const geometry=presentationGeometry(selected.map(n=>book.pages[n-1]),width,height,{...view(),fullscreen:fullscreenActive,rootFontSize,captionHeight:caption});
         railWidth=Math.min(railWidth,geometry.railWidth);
         selected.forEach((number,index)=>{
           const figure=figures[number-1], size=geometry.sizes[index];
           figure.style.width=`${size.width}px`;figure.style.flexBasis=`${size.width}px`;
         });
         layoutRails();
-        if(width===stage.clientWidth&&height===stage.clientHeight)break;
+        if(width===stage.clientWidth&&height===stage.clientHeight&&(fullscreenActive||caption===captionHeight()))break;
       }
       selected.forEach(number=>{
         loadPage(number);
@@ -320,7 +336,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
       if(!paginated()) {
         if(document.fullscreenElement!==shell)return false;
         const figure=figures[position.page-1],image=images[position.page-1];
-        stage.scrollTop+=figure.getBoundingClientRect().top-stage.getBoundingClientRect().top+image.getBoundingClientRect().height*position.offset-16;
+        stage.scrollTop+=figure.getBoundingClientRect().top-stage.getBoundingClientRect().top+image.getBoundingClientRect().height*position.offset-(window.innerWidth<1024?0:16);
         return true;
       }
       renderPages();

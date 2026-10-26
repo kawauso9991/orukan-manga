@@ -20,3 +20,18 @@ export function createLayoutRestorer({ navigation, cancelPassive, updateLayout, 
     }
   };
 }
+
+export function observeLayoutChanges({elements,measure,onResize,Observer,requestFrame}) {
+  let previous=measure(),scheduled=false;
+  const observer=new Observer(()=>{
+    if(scheduled||measure()===previous)return;
+    scheduled=true;
+    requestFrame(()=>{
+      scheduled=false;
+      if(measure()===previous)return;
+      previous=measure();onResize();previous=measure();
+    });
+  });
+  for(const element of elements)observer.observe(element);
+  return ()=>observer.disconnect();
+}

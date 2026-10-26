@@ -86,3 +86,50 @@ button{min-width:44px}
 @media(max-width:1023px){.reader-shell:fullscreen>.reader-toolbar{top:4px;width:calc(100% - 8px)}.fullscreen-affordance{bottom:max(4px,env(safe-area-inset-bottom));right:4px}}
 
 .reader-shell .reader-front-link{display:inline-flex;align-items:center;min-height:32px;padding:4px 0;white-space:nowrap;flex:none;font-size:.72rem}
+
+/* Let enlarged UI text wrap; a rail is offered only when its text also fits. */
+.reader-shell .toolbar-controls{flex-wrap:wrap;min-width:0}
+.reader-shell .reading-status{flex-wrap:wrap;min-width:0}
+.reader-shell .reading-status #current-position{white-space:normal;overflow-wrap:anywhere}
+.reader-shell .toolbar-controls>button{white-space:normal;overflow-wrap:anywhere}
+.reader-shell .page-form{height:auto;min-height:46px;max-width:100%;flex-wrap:wrap}
+.reader-shell .page-form button{white-space:nowrap;flex:none}
+.navigation-rail .toolbar-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+.navigation-rail .toolbar-controls>button{padding-left:4px;padding-right:4px}
+.navigation-rail #page-form input{max-width:100%}
+@media(min-width:1200px){.reader-shell .toolbar-inner{grid-template-columns:minmax(0,max-content) minmax(0,1fr)}}
+
+/* Vertical reading joins the untouched images directly. Controls remain in
+   the accessibility tree and reveal on keyboard focus or a precise pointer. */
+.reader-shell[data-mode="vertical"] .reader{padding-top:0;padding-bottom:0}
+.reader-shell[data-mode="vertical"] .page{position:relative;margin:0}
+.reader-shell[data-mode="vertical"] .page-caption{position:absolute;z-index:2;left:4px;right:4px;top:4px;min-height:0;padding:0;opacity:0;pointer-events:none}
+.reader-shell[data-mode="vertical"] .page-caption:focus-within{opacity:1;pointer-events:auto}
+.reader-shell[data-mode="vertical"] .page-label,.reader-shell[data-mode="vertical"] .enlarge-button{background:#171b21ec;border-radius:6px;color:var(--ink)}
+.reader-shell[data-mode="vertical"] .page-label{padding:2px 6px}
+@media(hover:hover) and (pointer:fine){.reader-shell[data-mode="vertical"] .page:hover .page-caption{opacity:1;pointer-events:auto}}
+
+/* Mobile keeps the single set of controls at the thumb edge. Artwork is
+   contained within the remaining dynamic viewport, with no internal crop. */
+.mobile-navigation{position:fixed;z-index:9;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;gap:4px;padding:5px 8px max(5px,env(safe-area-inset-bottom));max-height:40dvh;overflow:visible;background:#171b21f5;border-top:1px solid var(--line);box-shadow:0 -2px 12px #0003}
+.mobile-navigation .toolbar-controls{order:0;flex:1;justify-content:center;gap:4px;max-width:max-content}
+.mobile-navigation .toolbar-controls>button{margin:0;min-width:44px;padding:4px 8px}
+.mobile-navigation .page-form{flex:none;padding-left:0;gap:0}
+.mobile-navigation .page-form input{width:2.5rem}
+.mobile-navigation .page-form button{padding:0 6px}
+.mobile-menu{order:1;flex:none}
+.mobile-menu>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:4px 8px;font-size:.72rem;border:1px solid var(--line);border-radius:7px;background:#252d37}
+.mobile-menu>summary::-webkit-details-marker{display:none}
+.mobile-menu-actions{position:absolute;bottom:calc(100% + 6px);right:8px;width:min(380px,calc(100vw - 16px));max-height:60dvh;overflow:auto;padding:12px;background:var(--paper);border:1px solid var(--line);border-radius:9px;box-shadow:0 -4px 24px #0005}
+.mobile-menu-actions .reading-status{margin:0 0 10px}
+.mobile-menu-actions>button{width:100%;margin:3px 0;white-space:normal}
+@media(max-width:1023px){
+  .reader-shell .reference-panel{z-index:12}
+  .reader-shell[data-mode="vertical"] .page-caption{display:none}
+  .reader-shell[data-mode="vertical"] .page-image{cursor:auto;touch-action:pan-x pan-y pinch-zoom}
+  .reader-shell[data-mode="vertical"] .page-art{width:min(100%,calc(max(1px,100dvh - var(--mobile-nav-height,54px)) * var(--page-ratio)));margin-inline:auto}
+  .reader-shell[data-mode="vertical"] .reader{padding-bottom:var(--mobile-nav-height,54px)}
+  .reader-shell[data-mode="vertical"]~.site-footer{padding-bottom:calc(64px + var(--mobile-nav-height,54px))}
+  .reader-shell:fullscreen[data-mode="vertical"] .reading-stage{height:calc(100% - var(--mobile-nav-height,54px))}
+  .reader-shell:fullscreen .fullscreen-affordance{bottom:calc(var(--mobile-nav-height,54px) + 6px)}
+}

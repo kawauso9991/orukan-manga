@@ -58,12 +58,13 @@ export function pageSizes(pages, width, height, fit, scale) {
 }
 // Measure art against the entire stage. Rails may occupy only what is left,
 // never a width subtracted before fitting the art.
-export function presentationGeometry(pages, width, height, {fullscreen=false,fit='height',scale=1}={}) {
+export function presentationGeometry(pages, width, height, {fullscreen=false,fit='height',scale=1,rootFontSize=16,captionHeight=48}={}) {
   const padding=fullscreen?2:12, gap=fullscreen?4:12;
-  const sizes=pageSizes(pages,Math.max(1,width-padding*2-gap*(pages.length-1)),Math.max(1,height-(fullscreen?4:66)),fit,scale);
+  const sizes=pageSizes(pages,Math.max(1,width-padding*2-gap*(pages.length-1)),Math.max(1,height-(fullscreen?4:Math.max(48,captionHeight)+18)),fit,scale);
   const artWidth=sizes.reduce((sum,size)=>sum+size.width,0)+gap*(pages.length-1);
   const room=Math.floor((width-artWidth)/2-8);
-  return {sizes,artWidth,railWidth:room>=180?Math.min(280,room):0};
+  const textScale=Math.max(1,Number.isFinite(rootFontSize)?rootFontSize/16:1);
+  return {sizes,artWidth,railWidth:room>=180*textScale?Math.min(280*textScale,room):0};
 }
 export function referenceGroups(pages, links) { return pages.map(page=>({page,links:links.filter(link=>link.page===page)})); }
 export function createFullscreenController({element,getElement,request,exit,onChange,onError}) {

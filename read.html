@@ -63,6 +63,13 @@
     <button id="reveal-controls" type="button" aria-controls="reader-toolbar" aria-expanded="true">操作</button>
   </div>
 
+  <nav id="mobile-navigation" class="mobile-navigation" aria-label="ページ操作" hidden>
+    <details id="mobile-menu" class="mobile-menu">
+      <summary id="mobile-menu-toggle">メニュー</summary>
+      <div id="mobile-menu-actions" class="mobile-menu-actions"></div>
+    </details>
+  </nav>
+
   <div id="reading-body" class="reading-body">
     <nav id="navigation-rail" class="navigation-rail" aria-label="ページと目次" hidden></nav>
     <div id="reading-stage" class="reading-stage" tabindex="0" aria-label="本文表示領域。拡大時は上下左右にスクロールできます。">

@@ -2,7 +2,7 @@ import { assetURL, externalURL, parsePageHash, chooseStart, readProgress, writeP
 import { createNavigation } from './navigation.mjs';
 import { createScrollThrottle } from './scroll.mjs';
 import { installPageControl } from './controls.mjs';
-import { createLayoutRestorer } from './layout.mjs';
+import { createLayoutRestorer, observeLayoutChanges } from './layout.mjs';
 import { createPresentationUI } from './presentation-ui.mjs';
 import { renderDownloadLinks } from './presentation.mjs';
 
@@ -162,7 +162,7 @@ function loadNeighborhood(page) {
   for (let number = Math.max(1, page - 1); number <= Math.min(book.totalPages, page + 1); number++) loadPage(number);
 }
 
-function headerOffset() { return presentation?.fullscreen ? 16 : toolbar.getBoundingClientRect().height + 16; }
+function headerOffset() { return window.innerWidth<1024 ? 0 : presentation?.fullscreen ? 16 : toolbar.getBoundingClientRect().height + 16; }
 
 function positionAtScroll() {
   const paginated = presentation?.readPosition();
@@ -246,7 +246,7 @@ function zoomLayout(preserveCenter = false) {
 }
 
 function openZoom(page, opener) {
-  if (zoomDialog.open) return;
+  if (window.innerWidth<1024 || zoomDialog.open) return;
   layoutRestorer.openModal();
   zoomPage = page;
   zoomOpener = opener;
@@ -359,7 +359,17 @@ function installEvents() {
   zoomViewport.addEventListener('pointerup', endDrag);
   zoomViewport.addEventListener('pointercancel', endDrag);
   zoomViewport.addEventListener('lostpointercapture', endDrag);
-  window.addEventListener('resize', () => layoutRestorer.resize());
+  const resize=()=>{
+    if(window.innerWidth<1024&&zoomDialog.open)zoomDialog.close();
+    layoutRestorer.resize();
+  };
+  window.addEventListener('resize',resize);
+  if(typeof ResizeObserver==='function')observeLayoutChanges({
+    elements:[toolbar,$('reading-stage'),$('mobile-navigation'),document.documentElement],
+    measure:()=>[toolbar.getBoundingClientRect().height,$('reading-stage').clientWidth,$('reading-stage').clientHeight,
+      $('mobile-navigation').getBoundingClientRect().height,window.getComputedStyle(document.documentElement).fontSize].join(':'),
+    onResize:resize,Observer:ResizeObserver,requestFrame:requestAnimationFrame
+  });
 }
 
 async function start() {
