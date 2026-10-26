@@ -11,7 +11,7 @@ function method(name){const start=source.indexOf(`function ${name}(`),end=source
 
 test('actual presentation writes aligned flow geometry with a common mobile first-frame baseline',()=>{
   const f=fixture(390,[],structuredClone(book)),width=358.8;
-  for(const page of [1,2,3,6,7,33,42,43,73,91]) {
+  for(const page of [1,2,3,6,7,12,13,33,42,43,52,53,60,61,73,91]) {
     const frame=f.images[page-1].parentElement.parentElement;
     assert.equal(frame.classList.contains('aligned-frame'),true);
     const [w,h]=frame.style['--alignment-frame-ratio'].split('/').map(Number);
@@ -21,7 +21,7 @@ test('actual presentation writes aligned flow geometry with a common mobile firs
     assert.ok(Math.abs(frameHeight-top-width*1698/1200)<1e-8,'no added bottom spacer');
   }
   assert.equal(f.images[92].parentElement.parentElement.classList.contains('aligned-frame'),false);
-  assert.equal(f.images[52].parentElement.parentElement.classList.contains('aligned-frame'),false);
+  assert.equal(f.images[52].parentElement.parentElement.classList.contains('aligned-frame'),true);
 });
 
 test('actual renderer wraps complete artwork and keeps the document exceptions on their original structure',()=>{
@@ -31,7 +31,7 @@ test('actual renderer wraps complete artwork and keeps the document exceptions o
   assert.equal(images[1].parentElement.parentElement.dataset.alignmentFrame,'true');
   assert.equal(images[1].parentElement.parentElement.parentElement,figures[1]);
   assert.equal(images[92].parentElement.parentElement,figures[92]);
-  assert.equal(images[52].parentElement.parentElement,figures[52],'chapter art pending replacement stays unshifted');
+  assert.equal(images[52].parentElement.parentElement.dataset.alignmentFrame,'true','finalized chapter art uses the aligned artwork wrapper');
 });
 
 test('positive resume fractions use original image pixels and zero retains the aligned page start',()=>{

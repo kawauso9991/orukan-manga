@@ -4,21 +4,27 @@ import fs from 'node:fs';
 import {presentationGeometry} from '../assets/presentation.mjs';
 
 const book=JSON.parse(fs.readFileSync(new URL('../data/book.json',import.meta.url),'utf8'));
-const checkedAnchors=new Map([[2,112],[3,84],[12,124],[13,80],[42,68],[43,24],[52,38],[53,140],[60,140],[61,38],[73,112]]);
+const checkedAnchors=new Map([[2,112],[3,84],[12,84],[13,80],[42,68],[43,24],[52,38],[53,84],[60,84],[61,38],[73,112]]);
 const module=await import('../assets/alignment.mjs').catch(()=>null);
 function alignment(...args){assert.ok(module,'verified panel alignment is available');return module.pageAlignment(...args);}
 
-const pendingPairs=new Set([12,52,60]);
-test('all42 stable inspected comic pairs put their first frame on source baseline140 without cutting the image',()=>{
+test('all45 inspected comic pairs put their first frame on source baseline140 without cutting the image',()=>{
   for(let right=2;right<=90;right+=2)for(const page of [right,right+1]) {
-    if(pendingPairs.has(right))continue;
     const a=alignment(book,page,'spread');
     if(checkedAnchors.has(page))assert.equal(a.anchorY,checkedAnchors.get(page));assert.equal(a.inset+a.anchorY,140);
     assert.equal(a.frameHeight,1838);assert.ok(a.inset>=0);assert.ok(a.inset+1698<=a.frameHeight);
   }
 });
-test('chapter artwork being replaced keeps its entire spread unshifted until new anchors are verified',()=>{
-  for(const page of [12,13,52,53,60,61])assert.equal(alignment(book,page,'spread'),null);
+test('finalized v10 chapter artwork enables all three pairs with new anchors and rejects stale source identities',()=>{
+  for(const page of [12,53,60]) {
+    const item=book.pages[page-1],a=alignment(book,page,'spread'),partner=page%2?page-1:page+1;
+    assert.equal(item.src,`pages/normal/p${String(page).padStart(3,'0')}-v10.webp`);
+    assert.equal(a.anchorY,84);assert.equal(a.inset,56);assert.ok(alignment(book,partner,'spread'));
+    for(const key of ['bytes','zoomBytes']) {
+      const stale=structuredClone(book);stale.pages[page-1][key]++;
+      assert.equal(alignment(stale,page,'spread'),null);assert.equal(alignment(stale,partner,'spread'),null);
+    }
+  }
 });
 test('cover image top shares the comic baseline and never uses separate vertical centering',()=>{
   const a=alignment(book,1,'spread');assert.equal(a.anchorY,0);assert.equal(a.inset,140);assert.equal(a.width,1142);
@@ -42,7 +48,7 @@ test('narrow desktop cover and every spread share an absolute baseline despite a
   for(const fullscreen of [false,true])for(const bodyWidth of [768,1024,2000]) {
     const maxWidth=fullscreen?bodyWidth-220:bodyWidth;
     const baseline=module.alignmentBaseline(maxWidth,900,{fullscreen,mode:'spread'});
-    for(const stageWidth of fullscreen?[maxWidth]:[bodyWidth,bodyWidth-220])for(const pages of [[1],[2,3],[42,43],[72,73]]) {
+    for(const stageWidth of fullscreen?[maxWidth]:[bodyWidth,bodyWidth-220])for(const pages of [[1],[2,3],[12,13],[42,43],[52,53],[60,61],[72,73]]) {
       const as=pages.map(page=>alignment(book,page,'spread'));
       const g=presentationGeometry(as.map(a=>({width:a.width,height:a.envelopeHeight})),stageWidth,900,{fullscreen,captionHeight:0});
       as.forEach((a,i)=>{
@@ -67,7 +73,7 @@ test('portrait and landscape mobile preserve the full image, shared baseline and
 });
 test('representative desktop spreads fit full envelopes with matching first-panel Y and unchanged image proportions',()=>{
   for(const [width,height,fullscreen] of [[600,700,false],[1000,900,false],[1300,800,true],[2100,1080,true]]) {
-    for(const pair of [[2,3],[6,7],[42,43],[48,49],[72,73]]) {
+    for(const pair of [[2,3],[6,7],[12,13],[42,43],[48,49],[52,53],[60,61],[72,73]]) {
       const anchors=pair.map(page=>alignment(book,page,'spread'));
       const g=presentationGeometry(anchors.map(a=>({width:a.width,height:a.frameHeight})),width,height,{fullscreen,captionHeight:0});
       const starts=anchors.map((a,i)=>(a.inset+a.anchorY)*g.sizes[i].width/a.width);

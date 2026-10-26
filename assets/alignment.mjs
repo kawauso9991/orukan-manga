@@ -2,13 +2,10 @@ import { verifiedPanelAnchors } from './panel-anchors.mjs';
 
 const anchors=new Map(verifiedPanelAnchors.map(([page,src,bytes,zoom,zoomBytes,anchorY])=>[page,{src,bytes,zoom,zoomBytes,anchorY}]));
 const baseline=140;
-// These chapter starts are being recomposed by the asset publisher. Leave
-// both pages of each pair untouched until their replacement anchors are read.
-const pendingChapterArt=new Set([12,53,60]);
 
 function inspected(book,page) {
   const item=book.pages[page-1],record=anchors.get(page);
-  return !pendingChapterArt.has(page)&&item&&record&&item.src===record.src&&item.bytes===record.bytes&&item.zoom===record.zoom&&item.zoomBytes===record.zoomBytes&&item.width===1200&&item.height===1698?record:null;
+  return item&&record&&item.src===record.src&&item.bytes===record.bytes&&item.zoom===record.zoom&&item.zoomBytes===record.zoomBytes&&item.width===1200&&item.height===1698?record:null;
 }
 
 export function verifiedCover(book) {return Boolean(inspected(book,1));}
