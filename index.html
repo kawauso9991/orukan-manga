@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ed">
+  <meta name="description" content="kawauso 作『オルカンに勝てん！』全107ページを、縦スクロールで読めます。">
+  <title>オルカンに勝てん！｜kawauso</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="assets/reader.css">
+  <script type="module" src="assets/reader.mjs"></script>
+</head>
+<body>
+  <a class="skip-link" href="#reader">本文へ進む</a>
+  <header class="introduction" id="top">
+    <p class="eyebrow">kawauso の投資まんが</p>
+    <h1>オルカンに勝てん！</h1>
+    <p class="byline">作：kawauso <span aria-hidden="true">／</span> 全107ページ</p>
+    <p class="instructions">下へスクロールして読めます。<br class="mobile-break">文字が小さいときは、ページごとの「拡大」を。</p>
+    <div class="book-actions">
+      <button id="open-contents" type="button" disabled>目次から読む <span aria-hidden="true">↗</span></button>
+      <a class="download-link" id="pdf-download" href="downloads/orukan-v8.pdf" download="orukan-v8.pdf">PDFをダウンロード <span id="pdf-size">（約90.5 MB）</span><span aria-hidden="true"> ↓</span></a>
+    </div>
+    <p class="download-note">公開用PDFには添付ファイルを含みません。</p>
+  </header>
+
+  <noscript><div class="notice">読むにはJavaScriptを有効にしてください。<a href="downloads/orukan-v8.pdf" download="orukan-v8.pdf">全107ページのPDFをダウンロード</a>して読むこともできます。公開用PDFには添付ファイルを含みません。</div></noscript>
+  <div class="notice" id="startup-message" role="status">まんがを準備しています… <a href="">読み込めないときは再読み込み</a></div>
+
+  <nav class="reader-toolbar" aria-label="読書ナビゲーション" id="reader-toolbar" hidden>
+    <div class="toolbar-inner">
+      <div class="reading-status"><span id="current-position">1 / 107 ページ</span><span id="current-chapter">表紙</span></div>
+      <div class="toolbar-controls">
+        <button type="button" id="previous" aria-label="前のページ">← 前へ</button>
+        <form id="page-form" class="page-form">
+          <label for="page-number" class="sr-only">移動するページ（1から107）</label>
+          <input id="page-number" name="page" type="number" min="1" max="107" step="1" inputmode="numeric" value="1" required>
+          <span class="page-total" aria-hidden="true">/ 107</span>
+          <button type="submit">移動</button>
+        </form>
+        <button type="button" id="next" aria-label="次のページ">次へ →</button>
+        <button type="button" id="toolbar-contents">目次</button>
+      </div>
+      <div class="progress-track" aria-hidden="true"><div id="reading-progress"></div></div>
+    </div>
+  </nav>
+
+  <main id="reader" class="reader" tabindex="-1" aria-label="オルカンに勝てん！ 本文"></main>
+  <footer class="site-footer" id="site-footer" hidden>
+    <p class="end-mark" aria-hidden="true">おしまい</p>
+    <p>『オルカンに勝てん！』 作：kawauso</p>
+    <p>作品の権利・利用条件は、<a href="#p=107" data-page="107">107ページの記載</a>をご確認ください。</p>
+    <a href="#p=1" data-page="1">最初のページへ ↑</a>
+  </footer>
+
+  <dialog id="contents-dialog" class="contents-dialog" aria-labelledby="contents-title">
+    <div class="dialog-heading"><div><p class="eyebrow">全107ページ</p><h2 id="contents-title">目次</h2></div><button type="button" id="close-contents" aria-label="目次を閉じる">閉じる ×</button></div>
+    <div class="chapter-select"><label for="chapter-select">章を選ぶ</label><select id="chapter-select"><option value="">章・資料を選択…</option></select></div>
+    <nav aria-label="すべての章と資料"><ol id="contents-list"></ol></nav>
+  </dialog>
+
+  <dialog id="zoom-dialog" class="zoom-dialog" aria-labelledby="zoom-title">
+    <div class="zoom-toolbar">
+      <h2 id="zoom-title">ページの拡大</h2><button type="button" id="close-zoom" aria-label="拡大を閉じる">閉じる ×</button>
+      <div class="zoom-controls" role="group" aria-label="拡大率"><button type="button" id="zoom-out" aria-label="縮小">−</button><output id="zoom-level" aria-live="polite">100%</output><button type="button" id="zoom-in" aria-label="拡大">＋</button><button type="button" id="zoom-fit">幅に合わせる</button></div>
+      <p class="zoom-hint">スクロールやドラッグで移動できます。Escで閉じます。</p>
+    </div>
+    <details id="zoom-references" class="zoom-references references" hidden><summary>このページの出典・参照</summary><ol id="zoom-reference-list"></ol></details>
+    <div class="zoom-viewport" id="zoom-viewport" tabindex="0" aria-label="拡大したページ。上下左右にスクロールできます。"><div class="zoom-canvas" id="zoom-canvas"><img id="zoom-image" alt=""><div id="zoom-links" class="source-links"></div></div></div>
+    <p class="zoom-message" id="zoom-message" role="status" hidden></p>
+  </dialog>
+  <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+</body>
+</html>

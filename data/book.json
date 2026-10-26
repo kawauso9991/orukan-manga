@@ -1,0 +1,2683 @@
+{
+  "title": "オルカンに勝てん！",
+  "version": "v8",
+  "totalPages": 107,
+  "pages": [
+    {
+      "number": 1,
+      "label": "1",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p001.webp",
+      "bytes": 457450,
+      "zoom": "pages/hq/p001.webp",
+      "zoomBytes": 1238126
+    },
+    {
+      "number": 2,
+      "label": "2",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p002.webp",
+      "bytes": 229654,
+      "zoom": "pages/hq/p002.webp",
+      "zoomBytes": 579972
+    },
+    {
+      "number": 3,
+      "label": "3",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p003.webp",
+      "bytes": 370200,
+      "zoom": "pages/hq/p003.webp",
+      "zoomBytes": 986370
+    },
+    {
+      "number": 4,
+      "label": "4",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p004.webp",
+      "bytes": 389552,
+      "zoom": "pages/hq/p004.webp",
+      "zoomBytes": 1089456
+    },
+    {
+      "number": 5,
+      "label": "5",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p005.webp",
+      "bytes": 358684,
+      "zoom": "pages/hq/p005.webp",
+      "zoomBytes": 957026
+    },
+    {
+      "number": 6,
+      "label": "6",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p006.webp",
+      "bytes": 471232,
+      "zoom": "pages/hq/p006.webp",
+      "zoomBytes": 1272146
+    },
+    {
+      "number": 7,
+      "label": "7",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p007.webp",
+      "bytes": 411888,
+      "zoom": "pages/hq/p007.webp",
+      "zoomBytes": 1150446
+    },
+    {
+      "number": 8,
+      "label": "8",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p008.webp",
+      "bytes": 409098,
+      "zoom": "pages/hq/p008.webp",
+      "zoomBytes": 1116734
+    },
+    {
+      "number": 9,
+      "label": "9",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p009.webp",
+      "bytes": 307370,
+      "zoom": "pages/hq/p009.webp",
+      "zoomBytes": 828798
+    },
+    {
+      "number": 10,
+      "label": "10",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p010.webp",
+      "bytes": 477184,
+      "zoom": "pages/hq/p010.webp",
+      "zoomBytes": 1296698
+    },
+    {
+      "number": 11,
+      "label": "11",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p011.webp",
+      "bytes": 360500,
+      "zoom": "pages/hq/p011.webp",
+      "zoomBytes": 968700
+    },
+    {
+      "number": 12,
+      "label": "12",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p012.webp",
+      "bytes": 468172,
+      "zoom": "pages/hq/p012.webp",
+      "zoomBytes": 1269484
+    },
+    {
+      "number": 13,
+      "label": "13",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p013.webp",
+      "bytes": 398556,
+      "zoom": "pages/hq/p013.webp",
+      "zoomBytes": 1085104
+    },
+    {
+      "number": 14,
+      "label": "14",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p014.webp",
+      "bytes": 294824,
+      "zoom": "pages/hq/p014.webp",
+      "zoomBytes": 785504
+    },
+    {
+      "number": 15,
+      "label": "15",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p015.webp",
+      "bytes": 373800,
+      "zoom": "pages/hq/p015.webp",
+      "zoomBytes": 1015322
+    },
+    {
+      "number": 16,
+      "label": "16",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p016.webp",
+      "bytes": 367614,
+      "zoom": "pages/hq/p016.webp",
+      "zoomBytes": 957632
+    },
+    {
+      "number": 17,
+      "label": "17",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p017.webp",
+      "bytes": 226158,
+      "zoom": "pages/hq/p017.webp",
+      "zoomBytes": 613156
+    },
+    {
+      "number": 18,
+      "label": "18",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p018.webp",
+      "bytes": 416442,
+      "zoom": "pages/hq/p018.webp",
+      "zoomBytes": 1104010
+    },
+    {
+      "number": 19,
+      "label": "19",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p019.webp",
+      "bytes": 339148,
+      "zoom": "pages/hq/p019.webp",
+      "zoomBytes": 1144122
+    },
+    {
+      "number": 20,
+      "label": "20",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p020.webp",
+      "bytes": 362104,
+      "zoom": "pages/hq/p020.webp",
+      "zoomBytes": 978442
+    },
+    {
+      "number": 21,
+      "label": "21",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p021.webp",
+      "bytes": 337620,
+      "zoom": "pages/hq/p021.webp",
+      "zoomBytes": 979636
+    },
+    {
+      "number": 22,
+      "label": "22",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p022.webp",
+      "bytes": 321066,
+      "zoom": "pages/hq/p022.webp",
+      "zoomBytes": 834666
+    },
+    {
+      "number": 23,
+      "label": "23",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p023.webp",
+      "bytes": 599148,
+      "zoom": "pages/hq/p023.webp",
+      "zoomBytes": 1721480
+    },
+    {
+      "number": 24,
+      "label": "24",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p024.webp",
+      "bytes": 368906,
+      "zoom": "pages/hq/p024.webp",
+      "zoomBytes": 1015996
+    },
+    {
+      "number": 25,
+      "label": "25",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p025.webp",
+      "bytes": 346672,
+      "zoom": "pages/hq/p025.webp",
+      "zoomBytes": 912006
+    },
+    {
+      "number": 26,
+      "label": "26",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p026.webp",
+      "bytes": 368278,
+      "zoom": "pages/hq/p026.webp",
+      "zoomBytes": 980976
+    },
+    {
+      "number": 27,
+      "label": "27",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p027.webp",
+      "bytes": 396934,
+      "zoom": "pages/hq/p027.webp",
+      "zoomBytes": 1108066
+    },
+    {
+      "number": 28,
+      "label": "28",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p028.webp",
+      "bytes": 361402,
+      "zoom": "pages/hq/p028.webp",
+      "zoomBytes": 970838
+    },
+    {
+      "number": 29,
+      "label": "29",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p029.webp",
+      "bytes": 405348,
+      "zoom": "pages/hq/p029.webp",
+      "zoomBytes": 1104564
+    },
+    {
+      "number": 30,
+      "label": "30",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p030.webp",
+      "bytes": 272866,
+      "zoom": "pages/hq/p030.webp",
+      "zoomBytes": 736630
+    },
+    {
+      "number": 31,
+      "label": "31",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p031.webp",
+      "bytes": 263372,
+      "zoom": "pages/hq/p031.webp",
+      "zoomBytes": 696236
+    },
+    {
+      "number": 32,
+      "label": "32",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p032.webp",
+      "bytes": 298470,
+      "zoom": "pages/hq/p032.webp",
+      "zoomBytes": 798000
+    },
+    {
+      "number": 33,
+      "label": "33",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p033.webp",
+      "bytes": 368172,
+      "zoom": "pages/hq/p033.webp",
+      "zoomBytes": 971586
+    },
+    {
+      "number": 34,
+      "label": "34",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p034.webp",
+      "bytes": 263456,
+      "zoom": "pages/hq/p034.webp",
+      "zoomBytes": 689534
+    },
+    {
+      "number": 35,
+      "label": "35",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p035.webp",
+      "bytes": 247184,
+      "zoom": "pages/hq/p035.webp",
+      "zoomBytes": 662982
+    },
+    {
+      "number": 36,
+      "label": "36",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p036.webp",
+      "bytes": 217332,
+      "zoom": "pages/hq/p036.webp",
+      "zoomBytes": 585926
+    },
+    {
+      "number": 37,
+      "label": "37",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p037.webp",
+      "bytes": 288080,
+      "zoom": "pages/hq/p037.webp",
+      "zoomBytes": 746140
+    },
+    {
+      "number": 38,
+      "label": "38",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p038.webp",
+      "bytes": 329126,
+      "zoom": "pages/hq/p038.webp",
+      "zoomBytes": 881414
+    },
+    {
+      "number": 39,
+      "label": "39",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p039.webp",
+      "bytes": 221796,
+      "zoom": "pages/hq/p039.webp",
+      "zoomBytes": 590056
+    },
+    {
+      "number": 40,
+      "label": "40",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p040.webp",
+      "bytes": 282778,
+      "zoom": "pages/hq/p040.webp",
+      "zoomBytes": 758442
+    },
+    {
+      "number": 41,
+      "label": "41",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p041.webp",
+      "bytes": 315718,
+      "zoom": "pages/hq/p041.webp",
+      "zoomBytes": 954118
+    },
+    {
+      "number": 42,
+      "label": "42",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p042.webp",
+      "bytes": 370364,
+      "zoom": "pages/hq/p042.webp",
+      "zoomBytes": 937928
+    },
+    {
+      "number": 43,
+      "label": "43",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p043.webp",
+      "bytes": 349038,
+      "zoom": "pages/hq/p043.webp",
+      "zoomBytes": 916204
+    },
+    {
+      "number": 44,
+      "label": "44",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p044.webp",
+      "bytes": 298842,
+      "zoom": "pages/hq/p044.webp",
+      "zoomBytes": 777648
+    },
+    {
+      "number": 45,
+      "label": "45",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p045.webp",
+      "bytes": 214780,
+      "zoom": "pages/hq/p045.webp",
+      "zoomBytes": 565000
+    },
+    {
+      "number": 46,
+      "label": "46",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p046.webp",
+      "bytes": 324642,
+      "zoom": "pages/hq/p046.webp",
+      "zoomBytes": 871064
+    },
+    {
+      "number": 47,
+      "label": "47",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p047.webp",
+      "bytes": 323806,
+      "zoom": "pages/hq/p047.webp",
+      "zoomBytes": 879488
+    },
+    {
+      "number": 48,
+      "label": "48",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p048.webp",
+      "bytes": 352514,
+      "zoom": "pages/hq/p048.webp",
+      "zoomBytes": 965982
+    },
+    {
+      "number": 49,
+      "label": "49",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p049.webp",
+      "bytes": 332904,
+      "zoom": "pages/hq/p049.webp",
+      "zoomBytes": 900506
+    },
+    {
+      "number": 50,
+      "label": "50",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p050.webp",
+      "bytes": 363534,
+      "zoom": "pages/hq/p050.webp",
+      "zoomBytes": 961472
+    },
+    {
+      "number": 51,
+      "label": "51",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p051.webp",
+      "bytes": 332728,
+      "zoom": "pages/hq/p051.webp",
+      "zoomBytes": 912462
+    },
+    {
+      "number": 52,
+      "label": "52",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p052.webp",
+      "bytes": 309774,
+      "zoom": "pages/hq/p052.webp",
+      "zoomBytes": 841618
+    },
+    {
+      "number": 53,
+      "label": "53",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p053.webp",
+      "bytes": 330620,
+      "zoom": "pages/hq/p053.webp",
+      "zoomBytes": 1025954
+    },
+    {
+      "number": 54,
+      "label": "54",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p054.webp",
+      "bytes": 320960,
+      "zoom": "pages/hq/p054.webp",
+      "zoomBytes": 851858
+    },
+    {
+      "number": 55,
+      "label": "55",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p055.webp",
+      "bytes": 316138,
+      "zoom": "pages/hq/p055.webp",
+      "zoomBytes": 828732
+    },
+    {
+      "number": 56,
+      "label": "56",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p056.webp",
+      "bytes": 345496,
+      "zoom": "pages/hq/p056.webp",
+      "zoomBytes": 910534
+    },
+    {
+      "number": 57,
+      "label": "57",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p057.webp",
+      "bytes": 295718,
+      "zoom": "pages/hq/p057.webp",
+      "zoomBytes": 849542
+    },
+    {
+      "number": 58,
+      "label": "58",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p058.webp",
+      "bytes": 385784,
+      "zoom": "pages/hq/p058.webp",
+      "zoomBytes": 1044364
+    },
+    {
+      "number": 59,
+      "label": "59",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p059.webp",
+      "bytes": 391604,
+      "zoom": "pages/hq/p059.webp",
+      "zoomBytes": 1025396
+    },
+    {
+      "number": 60,
+      "label": "60",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p060.webp",
+      "bytes": 329612,
+      "zoom": "pages/hq/p060.webp",
+      "zoomBytes": 882522
+    },
+    {
+      "number": 61,
+      "label": "61",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p061.webp",
+      "bytes": 326616,
+      "zoom": "pages/hq/p061.webp",
+      "zoomBytes": 897292
+    },
+    {
+      "number": 62,
+      "label": "62",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p062.webp",
+      "bytes": 377254,
+      "zoom": "pages/hq/p062.webp",
+      "zoomBytes": 997280
+    },
+    {
+      "number": 63,
+      "label": "63",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p063.webp",
+      "bytes": 296300,
+      "zoom": "pages/hq/p063.webp",
+      "zoomBytes": 799448
+    },
+    {
+      "number": 64,
+      "label": "64",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p064.webp",
+      "bytes": 276854,
+      "zoom": "pages/hq/p064.webp",
+      "zoomBytes": 767286
+    },
+    {
+      "number": 65,
+      "label": "65",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p065.webp",
+      "bytes": 333820,
+      "zoom": "pages/hq/p065.webp",
+      "zoomBytes": 1132762
+    },
+    {
+      "number": 66,
+      "label": "66",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p066.webp",
+      "bytes": 399866,
+      "zoom": "pages/hq/p066.webp",
+      "zoomBytes": 1342960
+    },
+    {
+      "number": 67,
+      "label": "67",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p067.webp",
+      "bytes": 394574,
+      "zoom": "pages/hq/p067.webp",
+      "zoomBytes": 1220598
+    },
+    {
+      "number": 68,
+      "label": "68",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p068.webp",
+      "bytes": 395530,
+      "zoom": "pages/hq/p068.webp",
+      "zoomBytes": 1359446
+    },
+    {
+      "number": 69,
+      "label": "69",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p069.webp",
+      "bytes": 345400,
+      "zoom": "pages/hq/p069.webp",
+      "zoomBytes": 1044298
+    },
+    {
+      "number": 70,
+      "label": "70",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p070.webp",
+      "bytes": 353470,
+      "zoom": "pages/hq/p070.webp",
+      "zoomBytes": 974714
+    },
+    {
+      "number": 71,
+      "label": "71",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p071.webp",
+      "bytes": 338246,
+      "zoom": "pages/hq/p071.webp",
+      "zoomBytes": 944434
+    },
+    {
+      "number": 72,
+      "label": "72",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p072.webp",
+      "bytes": 372600,
+      "zoom": "pages/hq/p072.webp",
+      "zoomBytes": 1130660
+    },
+    {
+      "number": 73,
+      "label": "73",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p073.webp",
+      "bytes": 356856,
+      "zoom": "pages/hq/p073.webp",
+      "zoomBytes": 1084984
+    },
+    {
+      "number": 74,
+      "label": "74",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p074.webp",
+      "bytes": 410944,
+      "zoom": "pages/hq/p074.webp",
+      "zoomBytes": 1254252
+    },
+    {
+      "number": 75,
+      "label": "75",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p075.webp",
+      "bytes": 337660,
+      "zoom": "pages/hq/p075.webp",
+      "zoomBytes": 1052110
+    },
+    {
+      "number": 76,
+      "label": "76",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p076.webp",
+      "bytes": 414266,
+      "zoom": "pages/hq/p076.webp",
+      "zoomBytes": 1345730
+    },
+    {
+      "number": 77,
+      "label": "77",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p077.webp",
+      "bytes": 355878,
+      "zoom": "pages/hq/p077.webp",
+      "zoomBytes": 1085392
+    },
+    {
+      "number": 78,
+      "label": "78",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p078.webp",
+      "bytes": 366576,
+      "zoom": "pages/hq/p078.webp",
+      "zoomBytes": 984532
+    },
+    {
+      "number": 79,
+      "label": "79",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p079.webp",
+      "bytes": 352776,
+      "zoom": "pages/hq/p079.webp",
+      "zoomBytes": 952918
+    },
+    {
+      "number": 80,
+      "label": "80",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p080.webp",
+      "bytes": 346430,
+      "zoom": "pages/hq/p080.webp",
+      "zoomBytes": 976146
+    },
+    {
+      "number": 81,
+      "label": "81",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p081.webp",
+      "bytes": 417624,
+      "zoom": "pages/hq/p081.webp",
+      "zoomBytes": 1149754
+    },
+    {
+      "number": 82,
+      "label": "82",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p082.webp",
+      "bytes": 415354,
+      "zoom": "pages/hq/p082.webp",
+      "zoomBytes": 1157002
+    },
+    {
+      "number": 83,
+      "label": "83",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p083.webp",
+      "bytes": 368140,
+      "zoom": "pages/hq/p083.webp",
+      "zoomBytes": 1017362
+    },
+    {
+      "number": 84,
+      "label": "84",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p084.webp",
+      "bytes": 387192,
+      "zoom": "pages/hq/p084.webp",
+      "zoomBytes": 1278700
+    },
+    {
+      "number": 85,
+      "label": "85",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p085.webp",
+      "bytes": 331006,
+      "zoom": "pages/hq/p085.webp",
+      "zoomBytes": 1056674
+    },
+    {
+      "number": 86,
+      "label": "86",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p086.webp",
+      "bytes": 342148,
+      "zoom": "pages/hq/p086.webp",
+      "zoomBytes": 1069080
+    },
+    {
+      "number": 87,
+      "label": "87",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p087.webp",
+      "bytes": 361126,
+      "zoom": "pages/hq/p087.webp",
+      "zoomBytes": 1080288
+    },
+    {
+      "number": 88,
+      "label": "88",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p088.webp",
+      "bytes": 328890,
+      "zoom": "pages/hq/p088.webp",
+      "zoomBytes": 950988
+    },
+    {
+      "number": 89,
+      "label": "89",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p089.webp",
+      "bytes": 397388,
+      "zoom": "pages/hq/p089.webp",
+      "zoomBytes": 1194604
+    },
+    {
+      "number": 90,
+      "label": "90",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p090.webp",
+      "bytes": 372596,
+      "zoom": "pages/hq/p090.webp",
+      "zoomBytes": 995490
+    },
+    {
+      "number": 91,
+      "label": "91",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p091.webp",
+      "bytes": 370960,
+      "zoom": "pages/hq/p091.webp",
+      "zoomBytes": 1005082
+    },
+    {
+      "number": 92,
+      "label": "92",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p092.webp",
+      "bytes": 357198,
+      "zoom": "pages/hq/p092.webp",
+      "zoomBytes": 953642
+    },
+    {
+      "number": 93,
+      "label": "93",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p093.webp",
+      "bytes": 118930,
+      "zoom": "pages/hq/p093.webp",
+      "zoomBytes": 286922
+    },
+    {
+      "number": 94,
+      "label": "94",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p094.webp",
+      "bytes": 135036,
+      "zoom": "pages/hq/p094.webp",
+      "zoomBytes": 330996
+    },
+    {
+      "number": 95,
+      "label": "95",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p095.webp",
+      "bytes": 100056,
+      "zoom": "pages/hq/p095.webp",
+      "zoomBytes": 237314
+    },
+    {
+      "number": 96,
+      "label": "96",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p096.webp",
+      "bytes": 270206,
+      "zoom": "pages/hq/p096.webp",
+      "zoomBytes": 629538
+    },
+    {
+      "number": 97,
+      "label": "97",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p097.webp",
+      "bytes": 355618,
+      "zoom": "pages/hq/p097.webp",
+      "zoomBytes": 818564
+    },
+    {
+      "number": 98,
+      "label": "A1",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p098.webp",
+      "bytes": 201070,
+      "zoom": "pages/hq/p098.webp",
+      "zoomBytes": 463052
+    },
+    {
+      "number": 99,
+      "label": "A2",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p099.webp",
+      "bytes": 189674,
+      "zoom": "pages/hq/p099.webp",
+      "zoomBytes": 425540
+    },
+    {
+      "number": 100,
+      "label": "A3",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p100.webp",
+      "bytes": 204232,
+      "zoom": "pages/hq/p100.webp",
+      "zoomBytes": 477888
+    },
+    {
+      "number": 101,
+      "label": "A4",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p101.webp",
+      "bytes": 161464,
+      "zoom": "pages/hq/p101.webp",
+      "zoomBytes": 365746
+    },
+    {
+      "number": 102,
+      "label": "A5",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p102.webp",
+      "bytes": 206112,
+      "zoom": "pages/hq/p102.webp",
+      "zoomBytes": 466200
+    },
+    {
+      "number": 103,
+      "label": "A6",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p103.webp",
+      "bytes": 250716,
+      "zoom": "pages/hq/p103.webp",
+      "zoomBytes": 587532
+    },
+    {
+      "number": 104,
+      "label": "A7",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p104.webp",
+      "bytes": 264422,
+      "zoom": "pages/hq/p104.webp",
+      "zoomBytes": 620472
+    },
+    {
+      "number": 105,
+      "label": "A8",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p105.webp",
+      "bytes": 330816,
+      "zoom": "pages/hq/p105.webp",
+      "zoomBytes": 725412
+    },
+    {
+      "number": 106,
+      "label": "106",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p106.webp",
+      "bytes": 199172,
+      "zoom": "pages/hq/p106.webp",
+      "zoomBytes": 496166
+    },
+    {
+      "number": 107,
+      "label": "107",
+      "width": 1200,
+      "height": 1698,
+      "src": "pages/normal/p107.webp",
+      "bytes": 390262,
+      "zoom": "pages/hq/p107.webp",
+      "zoomBytes": 935962
+    }
+  ],
+  "chapters": [
+    {
+      "page": 1,
+      "title": "表紙"
+    },
+    {
+      "page": 2,
+      "title": "序章 それでも、売るんですか"
+    },
+    {
+      "page": 3,
+      "title": "第1章 1週間だけの王様"
+    },
+    {
+      "page": 12,
+      "title": "第2章 強い会社だけなら、勝てる？"
+    },
+    {
+      "page": 20,
+      "title": "第3章 それでも、確かめたい"
+    },
+    {
+      "page": 29,
+      "title": "第4章 約束した日に、払うために"
+    },
+    {
+      "page": 42,
+      "title": "第5章 先生にも、後悔がある"
+    },
+    {
+      "page": 53,
+      "title": "第6章 来月、このお金がいる"
+    },
+    {
+      "page": 60,
+      "title": "終章 ご飯が冷める前に"
+    },
+    {
+      "page": 65,
+      "title": "理論編"
+    },
+    {
+      "page": 66,
+      "title": "理論編 分けると何が変わる？"
+    },
+    {
+      "page": 67,
+      "title": "理論編 平均と中央値は違う"
+    },
+    {
+      "page": 68,
+      "title": "理論編 1,000通りの未来"
+    },
+    {
+      "page": 69,
+      "title": "理論編 揺れが大きいほど、中央値は削られる"
+    },
+    {
+      "page": 70,
+      "title": "理論編 高いシャープレシオが、大切な理由"
+    },
+    {
+      "page": 71,
+      "title": "理論編 いちばん急な坂道"
+    },
+    {
+      "page": 72,
+      "title": "理論編 中身と、量は分けられる"
+    },
+    {
+      "page": 73,
+      "title": "理論編 なぜ、市場の大きさに合わせるのか"
+    },
+    {
+      "page": 74,
+      "title": "理論編 世界へ広げて、オルカンへ"
+    },
+    {
+      "page": 75,
+      "title": "理論編 同じ坂道で、自分の位置を選ぶ"
+    },
+    {
+      "page": 76,
+      "title": "理論編 理論の市場と、買える商品"
+    },
+    {
+      "page": 78,
+      "title": "理論編 知ったニュースで、先回りできる？"
+    },
+    {
+      "page": 80,
+      "title": "理論編 みんなで平均には勝てない"
+    },
+    {
+      "page": 82,
+      "title": "理論編 売買を減らす。お金を残す"
+    },
+    {
+      "page": 84,
+      "title": "理論編 選ばなくていいことが、増える"
+    },
+    {
+      "page": 86,
+      "title": "理論編 悪い結果の境目を見る"
+    },
+    {
+      "page": 88,
+      "title": "理論編 途中の下落も、見落とさない"
+    },
+    {
+      "page": 90,
+      "title": "理論編 簡単な方法を、理解して選ぶ"
+    },
+    {
+      "page": 93,
+      "title": "巻末資料 数字と出典を確かめる"
+    },
+    {
+      "page": 97,
+      "title": "巻末補足 九つの考え方"
+    },
+    {
+      "page": 98,
+      "title": "理論補足別冊"
+    },
+    {
+      "page": 106,
+      "title": "試算の入力と計算方法"
+    },
+    {
+      "page": 107,
+      "title": "あとがき"
+    }
+  ],
+  "links": [
+    {
+      "page": 8,
+      "rect": [
+        0.6653566852059785,
+        0.9730706560407312,
+        0.12461387632888024,
+        0.011995192244875753
+      ],
+      "type": "external",
+      "url": "https://www.fsa.go.jp/ordinary/iwagai/index.html",
+      "label": "出典を開く：www.fsa.go.jp"
+    },
+    {
+      "page": 10,
+      "rect": [
+        0.4361490862383743,
+        0.9716494582782688,
+        0.1953463471373595,
+        0.014847549049768743
+      ],
+      "type": "external",
+      "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P44_Grading_the_performance.pdf",
+      "label": "出典を開く：people.duke.edu"
+    },
+    {
+      "page": 21,
+      "rect": [
+        0.08231481350823047,
+        0.9668723863859616,
+        0.03841773457537987,
+        0.010690235230311615
+      ],
+      "type": "external",
+      "url": "https://www.msci.com/ja/indexes/acwi",
+      "label": "出典を開く：www.msci.com"
+    },
+    {
+      "page": 21,
+      "rect": [
+        0.13585159546267309,
+        0.9668723863859616,
+        0.0934531165060352,
+        0.010690235230311615
+      ],
+      "type": "external",
+      "url": "https://www.lseg.com/en/ftse-russell/indices/global-equity-index-series",
+      "label": "出典を開く：www.lseg.com"
+    },
+    {
+      "page": 21,
+      "rect": [
+        0.24442375934777102,
+        0.9668723863859616,
+        0.07117325151576846,
+        0.010690235230311615
+      ],
+      "type": "external",
+      "url": "https://advisors.vanguard.com/investments/products/vt/vanguard-total-world-stock-etf",
+      "label": "出典を開く：advisors.vanguard.com"
+    },
+    {
+      "page": 23,
+      "rect": [
+        0.7275372953300957,
+        0.9621470292192636,
+        0.043275249313091256,
+        0.013065843059269751
+      ],
+      "type": "external",
+      "url": "https://mysimon.rochester.edu/novy-marx/research/OSoV.pdf",
+      "label": "出典を開く：mysimon.rochester.edu"
+    },
+    {
+      "page": 26,
+      "rect": [
+        0.7243231538467223,
+        0.9431163080963804,
+        0.05048787485998078,
+        0.012471941102030218
+      ],
+      "type": "external",
+      "url": "https://doi.org/10.1093/rfs/14.3.583",
+      "label": "出典を開く：doi.org"
+    },
+    {
+      "page": 26,
+      "rect": [
+        0.4250132207669859,
+        0.971623602043878,
+        0.05048787485998078,
+        0.01247194110203022
+      ],
+      "type": "external",
+      "url": "https://rpc.cfainstitute.org/research/financial-analysts-journal/2020/0015198x-2020-1842704",
+      "label": "出典を開く：rpc.cfainstitute.org"
+    },
+    {
+      "page": 27,
+      "rect": [
+        0.5750057620369455,
+        0.9550202057323892,
+        0.12338856153351488,
+        0.013065843059269748
+      ],
+      "type": "external",
+      "url": "https://spinup-000d1a-wp-offload-media.s3.amazonaws.com/faculty/wp-content/uploads/sites/3/2021/08/Putting-and-Academic-Factor-Into-Practice.pdf",
+      "label": "出典を開く：spinup-000d1a-wp-offload-media.s3.amazonaws.com"
+    },
+    {
+      "page": 30,
+      "rect": [
+        0.03695767137104225,
+        0.9585836531099439,
+        0.385936866889891,
+        0.014847548930988358
+      ],
+      "type": "internal",
+      "target": 106,
+      "label": "106ページへ（106）"
+    },
+    {
+      "page": 31,
+      "rect": [
+        0.03695767137104225,
+        0.9585836531099439,
+        0.385936866889891,
+        0.014847548930988358
+      ],
+      "type": "internal",
+      "target": 106,
+      "label": "106ページへ（106）"
+    },
+    {
+      "page": 32,
+      "rect": [
+        0.03695767137104225,
+        0.9704616566206171,
+        0.0432753165088574,
+        0.013065843059269755
+      ],
+      "type": "external",
+      "url": "https://www.bankofengland.co.uk/quarterly-bulletin/2023/2023/financial-stability-buy-sell-tools-a-gilt-market-case-study",
+      "label": "出典を開く：www.bankofengland.co.uk"
+    },
+    {
+      "page": 33,
+      "rect": [
+        0.7492327923402201,
+        0.9704357981293988,
+        0.043275249313091256,
+        0.011878039144790686
+      ],
+      "type": "external",
+      "url": "https://www.thepensionsregulator.gov.uk/en/document-library/scheme-management-detailed-guidance/funding-and-investment-detailed-guidance/db-investment/investing-to-fund-db",
+      "label": "出典を開く：www.thepensionsregulator.gov.uk"
+    },
+    {
+      "page": 38,
+      "rect": [
+        0.3368187777224532,
+        0.973233076347997,
+        0.05048787485998083,
+        0.012471941102030218
+      ],
+      "type": "external",
+      "url": "https://www.bis.org/publ/qtrpdf/r_qt1609e.pdf",
+      "label": "出典を開く：www.bis.org"
+    },
+    {
+      "page": 41,
+      "rect": [
+        0.6671345171883409,
+        0.954994347241171,
+        0.05048787485998088,
+        0.012471941102030218
+      ],
+      "type": "external",
+      "url": "https://www.bankofengland.co.uk/quarterly-bulletin/2023/2023/financial-stability-buy-sell-tools-a-gilt-market-case-study",
+      "label": "出典を開く：www.bankofengland.co.uk"
+    },
+    {
+      "page": 55,
+      "rect": [
+        0.035277777217813056,
+        0.9377933224752218,
+        0.0450257571450938,
+        0.013065843059269751
+      ],
+      "type": "external",
+      "url": "https://www.msci.com/documents/10199/c5396cad-ee91-43d4-bb74-36d786e9dd6f",
+      "label": "出典を開く：www.msci.com"
+    },
+    {
+      "page": 67,
+      "rect": [
+        0.03695767137104225,
+        0.9383909152955648,
+        0.0432753165088574,
+        0.013065843059269751
+      ],
+      "type": "external",
+      "url": "https://doi.org/10.1016/j.jfineco.2018.06.004",
+      "label": "出典を開く：doi.org"
+    },
+    {
+      "page": 71,
+      "rect": [
+        0.10150891452631353,
+        0.9502689544403555,
+        0.0432753165088574,
+        0.013065843059269751
+      ],
+      "type": "external",
+      "url": "https://www.newfrontieradvisors.com/media/t04a3oct/the-markowitz-optimization-enigma.pdf",
+      "label": "出典を開く：www.newfrontieradvisors.com"
+    },
+    {
+      "page": 71,
+      "rect": [
+        0.14478423103517093,
+        0.9502689544403555,
+        0.04327538370462353,
+        0.013065843059269751
+      ],
+      "type": "external",
+      "url": "https://rpc.cfainstitute.org/research/financial-analysts-journal/1992/faj-v48-n5-28",
+      "label": "出典を開く：rpc.cfainstitute.org"
+    },
+    {
+      "page": 72,
+      "rect": [
+        0.035277777217813056,
+        0.9734274399095939,
+        0.4824519919848889,
+        0.013065843059269751
+      ],
+      "type": "external",
+      "url": "https://academic.oup.com/restud/article-abstract/25/2/65/1550009",
+      "label": "出典を開く：academic.oup.com"
+    },
+    {
+      "page": 73,
+      "rect": [
+        0.6944150894140462,
+        0.9074821906620083,
+        0.06336449201008743,
+        0.014491207756644621
+      ],
+      "type": "internal",
+      "target": 76,
+      "label": "76ページへ（76）"
+    },
+    {
+      "page": 74,
+      "rect": [
+        0.035277777217813056,
+        0.9294786950738684,
+        0.08662118336447856,
+        0.013065843059269751
+      ],
+      "type": "external",
+      "url": "https://www.msci.com/documents/10199/255599/msci-acwi-net.pdf",
+      "label": "出典を開く：www.msci.com"
+    },
+    {
+      "page": 74,
+      "rect": [
+        0.12189896058229162,
+        0.9294786950738684,
+        0.12011489484870537,
+        0.013065843059269751
+      ],
+      "type": "external",
+      "url": "https://www.cambridge.org/core/journals/journal-of-financial-and-quantitative-analysis/article/abs/how-many-stocks-make-a-diversified-portfolio/CE5CDF2C7225FC1E0EDE3E700A3C66A7",
+      "label": "出典を開く：www.cambridge.org"
+    },
+    {
+      "page": 76,
+      "rect": [
+        0.03695767137104225,
+        0.9701032130333448,
+        0.043275320204624546,
+        0.012353160710582308
+      ],
+      "type": "external",
+      "url": "https://www.aeaweb.org/articles?id=10.1257/0895330042162430",
+      "label": "出典を開く：www.aeaweb.org"
+    },
+    {
+      "page": 76,
+      "rect": [
+        0.0802329915756668,
+        0.9701032130333448,
+        0.043275320204624546,
+        0.012353160710582308
+      ],
+      "type": "external",
+      "url": "https://web.stanford.edu/~wfsharpe/art/djam/djam.htm",
+      "label": "出典を開く：web.stanford.edu"
+    },
+    {
+      "page": 76,
+      "rect": [
+        0.12350831178029134,
+        0.9701032130333448,
+        0.07782470606892,
+        0.012353160710582308
+      ],
+      "type": "external",
+      "url": "https://doi.org/10.1016/0304-405X(77)90009-5",
+      "label": "出典を開く：doi.org"
+    },
+    {
+      "page": 76,
+      "rect": [
+        0.035781745463781815,
+        0.9552794201806459,
+        0.045725603233191484,
+        0.014491207756644633
+      ],
+      "type": "internal",
+      "target": 90,
+      "label": "90ページへ（90）"
+    },
+    {
+      "page": 76,
+      "rect": [
+        0.07915549688245242,
+        0.9552794201806459,
+        0.05285695096523358,
+        0.014491207756644633
+      ],
+      "type": "internal",
+      "target": 91,
+      "label": "91ページへ（91）"
+    },
+    {
+      "page": 76,
+      "rect": [
+        0.14729948464207165,
+        0.9552794201806459,
+        0.06053951295836752,
+        0.014491207756644633
+      ],
+      "type": "internal",
+      "target": 103,
+      "label": "103ページへ（A6）"
+    },
+    {
+      "page": 76,
+      "rect": [
+        0.7290038479655474,
+        0.9552794201806459,
+        0.06336449201008743,
+        0.014491207756644633
+      ],
+      "type": "internal",
+      "target": 73,
+      "label": "73ページへ（73）"
+    },
+    {
+      "page": 77,
+      "rect": [
+        0.4502116330654238,
+        0.6283482707594272,
+        0.29398147681510883,
+        0.14253646973748818
+      ],
+      "type": "external",
+      "url": "https://www.msci.com/documents/10199/255599/msci-acwi-net.pdf",
+      "label": "出典を開く：www.msci.com"
+    },
+    {
+      "page": 77,
+      "rect": [
+        0.6131613659286556,
+        0.9561821511556501,
+        0.18814814516166964,
+        0.011878039144790683
+      ],
+      "type": "external",
+      "url": "https://www.msci.com/documents/10199/8d97d244-4685-4200-a24c-3e2942e3adeb",
+      "label": "出典を開く：www.msci.com"
+    },
+    {
+      "page": 79,
+      "rect": [
+        0.03695767137104225,
+        0.9359894846095059,
+        0.0739415910882287,
+        0.013659745016509286
+      ],
+      "type": "external",
+      "url": "https://www.chicagobooth.edu/review/are-markets-efficient",
+      "label": "出典を開く：www.chicagobooth.edu"
+    },
+    {
+      "page": 79,
+      "rect": [
+        0.11089925405980018,
+        0.9360153074666067,
+        0.04327533330779894,
+        0.013065843059269751
+      ],
+      "type": "external",
+      "url": "https://www.pims.math.ca/files/Grossman_Stiglitz1980.pdf",
+      "label": "出典を開く：www.pims.math.ca"
+    },
+    {
+      "page": 81,
+      "rect": [
+        0.035277777217813056,
+        0.8885032221556788,
+        0.7518067261617979,
+        0.04216335677187204
+      ],
+      "type": "external",
+      "url": "https://web.stanford.edu/~wfsharpe/art/active/active.htm",
+      "label": "出典を開く：web.stanford.edu"
+    },
+    {
+      "page": 83,
+      "rect": [
+        0.03695767137104225,
+        0.9359894846095059,
+        0.08333193700531316,
+        0.013659745016509286
+      ],
+      "type": "external",
+      "url": "https://corporate.vanguard.com/content/dam/corp/research/pdf/partner_perspectives_unlocking_potential_spglobal_vanguard.pdf",
+      "label": "出典を開く：corporate.vanguard.com"
+    },
+    {
+      "page": 83,
+      "rect": [
+        0.1202896103922284,
+        0.9360153074666067,
+        0.0432753165088574,
+        0.013065843059269751
+      ],
+      "type": "external",
+      "url": "https://www.bk.mufg.jp/report/unyo/00355925202504250.pdf",
+      "label": "出典を開く：www.bk.mufg.jp"
+    },
+    {
+      "page": 84,
+      "rect": [
+        0.03695767137104225,
+        0.9567760531128896,
+        0.8029894052435543,
+        0.029101195904737174
+      ],
+      "type": "external",
+      "url": "https://faculty.haas.berkeley.edu/odean/papers/returns/Individual_Investor_Performance_Final.pdf",
+      "label": "出典を開く：faculty.haas.berkeley.edu"
+    },
+    {
+      "page": 84,
+      "rect": [
+        0.20414628115111721,
+        0.7679632179888627,
+        0.028484789230400168,
+        0.008460846063225844
+      ],
+      "type": "external",
+      "url": "https://faculty.haas.berkeley.edu/odean/papers/returns/Individual_Investor_Performance_Final.pdf",
+      "label": "出典を開く：faculty.haas.berkeley.edu"
+    },
+    {
+      "page": 85,
+      "rect": [
+        0.03695767137104225,
+        0.8921474045653006,
+        0.5561195520192663,
+        0.041573137006767395
+      ],
+      "type": "external",
+      "url": "https://www.berkshirehathaway.com/letters/1996.html",
+      "label": "出典を開く：www.berkshirehathaway.com"
+    },
+    {
+      "page": 86,
+      "rect": [
+        0.4327232629726466,
+        0.969273852706138,
+        0.043275249313091256,
+        0.013065843059269755
+      ],
+      "type": "external",
+      "url": "https://www.bis.org/publications/201901-standards-minimum-capital-requirements-market-risk.pdf",
+      "label": "出典を開く：www.bis.org"
+    },
+    {
+      "page": 87,
+      "rect": [
+        0.035277777217813056,
+        0.9199762993921532,
+        0.0450257571450938,
+        0.013065843059269751
+      ],
+      "type": "external",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/mar/10/inforce/2022-01-01/published/2019-12-15",
+      "label": "出典を開く：www.bis.org"
+    },
+    {
+      "page": 89,
+      "rect": [
+        0.035277777217813056,
+        0.9033470089553288,
+        0.0450257571450938,
+        0.013065843059269751
+      ],
+      "type": "external",
+      "url": "https://www.fidelity.com/webcontent/ap010098-etf-content/16.06/help/research/learn_er_glossary_3.shtml",
+      "label": "出典を開く：www.fidelity.com"
+    },
+    {
+      "page": 91,
+      "rect": [
+        0.045357142137188215,
+        0.9561821867897675,
+        0.9092857157256236,
+        0.016629254802706956
+      ],
+      "type": "external",
+      "url": "https://www.investor.gov/additional-resources/general-resources/publications-research/info-sheets/beginners-guide-asset",
+      "label": "出典を開く：www.investor.gov"
+    },
+    {
+      "page": 95,
+      "rect": [
+        0.07727513104854289,
+        0.38959968394913447,
+        0.38844696473364604,
+        0.021974372417862834
+      ],
+      "type": "external",
+      "url": "https://www.berkshirehathaway.com/letters/2017ltr.pdf",
+      "label": "出典を開く：www.berkshirehathaway.com"
+    },
+    {
+      "page": 95,
+      "rect": [
+        0.07727513104854289,
+        0.763757917010041,
+        0.2638634944889392,
+        0.021974372417862764
+      ],
+      "type": "external",
+      "url": "https://www.federalreservehistory.org/essays/ltcm-near-failure",
+      "label": "出典を開く：www.federalreservehistory.org"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.048716930443646604,
+        0.8088944657602456,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/",
+      "label": "出典を開く：www.nobelprize.org"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.048716930443646604,
+        0.8302749362208688,
+        0.1965476159278156,
+        0.01900486263166511
+      ],
+      "type": "external",
+      "url": "https://www.chicagobooth.edu/review/are-markets-efficient",
+      "label": "出典を開く：www.chicagobooth.edu"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.048716930443646604,
+        0.8516554066814921,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://web.stanford.edu/~wfsharpe/art/active/active.htm",
+      "label": "出典を開く：web.stanford.edu"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.048716930443646604,
+        0.8730358771421153,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://www.msci.com/ja/indexes/acwi",
+      "label": "出典を開く：www.msci.com"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.048716930443646604,
+        0.8944163476027385,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://www.aeaweb.org/articles?id=10.1257/0895330042162430",
+      "label": "出典を開く：www.aeaweb.org"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.2805423235892753,
+        0.8088944657602456,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://web.stanford.edu/~wfsharpe/art/djam/djam.htm",
+      "label": "出典を開く：web.stanford.edu"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.2805423235892753,
+        0.8302749362208688,
+        0.1965476159278156,
+        0.01900486263166511
+      ],
+      "type": "external",
+      "url": "https://www.investor.gov/additional-resources/general-resources/publications-research/info-sheets/beginners-guide-asset",
+      "label": "出典を開く：www.investor.gov"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.2805423235892753,
+        0.8516554066814921,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://web.stanford.edu/~wfsharpe/art/sr/sr.htm",
+      "label": "出典を開く：web.stanford.edu"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.2805423235892753,
+        0.8730358771421153,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://www.columbia.edu/~ks20/FE-Notes/4700-07-Notes-GBM.pdf",
+      "label": "出典を開く：www.columbia.edu"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.2805423235892753,
+        0.8944163476027385,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://www.nobelprize.org/uploads/2018/06/fama-lecture.pdf",
+      "label": "出典を開く：www.nobelprize.org"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.5123677167349039,
+        0.8088944657602456,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://corporate.vanguard.com/content/dam/corp/research/pdf/partner_perspectives_unlocking_potential_spglobal_vanguard.pdf",
+      "label": "出典を開く：corporate.vanguard.com"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.5123677167349039,
+        0.8302749362208688,
+        0.1965476159278156,
+        0.01900486263166511
+      ],
+      "type": "external",
+      "url": "https://www.msci.com/documents/1296102/1336482/foundations_of_factor_investing.pdf/004e02ad-6f98-4730-90e0-ea14515ff3dc",
+      "label": "出典を開く：www.msci.com"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.5123677167349039,
+        0.8516554066814921,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/updated",
+      "label": "出典を開く：www.investor.gov"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.5123677167349039,
+        0.8730358771421153,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://faculty.haas.berkeley.edu/odean/papers/returns/Individual_Investor_Performance_Final.pdf",
+      "label": "出典を開く：faculty.haas.berkeley.edu"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.5123677167349039,
+        0.8944163476027385,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://www.msci.com/documents/10199/c5396cad-ee91-43d4-bb74-36d786e9dd6f",
+      "label": "出典を開く：www.msci.com"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.7441931098805326,
+        0.8088944657602456,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://www.bis.org/committees/bcbs/basel-framework/standard/mar/10/inforce/2022-01-01/published/2019-12-15",
+      "label": "出典を開く：www.bis.org"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.7441931098805326,
+        0.8302749362208688,
+        0.1965476159278156,
+        0.01900486263166511
+      ],
+      "type": "external",
+      "url": "https://www.imes.boj.or.jp/research/abstracts/english/me20-1-3.html",
+      "label": "出典を開く：www.imes.boj.or.jp"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.7441931098805326,
+        0.8516554066814921,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://www.fidelity.com/webcontent/ap010098-etf-content/16.06/help/research/learn_er_glossary_3.shtml",
+      "label": "出典を開く：www.fidelity.com"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.7441931098805326,
+        0.8730358771421153,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://www.federalreservehistory.org/essays/ltcm-near-failure",
+      "label": "出典を開く：www.federalreservehistory.org"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.7441931098805326,
+        0.8944163476027385,
+        0.1965476159278156,
+        0.019004862631665093
+      ],
+      "type": "external",
+      "url": "https://www.frbsf.org/research-and-insights/publications/doctor-econ/2004/08/inflation-expectations-nominal-interest-rates-yield-curve/",
+      "label": "出典を開く：www.frbsf.org"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.038637565524271444,
+        0.08670968575697202,
+        0.4512830695563534,
+        0.03563411743437205
+      ],
+      "type": "external",
+      "url": "https://web.stanford.edu/~wfsharpe/art/active/active.htm",
+      "label": "出典を開く：web.stanford.edu"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.5100793649193751,
+        0.08670968575697202,
+        0.4512830695563534,
+        0.03563411743437205
+      ],
+      "type": "external",
+      "url": "https://www.msci.com/indexes/index/892400/msci-acwi-index",
+      "label": "出典を開く：www.msci.com"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.038637565524271444,
+        0.1259072149347813,
+        0.4512830695563534,
+        0.03563411743437205
+      ],
+      "type": "external",
+      "url": "https://www.gpif.go.jp/gpif/regulatory-requirements.html",
+      "label": "出典を開く：www.gpif.go.jp"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.5100793649193751,
+        0.1259072149347813,
+        0.4512830695563534,
+        0.03563411743437205
+      ],
+      "type": "external",
+      "url": "https://www.fsa.go.jp/policy/nisa2/invest/",
+      "label": "出典を開く：www.fsa.go.jp"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.038637565524271444,
+        0.16510474411259046,
+        0.4512830695563534,
+        0.03563411743437205
+      ],
+      "type": "external",
+      "url": "https://www.investor.gov/introduction-investing/investing-basics/investment-products/mutual-funds-and-exchange-traded-4",
+      "label": "出典を開く：www.investor.gov"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.5100793649193751,
+        0.16510474411259046,
+        0.4512830695563534,
+        0.03563411743437205
+      ],
+      "type": "external",
+      "url": "https://www.investor.gov/introduction-investing/getting-started/asset-allocation",
+      "label": "出典を開く：www.investor.gov"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.038637565524271444,
+        0.20430227329039974,
+        0.4512830695563534,
+        0.03563411743437205
+      ],
+      "type": "external",
+      "url": "https://www.ice.com/publicdocs/data/NYSE_FANGplus_Index_Methodology.pdf",
+      "label": "出典を開く：www.ice.com"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.5100793649193751,
+        0.20430227329039974,
+        0.4512830695563534,
+        0.03563411743437205
+      ],
+      "type": "external",
+      "url": "https://www.sec.gov/newsroom/speeches-statements/tsty1498-testimony-hedge-fund-activities-us-financial-markets",
+      "label": "出典を開く：www.sec.gov"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.038637565524271444,
+        0.24349980246820901,
+        0.4512830695563534,
+        0.03563411743437205
+      ],
+      "type": "external",
+      "url": "https://www.daiwa-am.co.jp/funds/doc_open/fund_doc_open.php?code=3346&type=1",
+      "label": "出典を開く：www.daiwa-am.co.jp"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.5100793649193751,
+        0.24349980246820901,
+        0.4512830695563534,
+        0.03563411743437205
+      ],
+      "type": "external",
+      "url": "https://www.amova-am.com/api/reports/prospectus?fundcode=645066",
+      "label": "出典を開く：www.amova-am.com"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.038637565524271444,
+        0.2826973316460183,
+        0.4512830695563534,
+        0.03563411743437205
+      ],
+      "type": "external",
+      "url": "https://www.fsa.go.jp/ordinary/iwagai/index.html",
+      "label": "出典を開く：www.fsa.go.jp"
+    },
+    {
+      "page": 96,
+      "rect": [
+        0.5100793649193751,
+        0.5653946632920366,
+        0.4512830695563534,
+        0.07601945052666037
+      ],
+      "type": "external",
+      "url": "https://www.cambridge.org/core/journals/journal-of-financial-and-quantitative-analysis/article/abs/how-many-stocks-make-a-diversified-portfolio/CE5CDF2C7225FC1E0EDE3E700A3C66A7",
+      "label": "出典を開く：www.cambridge.org"
+    },
+    {
+      "page": 97,
+      "rect": [
+        0.5762036945576132,
+        0.16866815585602768,
+        0.10124554072097025,
+        0.015441450888227888
+      ],
+      "type": "external",
+      "url": "https://academic.oup.com/restud/article-abstract/25/2/65/1550009",
+      "label": "出典を開く：academic.oup.com"
+    },
+    {
+      "page": 97,
+      "rect": [
+        0.09407407258083482,
+        0.8570005242966479,
+        0.1678617433672739,
+        0.015441450888227888
+      ],
+      "type": "external",
+      "url": "https://www.nobelprize.org/prizes/economic-sciences/1981/press-release/",
+      "label": "出典を開く：www.nobelprize.org"
+    },
+    {
+      "page": 97,
+      "rect": [
+        0.28041465163362983,
+        0.8570005242966479,
+        0.3156924288514429,
+        0.015441450888227888
+      ],
+      "type": "external",
+      "url": "https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/",
+      "label": "出典を開く：www.nobelprize.org"
+    },
+    {
+      "page": 97,
+      "rect": [
+        0.6145859161705939,
+        0.8570005242966479,
+        0.16786174336727386,
+        0.015441450888227888
+      ],
+      "type": "external",
+      "url": "https://www.nobelprize.org/prizes/economic-sciences/2013/press-release/",
+      "label": "出典を開く：www.nobelprize.org"
+    },
+    {
+      "page": 103,
+      "rect": [
+        0.06719576612916772,
+        0.8788440007231351,
+        0.5022547539324642,
+        0.015441450888227888
+      ],
+      "type": "external",
+      "url": "https://academic.oup.com/restud/article-abstract/25/2/65/1550009",
+      "label": "出典を開く：academic.oup.com"
+    },
+    {
+      "page": 103,
+      "rect": [
+        0.06383597782270935,
+        0.7400018387204597,
+        0.8718650655259512,
+        0.040385333092288325
+      ],
+      "type": "external",
+      "url": "https://doi.org/10.1016/0304-405X(77)90009-5",
+      "label": "出典を開く：doi.org"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.19506317810240725,
+        0.3060867940832784,
+        0.013303403842165485
+      ],
+      "type": "external",
+      "url": "https://www.mof.go.jp/faq/jgbs/04bh.htm",
+      "label": "出典を開く：www.mof.go.jp"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.229747052405196,
+        0.5528262875212758,
+        0.01330340384216562
+      ],
+      "type": "external",
+      "url": "https://www.mof.go.jp/jgbs/individual/kojinmuke/main/qa/answer_qd.html",
+      "label": "出典を開く：www.mof.go.jp"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.26443092670798485,
+        0.4112737024665549,
+        0.01330340384216562
+      ],
+      "type": "external",
+      "url": "https://web.stanford.edu/~wfsharpe/mia/rr/mia_rr5.htm",
+      "label": "出典を開く：web.stanford.edu"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.2991148010107737,
+        0.8327168121790982,
+        0.027557050815914304
+      ],
+      "type": "external",
+      "url": "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/investor-bulletin-interested-margin-understand-interest",
+      "label": "出典を開く：www.investor.gov"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.3480523222873112,
+        0.47360382317030963,
+        0.01330340384216562
+      ],
+      "type": "external",
+      "url": "https://www.direxion.com/product/daily-sp-500-bull-bear-3x-etfs",
+      "label": "出典を開く：www.direxion.com"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.38273619659010005,
+        0.674472798817892,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://www.sec.gov/Archives/edgar/data/1424958/000119312524050343/d661569d497k.htm",
+      "label": "出典を開く：www.sec.gov"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.4174200708928889,
+        0.4356771888516848,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://www.amova-am.com/sp/tracers/goldplus-faq/qa011",
+      "label": "出典を開く：www.amova-am.com"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.45210394519567765,
+        0.3688960205995341,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://www.amova-am.com/sp/tracers/sp500gold",
+      "label": "出典を開く：www.amova-am.com"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.4867878194984664,
+        0.7570644588825747,
+        0.027557050815914374
+      ],
+      "type": "external",
+      "url": "https://www.cmegroup.com/education/courses/introduction-to-precious-metals/what-is-contango-and-backwardation",
+      "label": "出典を開く：www.cmegroup.com"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.535725340775004,
+        0.7119976024550644,
+        0.01330340384216562
+      ],
+      "type": "external",
+      "url": "https://rpc.cfainstitute.org/research/financial-analysts-journal/2002/the-statistics-of-sharpe-ratios",
+      "label": "出典を開く：rpc.cfainstitute.org"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.5704092150777929,
+        0.6103189850213917,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://dspace.mit.edu/entities/publication/bb69ca4b-0cdc-487f-831d-63b2e84fafee",
+      "label": "出典を開く：dspace.mit.edu"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.6050930893805817,
+        0.77853149028786,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://www.aqr.com/Insights/Research/Working-Paper/Implementing-Momentum-What-Have-We-Learned",
+      "label": "出典を開く：www.aqr.com"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.6397769636833704,
+        0.46828729415416986,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://www.aeaweb.org/articles?id=10.1257/0895330042162430",
+      "label": "出典を開く：www.aeaweb.org"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.6744608379861592,
+        0.4097591098980035,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://web.stanford.edu/~wfsharpe/art/djam/djam.htm",
+      "label": "出典を開く：web.stanford.edu"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.709144712288948,
+        0.284944318228397,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://www.msci.com/ja/indexes/acwi",
+      "label": "出典を開く：www.msci.com"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.7438285865917369,
+        0.8554511557335794,
+        0.027557050815914405
+      ],
+      "type": "external",
+      "url": "https://www.investor.gov/additional-resources/general-resources/publications-research/info-sheets/beginners-guide-asset",
+      "label": "出典を開く：www.investor.gov"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.7927661078682745,
+        0.6478901537371933,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://www.ssga.com/library-content/products/fund-data/etfs/us/navhist-us-en-spy.xlsx",
+      "label": "出典を開く：www.ssga.com"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.8274499821710632,
+        0.6457109950416243,
+        0.013303403842165586
+      ],
+      "type": "external",
+      "url": "https://www.ssga.com/library-content/products/fund-data/etfs/us/navhist-us-en-gld.xlsx",
+      "label": "出典を開く：www.ssga.com"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.8621338564738521,
+        0.5960694508560405,
+        0.013303403842165568
+      ],
+      "type": "external",
+      "url": "https://www.ssga.com/us/en/individual/etfs/state-street-spdr-sp-500-etf-trust-spy",
+      "label": "出典を開く：www.ssga.com"
+    },
+    {
+      "page": 104,
+      "rect": [
+        0.06719576612916772,
+        0.8968177782887974,
+        0.3093323495873172,
+        0.013303403842165568
+      ],
+      "type": "external",
+      "url": "https://www.spdrgoldshares.com/usa/gld/",
+      "label": "出典を開く：www.spdrgoldshares.com"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.19506317810240725,
+        0.8491764150924378,
+        0.013303403842165485
+      ],
+      "type": "external",
+      "url": "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins-29",
+      "label": "出典を開く：www.investor.gov"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.229747052405196,
+        0.5420695892793186,
+        0.01330340384216562
+      ],
+      "type": "external",
+      "url": "https://www.daiwa-am.co.jp/funds/detail/csv_out.php?code=3346&type=1",
+      "label": "出典を開く：www.daiwa-am.co.jp"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.26443092670798485,
+        0.3992033269967726,
+        0.01330340384216562
+      ],
+      "type": "external",
+      "url": "https://www.am.mufg.jp/fund_file/setteirai/253425.csv",
+      "label": "出典を開く：www.am.mufg.jp"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.2991148010107737,
+        0.3211090795591151,
+        0.013303403842165485
+      ],
+      "type": "external",
+      "url": "https://doi.org/10.1016/j.jfineco.2018.06.004",
+      "label": "出典を開く：doi.org"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.33379867531356244,
+        0.6952907191223694,
+        0.01330340384216562
+      ],
+      "type": "external",
+      "url": "https://www.newfrontieradvisors.com/media/t04a3oct/the-markowitz-optimization-enigma.pdf",
+      "label": "出典を開く：www.newfrontieradvisors.com"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.3684825496163513,
+        0.5917265884911124,
+        0.013303403842165485
+      ],
+      "type": "external",
+      "url": "https://rpc.cfainstitute.org/research/financial-analysts-journal/1992/faj-v48-n5-28",
+      "label": "出典を開く：rpc.cfainstitute.org"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.40316642391914004,
+        0.29058540279494066,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://www.cbo.gov/publication/24844",
+      "label": "出典を開く：www.cbo.gov"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.4378502982219288,
+        0.4302524746520771,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://www.pims.math.ca/files/Grossman_Stiglitz1980.pdf",
+      "label": "出典を開く：www.pims.math.ca"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.48821318419584125,
+        0.4477166542690477,
+        0.01330340384216562
+      ],
+      "type": "external",
+      "url": "https://www.bk.mufg.jp/report/unyo/00355925202504250.pdf",
+      "label": "出典を開く：www.bk.mufg.jp"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.5228970584986301,
+        0.7267262424329167,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://www.bis.org/publications/201901-standards-minimum-capital-requirements-market-risk.pdf",
+      "label": "出典を開く：www.bis.org"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.5732599444725426,
+        0.4510085748517157,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://mysimon.rochester.edu/novy-marx/research/OSoV.pdf",
+      "label": "出典を開く：mysimon.rochester.edu"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.6236228304464551,
+        0.8343704999835369,
+        0.02755705081591444
+      ],
+      "type": "external",
+      "url": "https://spinup-000d1a-wp-offload-media.s3.amazonaws.com/faculty/wp-content/uploads/sites/3/2021/08/Putting-and-Academic-Factor-Into-Practice.pdf",
+      "label": "出典を開く：spinup-000d1a-wp-offload-media.s3.amazonaws.com"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.6725603517229928,
+        0.8417116374331485,
+        0.027557050815914374
+      ],
+      "type": "external",
+      "url": "https://www.bankofengland.co.uk/quarterly-bulletin/2023/2023/financial-stability-buy-sell-tools-a-gilt-market-case-study",
+      "label": "出典を開く：www.bankofengland.co.uk"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.7214978729995304,
+        0.8618031715057697,
+        0.027557050815914374
+      ],
+      "type": "external",
+      "url": "https://www.thepensionsregulator.gov.uk/en/document-library/scheme-management-detailed-guidance/funding-and-investment-detailed-guidance/db-investment/investing-to-fund-db",
+      "label": "出典を開く：www.thepensionsregulator.gov.uk"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.770435394276068,
+        0.2580834826759235,
+        0.013303403842165586
+      ],
+      "type": "external",
+      "url": "https://doi.org/10.1093/rfs/14.3.583",
+      "label": "出典を開く：doi.org"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.8207982802499805,
+        0.6701144814267542,
+        0.013303403842165553
+      ],
+      "type": "external",
+      "url": "https://rpc.cfainstitute.org/research/financial-analysts-journal/2020/0015198x-2020-1842704",
+      "label": "出典を開く：rpc.cfainstitute.org"
+    },
+    {
+      "page": 105,
+      "rect": [
+        0.06719576612916772,
+        0.871161166223893,
+        0.3432252220652081,
+        0.013303451354322145
+      ],
+      "type": "external",
+      "url": "https://www.bis.org/publ/qtrpdf/r_qt1609e.pdf",
+      "label": "出典を開く：www.bis.org"
+    },
+    {
+      "page": 106,
+      "rect": [
+        0.6316402016141767,
+        0.9573699550701291,
+        0.05048787485998078,
+        0.012471941102030218
+      ],
+      "type": "external",
+      "url": "https://doi.org/10.1093/rfs/14.3.583",
+      "label": "出典を開く：doi.org"
+    }
+  ],
+  "download": {
+    "url": "downloads/orukan-v8.pdf",
+    "filename": "orukan-v8.pdf",
+    "bytes": 90478119,
+    "sha256": "b1a9bc0baa9421c73d88926ec1b595fb3e76f5c39f76366757144a96f1c7c0ec"
+  }
+}
