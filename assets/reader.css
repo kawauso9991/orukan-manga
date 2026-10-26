@@ -133,3 +133,21 @@ button{min-width:44px}
   .reader-shell:fullscreen[data-mode="vertical"] .reading-stage{height:calc(100% - var(--mobile-nav-height,54px))}
   .reader-shell:fullscreen .fullscreen-affordance{bottom:calc(var(--mobile-nav-height,54px) + 6px)}
 }
+
+/* Keep the work link first; the cover alone gets its quiet book-opening rail. */
+.reader-shell .reader-front-link{font-family:"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP","Noto Serif CJK JP",serif;font-weight:700;white-space:normal;line-height:1.5}
+.reader-author{display:none}
+.navigation-rail .reader-front-link{font-size:.95rem;width:100%}
+.reader-shell[data-page="1"] .navigation-rail .reading-status{gap:7px}
+.reader-shell[data-page="1"] .navigation-rail .reader-front-link{font-size:1.15rem;order:-2}
+.reader-shell[data-page="1"] .navigation-rail .reader-author{display:block;order:-1;font-size:.7rem;color:var(--muted)}
+.reader-shell[data-page="1"] .navigation-rail #current-chapter{font-size:1.02rem;font-weight:600;margin-top:10px}
+.reader-shell[data-page="1"] .navigation-rail #current-position{order:1;width:100%;border-top:1px solid #e7b46a;padding-top:10px;margin-top:4px;font-size:.78rem}
+/* P1 has 29 fully blank columns per side at normal resolution. Mask 28
+   columns conservatively, also inside the HQ image's verified blank area.
+   Mobile and other pages retain their complete image boxes, and enlargement
+   still opens the original. */
+@media(min-width:1024px){
+  .reader-shell #page-1 .page-art{aspect-ratio:1144 / 1698;overflow:hidden}
+  .reader-shell #page-1 .page-image{width:104.895105%;max-width:none;margin-left:-2.447552%}
+}

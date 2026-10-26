@@ -198,7 +198,7 @@ function updatePosition(position) {
   $('next').disabled = spread ? position.page >= book.totalPages - 1 : position.page === book.totalPages;
   if (spread && position.page !== 1) {
     const right = position.page - position.page % 2;
-    $('current-position').textContent = `${right}・${right + 1} / ${book.totalPages} ページ（選択 ${position.page}）`;
+    $('current-position').textContent = `${right}・${right + 1} / ${book.totalPages} ページ`;
   }
   $('reading-progress').style.width = `${((position.page - 1 + position.offset) / book.totalPages) * 100}%`;
   const chapter = book.chapters.filter(chapter => chapter.page <= position.page).at(-1);

@@ -8,7 +8,8 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   let mode=effectiveMode(preferences.mode,window.innerWidth), displayed='', referenceKey='', opener, pendingAnchor=null, offset=0, dragging=null, lastAnchor=null;
   let modalActive=false;
   let fullscreenActive=false, fullscreenPreferences=null, windowedAnchor=null, transitionPending=false, transitionGeneration=0;
-  let railWidth=0, referenceChoice=null, autoReferences=false, chromeVisible=true, chromeTimer=null, lastPointerReveal=-Infinity, suppressTouchClickUntil=0, relocatedFocus=null;
+  let railWidth=0, referenceChoice=null, autoReferences=false, chromeVisible=true, chromeTimer=null, suppressTouchClickUntil=0, relocatedFocus=null;
+  let chromeHiddenByUser=false, topEdgeHover=false, toolbarHover=false, keyboardChrome=false;
   const toolbar=$('reader-toolbar'), rail=$('navigation-rail');
   const view=()=>fullscreenPreferences??preferences;
   const transitioning=()=>transitionPending||(document.fullscreenElement===shell)!==fullscreenActive;
@@ -72,7 +73,10 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
       }
       if(!panel.contains(document.activeElement)) $('close-references').focus({preventScroll:true});
     }
-    if(!modal&&relocatedFocus) {setChrome(true);relocatedFocus.focus({preventScroll:true});}
+    if(!modal&&relocatedFocus) {
+      if(!fullscreenActive||keyboardChrome||(!chromeHiddenByUser&&chromeVisible)) setChrome(true);
+      relocatedFocus.focus({preventScroll:true});
+    }
     relocatedFocus=null;
     modalActive=modal;
     toolbar.inert=modal||(fullscreenActive&&!chromeVisible);
@@ -96,6 +100,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   }
   function renderPages(force=false) {
     const selected=pages(), key=`${mode}:${selected.join(',')}`;
+    shell.dataset.page=String(getPage());
     for(let i=0;i<figures.length;i++) {
       figures[i].classList.toggle('active-page',i+1===getPage());
       if(i+1===getPage()) figures[i].setAttribute('aria-current','page'); else figures[i].removeAttribute('aria-current');
@@ -110,6 +115,11 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     }
     if(paginated()) {
       railWidth=Infinity;
+      // Mask only the cover's verified blank columns (28/1200 per side).
+      const displayPages=selected.map(number=>{
+        const item=book.pages[number-1];
+        return number===1?{...item,width:item.width*1144/1200}:item;
+      });
       // Moving the single navigation block can change the windowed toolbar's
       // height. Settle that layout in bounded passes; don't oscillate a rail at
       // the threshold by lending it the space created by hiding itself.
@@ -118,7 +128,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
         const width=stage.clientWidth,height=stage.clientHeight;
         const rootFontSize=parseFloat(window.getComputedStyle(document.documentElement).fontSize)||16;
         const caption=captionHeight();
-        const geometry=presentationGeometry(selected.map(n=>book.pages[n-1]),width,height,{...view(),fullscreen:fullscreenActive,rootFontSize,captionHeight:caption});
+        const geometry=presentationGeometry(displayPages,width,height,{...view(),fullscreen:fullscreenActive,rootFontSize,captionHeight:caption});
         railWidth=Math.min(railWidth,geometry.railWidth);
         selected.forEach((number,index)=>{
           const figure=figures[number-1], size=geometry.sizes[index];
@@ -205,28 +215,59 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   $('zoom-show-references').addEventListener('click',event=>setPanel(panel.hidden,event.currentTarget));
   $('close-references').addEventListener('click',()=>setPanel(false));
   function setChrome(visible) {
-    if(!visible&&(toolbar.contains(document.activeElement)||panelModal()||document.querySelector('dialog[open]'))) return;
+    const editing=Boolean(document.activeElement?.matches?.('input,select,textarea,[contenteditable]:not([contenteditable="false"])'));
+    if(!visible&&((toolbar.contains(document.activeElement)&&(keyboardChrome||editing))||panelModal()||document.querySelector('dialog[open]'))) return;
     chromeVisible=visible;
     shell.classList.toggle('chrome-hidden',fullscreenActive&&!visible);
     toolbar.inert=panelModal()||(fullscreenActive&&!visible);
     $('reveal-controls').setAttribute('aria-expanded',String(visible));
   }
-  function revealChrome() {
+  function hideChromeSoon(delay=200) {
+    clearTimeout(chromeTimer);
+    if(!fullscreenActive||topEdgeHover||toolbarHover) return;
+    chromeTimer=setTimeout(()=>setChrome(false),delay);
+  }
+  function revealChrome(temporary=false) {
     if(!fullscreenActive) return;
     clearTimeout(chromeTimer);setChrome(true);
-    chromeTimer=setTimeout(()=>setChrome(false),2600);
+    if(temporary) hideChromeSoon(2600);
   }
-  $('reveal-controls').addEventListener('click',()=>{
-    if(chromeVisible) {clearTimeout(chromeTimer);setChrome(false);} else revealChrome();
+  $('reveal-controls').addEventListener('click',event=>{
+    if(chromeVisible) {
+      chromeHiddenByUser=true;keyboardChrome=false;clearTimeout(chromeTimer);setChrome(false);
+      if(event.detail>0) stage.focus({preventScroll:true});
+    }
+    else {chromeHiddenByUser=false;revealChrome(true);}
   });
   shell.addEventListener('pointermove',event=>{
-    if(event.pointerType!=='mouse'||performance.now()-lastPointerReveal<400) return;
-    lastPointerReveal=performance.now();revealChrome();
+    if(!fullscreenActive||event.pointerType!=='mouse') return;
+    const top=shell.getBoundingClientRect().top;
+    const hover=event.clientY>=top&&event.clientY<top+12;
+    if(hover===topEdgeHover) return;
+    topEdgeHover=hover;
+    if(hover) revealChrome(); else hideChromeSoon();
   },{passive:true});
-  shell.addEventListener('focusin',revealChrome);
-  shell.addEventListener('focusout',revealChrome);
+  toolbar.addEventListener('pointerenter',event=>{
+    if(event.pointerType!=='mouse') return;
+    toolbarHover=true;revealChrome();
+  });
+  toolbar.addEventListener('pointerleave',event=>{
+    if(event.pointerType!=='mouse') return;
+    toolbarHover=false;hideChromeSoon();
+  });
+  shell.addEventListener('pointerleave',()=>{topEdgeHover=false;toolbarHover=false;hideChromeSoon();});
+  shell.addEventListener('pointerdown',event=>{
+    keyboardChrome=false;
+    if(event.pointerType==='mouse') hideChromeSoon();
+  },{passive:true});
+  shell.addEventListener('focusin',event=>{
+    if(keyboardChrome&&toolbar.contains(event.target)) revealChrome(); else hideChromeSoon();
+  });
+  shell.addEventListener('focusout',()=>hideChromeSoon());
   document.addEventListener('keydown',event=>{
-    if(fullscreenActive&&!panelModal()) revealChrome();
+    if(event.key==='Tab'&&fullscreenActive&&!panelModal()&&!document.querySelector('dialog[open]')) {
+      keyboardChrome=true;revealChrome();
+    }
     if(event.key==='Escape'&&!panel.hidden&&!$('contents-dialog').open) {event.preventDefault();setPanel(false);return;}
     if(event.key==='Escape'&&!event.defaultPrevented&&panel.hidden&&document.fullscreenElement===shell&&!document.querySelector('dialog[open]')) {
       event.preventDefault();fullscreen.toggle();return;
@@ -263,7 +304,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   stage.addEventListener('pointerdown',event=>{
     suppressTouchClickUntil=0;
     if(event.pointerType==='touch'&&fullscreenActive&&!chromeVisible&&!excluded(event.target)) {
-      suppressTouchClickUntil=performance.now()+1000;revealChrome();
+      suppressTouchClickUntil=performance.now()+1000;revealChrome(true);
     }
     if(event.pointerType!=='mouse'||event.button!==0||event.target.closest('a,button')||!pannable())return;
     dragging={x:event.clientX,y:event.clientY,left:stage.scrollLeft,top:stage.scrollTop,moved:false};
@@ -318,8 +359,8 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
       $('toggle-fullscreen').textContent=active?'全画面を終了':'全画面';$('toggle-fullscreen').setAttribute('aria-pressed',String(active));
       (active?$('fullscreen-affordance'):$('presentation-controls')).append($('toggle-fullscreen'));
       $('fullscreen-affordance').hidden=!active;
-      clearTimeout(chromeTimer);setChrome(true);
-      resize();reflow();references();if(active) revealChrome();
+      topEdgeHover=false;toolbarHover=false;clearTimeout(chromeTimer);setChrome(!active);
+      resize();reflow();references();
       if(recoverFocus&&!panelModal()) $('toggle-fullscreen').focus({preventScroll:true});
       settleFullscreen(generation);
     },

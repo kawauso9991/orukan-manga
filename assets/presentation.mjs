@@ -50,7 +50,7 @@ export function createWheelIntent({ threshold = 64, quiet = 220 } = {}) {
 export function canTurnWheel({desktop,mode,ctrlKey,metaKey,excluded,pannable,deltaX=0,deltaY=0}) {
   return Boolean(desktop && mode !== 'vertical' && !ctrlKey && !metaKey && !excluded && !pannable && Math.abs(deltaY) > Math.abs(deltaX));
 }
-export function keyDirection(key) { return ({ArrowLeft:1,ArrowRight:-1,PageDown:1,PageUp:-1})[key] ?? 0; }
+export function keyDirection(key) { return ({ArrowLeft:1,ArrowDown:1,ArrowRight:-1,ArrowUp:-1,PageDown:1,PageUp:-1})[key] ?? 0; }
 export function pageSizes(pages, width, height, fit, scale) {
   const ratioSum = pages.reduce((sum,page)=>sum + page.width / page.height,0);
   const fittedHeight = Math.max(1, fit === 'width' ? width / ratioSum : Math.min(height, width / ratioSum)) * scale;
