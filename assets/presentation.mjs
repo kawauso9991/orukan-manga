@@ -79,8 +79,8 @@ export function downloadOptions(book) {
   try {
     const url=new URL(high?.url);
     safe=typeof high.url==='string' && url.href===high.url && !url.search && !url.hash &&
-      /^https:\/\/github\.com\/kawauso9991\/orukan-manga\/releases\/download\/[A-Za-z0-9._-]+\/orukan-v8-high-quality\.pdf$/.test(high.url) &&
-      high.filename==='orukan-v8-high-quality.pdf' && Number.isSafeInteger(high.bytes) && high.bytes>0 &&
+      /^https:\/\/github\.com\/kawauso9991\/orukan-manga\/releases\/download\/[A-Za-z0-9._-]+\/orukan-v[1-9]\d*-high-quality\.pdf$/.test(high.url) &&
+      /^orukan-v[1-9]\d*-high-quality\.pdf$/.test(high.filename) && url.pathname.endsWith('/'+high.filename) && Number.isSafeInteger(high.bytes) && high.bytes>0 &&
       /^[a-f0-9]{64}$/i.test(high.sha256) && high.pages===107;
   } catch { /* A missing or invalid optional asset leaves the existing download available. */ }
   return safe?{primary:high,highQuality:true,secondary:book.download}:{primary:book.download,highQuality:false,secondary:null};

@@ -11,14 +11,16 @@ kawauso 作『オルカンに勝てん！』全107ページのWebリーダーで
 - 出典・参照ボタンで、表示中のページのリンクを横のパネルに開けます。外部の出典は新しいタブで開きます。スマートフォンでは縦スクロールと開閉式の出典欄を使います。
 - PCの全画面表示はブラウザーの対応が必要です。終了ボタンや Esc で戻れます。対応していない場合や開始できない場合も、そのまま通常表示で読めます。
 
-[高画質PDFをダウンロード](https://github.com/kawauso9991/orukan-manga/releases/download/v8-hq/orukan-v8-high-quality.pdf)（全107ページ、250,020,270 bytes・約250.0 MB）。原本の画質を保持しています。
+[高画質PDFをダウンロード](https://github.com/kawauso9991/orukan-manga/releases/download/v9/orukan-v9-high-quality.pdf)（全107ページ、245,150,945 bytes・約245.2 MB）。原本の画質を保持しています。
 
-[軽量PDFをダウンロード](https://kawauso9991.github.io/orukan-manga/downloads/orukan-v8.pdf)（全107ページ、90,478,119 bytes・約90.5 MB）。どちらの公開用PDFにも添付ファイルは含みません。
+[軽量PDFをダウンロード](https://kawauso9991.github.io/orukan-manga/downloads/orukan-v9.pdf)（全107ページ、85,608,794 bytes・約85.6 MB）。どちらの公開用PDFにも添付ファイルは含みません。
 
-高画質PDFのSHA256：`be62a3e519d83dfc9f7ceb0f18ee4bfe53c70527c4acd47c52f6ef829b578389`
+高画質PDFのSHA256：`809aaef36c4cf43e20448ebd4ee60b6d10d15739302fa124aa16d9f8398e047d`
 
 原作・著者：kawauso。作品の権利・利用条件は原作107ページの記載をご確認ください。
 
 JavaScriptを有効にしたブラウザーでWeb版をご利用ください。JavaScriptを使わずPDFをダウンロードして読むこともできます。Web版は静的Webサーバーで配信します。外部のフォントやスクリプトは使いません。
 
-高画質PDFはGitHub Releaseで配信します。リポジトリ内の軽量PDFデータは転送用に分割され、公開時に結合・SHA256照合されます。SHA256SUMSは公開サイトのファイル用です。
+高画質PDFと修正版の軽量PDFはGitHub Releaseで配信します。公開時に修正版の軽量PDFを取得し、サイズ・SHA256を照合します。旧v8の軽量PDFは分割データから結合して照合し、従来のURLも維持します。SHA256SUMSは公開サイトのファイル用です。
+
+理論編の小見出し21ページの書体・文字サイズを整えたv9です。本文・図版・ページ構成・参照リンクは保持しています。旧版のPDFも従来のReleaseで利用できます。

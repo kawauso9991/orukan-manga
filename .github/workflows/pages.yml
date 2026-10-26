@@ -31,6 +31,18 @@ jobs:
                   output.write((parts / f"part-{index:03}.bin").read_bytes())
           assert target.stat().st_size == 90478119
           assert hashlib.sha256(target.read_bytes()).hexdigest() == "b1a9bc0baa9421c73d88926ec1b595fb3e76f5c39f76366757144a96f1c7c0ec"
+      - name: Fetch verified corrected public PDF
+        shell: python
+        run: |
+          from pathlib import Path
+          import hashlib
+          import urllib.request
+          target = Path("downloads/orukan-v9.pdf")
+          with urllib.request.urlopen("https://github.com/kawauso9991/orukan-manga/releases/download/v9/orukan-v9.pdf", timeout=120) as source, target.open("wb") as output:
+              while chunk := source.read(1024 * 1024):
+                  output.write(chunk)
+          assert target.stat().st_size == 85608794
+          assert hashlib.sha256(target.read_bytes()).hexdigest() == "216415257816368dbb39f6062b9f717a4aeec2bdf32fc29276886afeef8b7206"
       - name: Stage reader files
         run: |
           mkdir -p _site

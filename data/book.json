@@ -658,120 +658,120 @@
       "label": "66",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p066.webp",
-      "bytes": 399866,
-      "zoom": "pages/hq/p066.webp",
-      "zoomBytes": 1342960
+      "src": "pages/normal/p066-v9.webp",
+      "bytes": 1431380,
+      "zoom": "pages/hq/p066-v9.webp",
+      "zoomBytes": 5515054
     },
     {
       "number": 67,
       "label": "67",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p067.webp",
-      "bytes": 394574,
-      "zoom": "pages/hq/p067.webp",
-      "zoomBytes": 1220598
+      "src": "pages/normal/p067-v9.webp",
+      "bytes": 1435962,
+      "zoom": "pages/hq/p067-v9.webp",
+      "zoomBytes": 5393596
     },
     {
       "number": 68,
       "label": "68",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p068.webp",
-      "bytes": 395530,
-      "zoom": "pages/hq/p068.webp",
-      "zoomBytes": 1359446
+      "src": "pages/normal/p068-v9.webp",
+      "bytes": 1342688,
+      "zoom": "pages/hq/p068-v9.webp",
+      "zoomBytes": 5156184
     },
     {
       "number": 69,
       "label": "69",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p069.webp",
-      "bytes": 345400,
-      "zoom": "pages/hq/p069.webp",
-      "zoomBytes": 1044298
+      "src": "pages/normal/p069-v9.webp",
+      "bytes": 1214790,
+      "zoom": "pages/hq/p069-v9.webp",
+      "zoomBytes": 4387764
     },
     {
       "number": 70,
       "label": "70",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p070.webp",
-      "bytes": 353470,
-      "zoom": "pages/hq/p070.webp",
-      "zoomBytes": 974714
+      "src": "pages/normal/p070-v9.webp",
+      "bytes": 1259386,
+      "zoom": "pages/hq/p070-v9.webp",
+      "zoomBytes": 4500446
     },
     {
       "number": 71,
       "label": "71",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p071.webp",
-      "bytes": 338246,
-      "zoom": "pages/hq/p071.webp",
-      "zoomBytes": 944434
+      "src": "pages/normal/p071-v9.webp",
+      "bytes": 1202160,
+      "zoom": "pages/hq/p071-v9.webp",
+      "zoomBytes": 4338098
     },
     {
       "number": 72,
       "label": "72",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p072.webp",
-      "bytes": 372600,
-      "zoom": "pages/hq/p072.webp",
-      "zoomBytes": 1130660
+      "src": "pages/normal/p072-v9.webp",
+      "bytes": 1320382,
+      "zoom": "pages/hq/p072-v9.webp",
+      "zoomBytes": 4945454
     },
     {
       "number": 73,
       "label": "73",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p073.webp",
-      "bytes": 356856,
-      "zoom": "pages/hq/p073.webp",
-      "zoomBytes": 1084984
+      "src": "pages/normal/p073-v9.webp",
+      "bytes": 1132160,
+      "zoom": "pages/hq/p073-v9.webp",
+      "zoomBytes": 4151484
     },
     {
       "number": 74,
       "label": "74",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p074.webp",
-      "bytes": 410944,
-      "zoom": "pages/hq/p074.webp",
-      "zoomBytes": 1254252
+      "src": "pages/normal/p074-v9.webp",
+      "bytes": 1373672,
+      "zoom": "pages/hq/p074-v9.webp",
+      "zoomBytes": 5063618
     },
     {
       "number": 75,
       "label": "75",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p075.webp",
-      "bytes": 337660,
-      "zoom": "pages/hq/p075.webp",
-      "zoomBytes": 1052110
+      "src": "pages/normal/p075-v9.webp",
+      "bytes": 1077986,
+      "zoom": "pages/hq/p075-v9.webp",
+      "zoomBytes": 3919130
     },
     {
       "number": 76,
       "label": "76",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p076.webp",
-      "bytes": 414266,
-      "zoom": "pages/hq/p076.webp",
-      "zoomBytes": 1345730
+      "src": "pages/normal/p076-v9.webp",
+      "bytes": 1411784,
+      "zoom": "pages/hq/p076-v9.webp",
+      "zoomBytes": 5358030
     },
     {
       "number": 77,
       "label": "77",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p077.webp",
-      "bytes": 355878,
-      "zoom": "pages/hq/p077.webp",
-      "zoomBytes": 1085392
+      "src": "pages/normal/p077-v9.webp",
+      "bytes": 1282066,
+      "zoom": "pages/hq/p077-v9.webp",
+      "zoomBytes": 4872722
     },
     {
       "number": 78,
@@ -788,50 +788,50 @@
       "label": "79",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p079.webp",
-      "bytes": 352776,
-      "zoom": "pages/hq/p079.webp",
-      "zoomBytes": 952918
+      "src": "pages/normal/p079-v9.webp",
+      "bytes": 1511196,
+      "zoom": "pages/hq/p079-v9.webp",
+      "zoomBytes": 5800860
     },
     {
       "number": 80,
       "label": "80",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p080.webp",
-      "bytes": 346430,
-      "zoom": "pages/hq/p080.webp",
-      "zoomBytes": 976146
+      "src": "pages/normal/p080-v9.webp",
+      "bytes": 1408654,
+      "zoom": "pages/hq/p080-v9.webp",
+      "zoomBytes": 5546800
     },
     {
       "number": 81,
       "label": "81",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p081.webp",
-      "bytes": 417624,
-      "zoom": "pages/hq/p081.webp",
-      "zoomBytes": 1149754
+      "src": "pages/normal/p081-v9.webp",
+      "bytes": 1667012,
+      "zoom": "pages/hq/p081-v9.webp",
+      "zoomBytes": 6651424
     },
     {
       "number": 82,
       "label": "82",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p082.webp",
-      "bytes": 415354,
-      "zoom": "pages/hq/p082.webp",
-      "zoomBytes": 1157002
+      "src": "pages/normal/p082-v9.webp",
+      "bytes": 1652870,
+      "zoom": "pages/hq/p082-v9.webp",
+      "zoomBytes": 6524128
     },
     {
       "number": 83,
       "label": "83",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p083.webp",
-      "bytes": 368140,
-      "zoom": "pages/hq/p083.webp",
-      "zoomBytes": 1017362
+      "src": "pages/normal/p083-v9.webp",
+      "bytes": 1486020,
+      "zoom": "pages/hq/p083-v9.webp",
+      "zoomBytes": 5897908
     },
     {
       "number": 84,
@@ -848,10 +848,10 @@
       "label": "85",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p085.webp",
-      "bytes": 331006,
-      "zoom": "pages/hq/p085.webp",
-      "zoomBytes": 1056674
+      "src": "pages/normal/p085-v9.webp",
+      "bytes": 1297554,
+      "zoom": "pages/hq/p085-v9.webp",
+      "zoomBytes": 4947448
     },
     {
       "number": 86,
@@ -868,10 +868,10 @@
       "label": "87",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p087.webp",
-      "bytes": 361126,
-      "zoom": "pages/hq/p087.webp",
-      "zoomBytes": 1080288
+      "src": "pages/normal/p087-v9.webp",
+      "bytes": 1265778,
+      "zoom": "pages/hq/p087-v9.webp",
+      "zoomBytes": 4744994
     },
     {
       "number": 88,
@@ -898,20 +898,20 @@
       "label": "90",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p090.webp",
-      "bytes": 372596,
-      "zoom": "pages/hq/p090.webp",
-      "zoomBytes": 995490
+      "src": "pages/normal/p090-v9.webp",
+      "bytes": 1508312,
+      "zoom": "pages/hq/p090-v9.webp",
+      "zoomBytes": 5889842
     },
     {
       "number": 91,
       "label": "91",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p091.webp",
-      "bytes": 370960,
-      "zoom": "pages/hq/p091.webp",
-      "zoomBytes": 1005082
+      "src": "pages/normal/p091-v9.webp",
+      "bytes": 1551040,
+      "zoom": "pages/hq/p091-v9.webp",
+      "zoomBytes": 5973192
     },
     {
       "number": 92,
@@ -2675,16 +2675,17 @@
     }
   ],
   "download": {
-    "url": "downloads/orukan-v8.pdf",
-    "filename": "orukan-v8.pdf",
-    "bytes": 90478119,
-    "sha256": "b1a9bc0baa9421c73d88926ec1b595fb3e76f5c39f76366757144a96f1c7c0ec"
+    "filename": "orukan-v9.pdf",
+    "bytes": 85608794,
+    "sha256": "216415257816368dbb39f6062b9f717a4aeec2bdf32fc29276886afeef8b7206",
+    "url": "downloads/orukan-v9.pdf"
   },
   "highQualityDownload": {
-    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v8-hq/orukan-v8-high-quality.pdf",
-    "filename": "orukan-v8-high-quality.pdf",
-    "bytes": 250020270,
-    "sha256": "be62a3e519d83dfc9f7ceb0f18ee4bfe53c70527c4acd47c52f6ef829b578389",
+    "filename": "orukan-v9-high-quality.pdf",
+    "bytes": 245150945,
+    "sha256": "809aaef36c4cf43e20448ebd4ee60b6d10d15739302fa124aa16d9f8398e047d",
+    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v9/orukan-v9-high-quality.pdf",
     "pages": 107
-  }
+  },
+  "revision": "v9-theory-subtitles"
 }
