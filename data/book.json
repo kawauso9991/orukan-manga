@@ -2676,16 +2676,16 @@
     }
   ],
   "download": {
-    "filename": "orukan-v9.pdf",
-    "bytes": 85608794,
-    "sha256": "216415257816368dbb39f6062b9f717a4aeec2bdf32fc29276886afeef8b7206",
-    "url": "downloads/orukan-v9.pdf"
+    "filename": "orukan-v10.pdf",
+    "bytes": 111751633,
+    "sha256": "898721b8b81b1e647232334ce6fdb37b3e2d798a23db8b1833bf9cab368aeb2a",
+    "url": "downloads/orukan-v10.pdf"
   },
   "highQualityDownload": {
-    "filename": "orukan-v9-high-quality.pdf",
-    "bytes": 245150945,
-    "sha256": "809aaef36c4cf43e20448ebd4ee60b6d10d15739302fa124aa16d9f8398e047d",
-    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v9/orukan-v9-high-quality.pdf",
+    "filename": "orukan-v10-high-quality.pdf",
+    "bytes": 271293783,
+    "sha256": "22f691e00152e9fa7204e637f47b79b36abd64b4eadf46c2c8dddd76707f1721",
+    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v10/orukan-v10-high-quality.pdf",
     "pages": 107
   },
   "revision": "v10-p92-white-paper-chapter-spacing"
