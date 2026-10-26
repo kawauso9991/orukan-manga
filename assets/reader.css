@@ -148,8 +148,8 @@ button{min-width:44px}
    Mobile and other pages retain their complete image boxes, and enlargement
    still opens the original. */
 @media(min-width:1024px){
-  .reader-shell #page-1 .page-art{aspect-ratio:1142 / 1698;overflow:hidden}
-  .reader-shell #page-1 .page-image{width:105.078809%;max-width:none;margin-left:-2.539405%}
+  .reader-shell #page-1[data-verified-cover="true"] .page-art{aspect-ratio:1142 / 1698;overflow:hidden}
+  .reader-shell #page-1[data-verified-cover="true"] .page-image{width:105.078809%;max-width:none;margin-left:-2.539405%}
 }
 
 .fullscreen-control-group{display:contents}
@@ -184,3 +184,16 @@ button{min-width:44px}
 .reader-shell .zoom-close{position:absolute;z-index:12;right:8px;top:8px;width:44px;height:44px;padding:0;border-radius:50%;background:#171b21bb;border-color:#ffffff66;color:#fff;font-size:1.4rem;line-height:1}
 .reader-shell .zoom-canvas.cover-view{background:#0d1014}
 .reader-shell .zoom-canvas.cover-view img{clip-path:inset(0 2.5%)}
+
+/* Move the intact art and its links as one layer. Continuous reading reserves
+   only its top inset; paginated views fit a shared complete-page envelope. */
+.page-frame{display:contents}
+.reader-shell .page-frame.aligned-frame{display:block;position:relative;width:100%;aspect-ratio:var(--alignment-frame-ratio);background:#fff}
+.reader-shell[data-mode="spread"] .page-frame.aligned-frame,.reader-shell[data-mode="single"] .page-frame.aligned-frame{background:transparent}
+.reader-shell[data-mode="spread"] .aligned-page,.reader-shell[data-mode="single"] .aligned-page{align-self:flex-start}
+.reader-shell .page-frame.aligned-frame>.page-art{position:absolute;left:0;top:var(--alignment-top);width:100%;margin:0}
+.reader-shell[data-mode="vertical"] .page-frame.aligned-frame{width:var(--alignment-width);margin-inline:auto}
+.reader-shell[data-mode="vertical"] .page-frame.aligned-frame>.page-art{width:100%;margin:0}
+@media(max-width:1023px){
+  .reader-shell[data-mode="vertical"] .page-frame.aligned-frame{width:min(var(--alignment-width),calc(max(1px,100dvh - var(--mobile-nav-height,54px)) * var(--alignment-fit-ratio)))}
+}

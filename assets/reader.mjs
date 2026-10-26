@@ -5,6 +5,7 @@ import { installPageControl } from './controls.mjs';
 import { createLayoutRestorer, observeLayoutChanges } from './layout.mjs';
 import { createPresentationUI } from './presentation-ui.mjs';
 import { renderDownloadLinks, visiblePages, chapterLabel } from './presentation.mjs';
+import { pageAlignment, verifiedCover } from './alignment.mjs';
 
 const $ = id => document.getElementById(id);
 const documentURL = document.URL;
@@ -98,6 +99,7 @@ function renderPages() {
     const figure = element('figure', 'page');
     figure.id = `page-${page.number}`;
     figure.dataset.page = String(page.number);
+    figure.dataset.verifiedCover=String(page.number===1&&verifiedCover(book));
     const art = element('div', 'page-art');
     art.style.setProperty('--page-ratio', `${page.width} / ${page.height}`);
     const image = element('img', 'page-image');
@@ -128,7 +130,9 @@ function renderPages() {
       addHotspots(hotspots, links);
       art.append(hotspots);
     }
-    figure.append(art, loadError);
+    if(pageAlignment(book,page.number)) {
+      const frame=element('div','page-frame');frame.dataset.alignmentFrame='true';frame.append(art);figure.append(frame,loadError);
+    } else figure.append(art, loadError);
     fragment.append(figure);
     figures.push(figure);
     images.push(image);
@@ -172,7 +176,7 @@ function positionAtScroll() {
     if (figures[middle].getBoundingClientRect().top <= line + 1) low = middle;
     else high = middle - 1;
   }
-  const top = figures[low].getBoundingClientRect().top;
+  const top = (pageAlignment(book,low+1,'vertical',window.innerWidth>=1024)?images[low]:figures[low]).getBoundingClientRect().top;
   return { page: low + 1, offset: Math.max(0, Math.min(1, (line - top) / images[low].getBoundingClientRect().height)) };
 }
 
@@ -181,7 +185,8 @@ function moveTo(position, settled) {
   loadNeighborhood(position.page);
   if (presentation?.moveTo(position)) { requestAnimationFrame(() => requestAnimationFrame(settled)); return; }
   const image = images[position.page - 1];
-  const top = figures[position.page - 1].getBoundingClientRect().top;
+  const aligned=pageAlignment(book,position.page,'vertical',window.innerWidth>=1024);
+  const top = (aligned&&position.offset>0?image:figures[position.page - 1]).getBoundingClientRect().top;
   window.scrollTo({ top: Math.max(0, window.scrollY + top + image.getBoundingClientRect().height * position.offset - headerOffset()), behavior: 'instant' });
   requestAnimationFrame(() => requestAnimationFrame(settled));
 }
@@ -247,7 +252,7 @@ function openZoom(page, opener) {
   pendingZoomPage = null;
   skipZoomRestore = false;
   zoomDialog.setAttribute('aria-label',`${pageLabel(page)}の拡大`);
-  zoomCanvas.classList.toggle('cover-view',page===1);
+  zoomCanvas.classList.toggle('cover-view',page===1&&verifiedCover(book));
   $('zoom-message').hidden = true;
   zoomImage.alt = `${book.title} ${pageLabel(page)} 拡大画像`;
   const item = book.pages[page - 1];

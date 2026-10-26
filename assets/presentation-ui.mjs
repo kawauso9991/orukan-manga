@@ -1,4 +1,5 @@
 import { visiblePages, stepPage, effectiveMode, readPreferences, writePreferences, createWheelIntent, canTurnWheel, keyDirection, presentationGeometry, fullscreenReferenceWidth, referenceGroups, createFullscreenController } from './presentation.mjs';
+import { pageAlignment, verifiedCover, alignmentBaseline, renderedAlignment } from './alignment.mjs';
 
 // Presentation never owns the active logical page; navigation/history do.
 export function createPresentationUI({book,figures,images,getPage,getStorage,go,makeLink,reflow,persist,loadPage,observeScroll}) {
@@ -123,6 +124,18 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     const selected=pages(), key=`${mode}:${selected.join(',')}`;
     shell.dataset.page=String(getPage());
     for(let i=0;i<figures.length;i++) {
+      const alignment=pageAlignment(book,i+1,mode,window.innerWidth>=1024),frame=images[i].parentElement?.parentElement;
+      figures[i].classList.toggle('aligned-page',Boolean(alignment));
+      figures[i].dataset.verifiedCover=String(i===0&&verifiedCover(book));
+      if(frame?.dataset?.alignmentFrame==='true') {
+        frame.classList.toggle('aligned-frame',Boolean(alignment));
+        if(alignment) {
+          frame.style.setProperty('--alignment-frame-ratio',`${alignment.width} / ${alignment.frameHeight}`);
+          frame.style.setProperty('--alignment-top',`${alignment.inset/alignment.frameHeight*100}%`);
+          frame.style.setProperty('--alignment-width',`${alignment.width/alignment.sourceWidth*100}%`);
+          frame.style.setProperty('--alignment-fit-ratio',String(alignment.width/alignment.envelopeHeight));
+        }
+      }
       if(window.innerWidth>=1024){images[i].setAttribute('role','button');images[i].setAttribute('tabindex','0');images[i].setAttribute('aria-label',`${images[i].alt??''}を拡大`);}
       else {images[i].removeAttribute('role');images[i].removeAttribute('tabindex');images[i].removeAttribute('aria-label');}
       figures[i].classList.toggle('active-page',i+1===getPage());
@@ -140,8 +153,9 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
       railWidth=Infinity;
       // Mask only the cover's verified blank columns (29/1200 per side).
       const displayPages=selected.map(number=>{
-        const item=book.pages[number-1];
-        return number===1?{...item,width:item.width*1142/1200}:item;
+        const item=book.pages[number-1],alignment=pageAlignment(book,number,mode);
+        if(alignment)return {...item,width:alignment.width,height:alignment.envelopeHeight};
+        return number===1&&verifiedCover(book)?{...item,width:item.width*1142/1200}:item;
       });
       // Moving the single navigation block can change the windowed toolbar's
       // height. Settle that layout in bounded passes; don't oscillate a rail at
@@ -150,10 +164,17 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
         const width=stage.clientWidth,height=stage.clientHeight;
         const rootFontSize=parseFloat(window.getComputedStyle(document.documentElement).fontSize)||16;
         const geometry=presentationGeometry(displayPages,width,height,{...view(),fullscreen:fullscreenActive,rootFontSize,captionHeight:0});
+        const baselineY=alignmentBaseline(fullscreenActive?width:$('reading-body').clientWidth,height,{...view(),mode,fullscreen:fullscreenActive});
         railWidth=Math.min(railWidth,geometry.railWidth);
         selected.forEach((number,index)=>{
           const figure=figures[number-1], size=geometry.sizes[index];
           figure.style.width=`${size.width}px`;figure.style.flexBasis=`${size.width}px`;
+          const alignment=pageAlignment(book,number,mode),frame=images[number-1].parentElement?.parentElement;
+          if(alignment&&frame?.dataset?.alignmentFrame==='true') {
+            const placement=renderedAlignment(alignment,size.width,baselineY);
+            frame.style.setProperty('--alignment-frame-ratio',`${size.width} / ${placement.height}`);
+            frame.style.setProperty('--alignment-top',`${placement.top/placement.height*100}%`);
+          }
         });
         layoutRails();
         if(width===stage.clientWidth&&height===stage.clientHeight)break;
@@ -323,7 +344,8 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   stage.addEventListener('scroll',()=>{
     if(transitioning()) return;
     if(!paginated()){if(document.fullscreenElement===shell) observeScroll();return;}
-    offset=Math.max(0,Math.min(1,stage.scrollTop/Math.max(1,images[getPage()-1].getBoundingClientRect().height)));
+    const image=images[getPage()-1].getBoundingClientRect(),alignment=pageAlignment(book,getPage(),mode);
+    offset=Math.max(0,Math.min(1,(alignment?stage.getBoundingClientRect().top-image.top:stage.scrollTop)/Math.max(1,image.height)));
     lastAnchor=panAnchor();
     observeScroll();
   },{passive:true});
@@ -401,12 +423,17 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
       if(!paginated()) {
         if(document.fullscreenElement!==shell)return false;
         const figure=figures[position.page-1],image=images[position.page-1];
-        stage.scrollTop+=figure.getBoundingClientRect().top-stage.getBoundingClientRect().top+image.getBoundingClientRect().height*position.offset-(window.innerWidth<1024?0:16);
+        const alignment=pageAlignment(book,position.page,mode,window.innerWidth>=1024),base=alignment&&position.offset>0?image:figure;
+        stage.scrollTop+=base.getBoundingClientRect().top-stage.getBoundingClientRect().top+image.getBoundingClientRect().height*position.offset-(window.innerWidth<1024||alignment?0:16);
         return true;
       }
       renderPages();
       if(pendingAnchor){applyAnchor(pendingAnchor);pendingAnchor=null;}
-      else {stage.scrollLeft=0;stage.scrollTop=position.offset*images[position.page-1].getBoundingClientRect().height;}
+      else {
+        const image=images[position.page-1].getBoundingClientRect(),alignment=pageAlignment(book,position.page,mode);
+        const base=alignment&&position.offset>0?stage.scrollTop+image.top-stage.getBoundingClientRect().top:0;
+        stage.scrollLeft=0;stage.scrollTop=base+position.offset*image.height;
+      }
       lastAnchor=panAnchor();
       offset=position.offset;
       window.scrollTo({top:window.scrollY+shell.getBoundingClientRect().top,behavior:'instant'});
