@@ -118,10 +118,10 @@
       "label": "12",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p012.webp",
-      "bytes": 468172,
-      "zoom": "pages/hq/p012.webp",
-      "zoomBytes": 1269484
+      "src": "pages/normal/p012-v10.webp",
+      "bytes": 1890544,
+      "zoom": "pages/hq/p012-v10.webp",
+      "zoomBytes": 7526730
     },
     {
       "number": 13,
@@ -288,50 +288,50 @@
       "label": "29",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p029.webp",
-      "bytes": 405348,
-      "zoom": "pages/hq/p029.webp",
-      "zoomBytes": 1104564
+      "src": "pages/normal/p029-v10.webp",
+      "bytes": 1626586,
+      "zoom": "pages/hq/p029-v10.webp",
+      "zoomBytes": 6420226
     },
     {
       "number": 30,
       "label": "30",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p030.webp",
-      "bytes": 272866,
-      "zoom": "pages/hq/p030.webp",
-      "zoomBytes": 736630
+      "src": "pages/normal/p030-v10.webp",
+      "bytes": 1113400,
+      "zoom": "pages/hq/p030-v10.webp",
+      "zoomBytes": 4169342
     },
     {
       "number": 31,
       "label": "31",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p031.webp",
-      "bytes": 263372,
-      "zoom": "pages/hq/p031.webp",
-      "zoomBytes": 696236
+      "src": "pages/normal/p031-v10.webp",
+      "bytes": 1108338,
+      "zoom": "pages/hq/p031-v10.webp",
+      "zoomBytes": 4131256
     },
     {
       "number": 32,
       "label": "32",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p032.webp",
-      "bytes": 298470,
-      "zoom": "pages/hq/p032.webp",
-      "zoomBytes": 798000
+      "src": "pages/normal/p032-v10.webp",
+      "bytes": 1282522,
+      "zoom": "pages/hq/p032-v10.webp",
+      "zoomBytes": 4746476
     },
     {
       "number": 33,
       "label": "33",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p033.webp",
-      "bytes": 368172,
-      "zoom": "pages/hq/p033.webp",
-      "zoomBytes": 971586
+      "src": "pages/normal/p033-v10.webp",
+      "bytes": 1529218,
+      "zoom": "pages/hq/p033-v10.webp",
+      "zoomBytes": 5683250
     },
     {
       "number": 34,
@@ -368,10 +368,10 @@
       "label": "37",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p037.webp",
-      "bytes": 288080,
-      "zoom": "pages/hq/p037.webp",
-      "zoomBytes": 746140
+      "src": "pages/normal/p037-v10.webp",
+      "bytes": 1382312,
+      "zoom": "pages/hq/p037-v10.webp",
+      "zoomBytes": 4972260
     },
     {
       "number": 38,
@@ -418,280 +418,280 @@
       "label": "42",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p042.webp",
-      "bytes": 370364,
-      "zoom": "pages/hq/p042.webp",
-      "zoomBytes": 937928
+      "src": "pages/normal/p042-v10.webp",
+      "bytes": 1790552,
+      "zoom": "pages/hq/p042-v10.webp",
+      "zoomBytes": 6748774
     },
     {
       "number": 43,
       "label": "43",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p043.webp",
-      "bytes": 349038,
-      "zoom": "pages/hq/p043.webp",
-      "zoomBytes": 916204
+      "src": "pages/normal/p043-v10.webp",
+      "bytes": 1651002,
+      "zoom": "pages/hq/p043-v10.webp",
+      "zoomBytes": 6171428
     },
     {
       "number": 44,
       "label": "44",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p044.webp",
-      "bytes": 298842,
-      "zoom": "pages/hq/p044.webp",
-      "zoomBytes": 777648
+      "src": "pages/normal/p044-v10.webp",
+      "bytes": 1445048,
+      "zoom": "pages/hq/p044-v10.webp",
+      "zoomBytes": 5118062
     },
     {
       "number": 45,
       "label": "45",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p045.webp",
-      "bytes": 214780,
-      "zoom": "pages/hq/p045.webp",
-      "zoomBytes": 565000
+      "src": "pages/normal/p045-v10.webp",
+      "bytes": 1161706,
+      "zoom": "pages/hq/p045-v10.webp",
+      "zoomBytes": 4007638
     },
     {
       "number": 46,
       "label": "46",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p046.webp",
-      "bytes": 324642,
-      "zoom": "pages/hq/p046.webp",
-      "zoomBytes": 871064
+      "src": "pages/normal/p046-v10.webp",
+      "bytes": 1697696,
+      "zoom": "pages/hq/p046-v10.webp",
+      "zoomBytes": 6258246
     },
     {
       "number": 47,
       "label": "47",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p047.webp",
-      "bytes": 323806,
-      "zoom": "pages/hq/p047.webp",
-      "zoomBytes": 879488
+      "src": "pages/normal/p047-v10.webp",
+      "bytes": 1507686,
+      "zoom": "pages/hq/p047-v10.webp",
+      "zoomBytes": 5698796
     },
     {
       "number": 48,
       "label": "48",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p048.webp",
-      "bytes": 352514,
-      "zoom": "pages/hq/p048.webp",
-      "zoomBytes": 965982
+      "src": "pages/normal/p048-v10.webp",
+      "bytes": 1682262,
+      "zoom": "pages/hq/p048-v10.webp",
+      "zoomBytes": 6280504
     },
     {
       "number": 49,
       "label": "49",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p049.webp",
-      "bytes": 332904,
-      "zoom": "pages/hq/p049.webp",
-      "zoomBytes": 900506
+      "src": "pages/normal/p049-v10.webp",
+      "bytes": 1496834,
+      "zoom": "pages/hq/p049-v10.webp",
+      "zoomBytes": 5704282
     },
     {
       "number": 50,
       "label": "50",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p050.webp",
-      "bytes": 363534,
-      "zoom": "pages/hq/p050.webp",
-      "zoomBytes": 961472
+      "src": "pages/normal/p050-v10.webp",
+      "bytes": 1499804,
+      "zoom": "pages/hq/p050-v10.webp",
+      "zoomBytes": 5673636
     },
     {
       "number": 51,
       "label": "51",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p051.webp",
-      "bytes": 332728,
-      "zoom": "pages/hq/p051.webp",
-      "zoomBytes": 912462
+      "src": "pages/normal/p051-v10.webp",
+      "bytes": 1492698,
+      "zoom": "pages/hq/p051-v10.webp",
+      "zoomBytes": 5731192
     },
     {
       "number": 52,
       "label": "52",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p052.webp",
-      "bytes": 309774,
-      "zoom": "pages/hq/p052.webp",
-      "zoomBytes": 841618
+      "src": "pages/normal/p052-v10.webp",
+      "bytes": 1474528,
+      "zoom": "pages/hq/p052-v10.webp",
+      "zoomBytes": 5518844
     },
     {
       "number": 53,
       "label": "53",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p053.webp",
-      "bytes": 330620,
-      "zoom": "pages/hq/p053.webp",
-      "zoomBytes": 1025954
+      "src": "pages/normal/p053-v10.webp",
+      "bytes": 1332834,
+      "zoom": "pages/hq/p053-v10.webp",
+      "zoomBytes": 4993478
     },
     {
       "number": 54,
       "label": "54",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p054.webp",
-      "bytes": 320960,
-      "zoom": "pages/hq/p054.webp",
-      "zoomBytes": 851858
+      "src": "pages/normal/p054-v10.webp",
+      "bytes": 1382190,
+      "zoom": "pages/hq/p054-v10.webp",
+      "zoomBytes": 5102636
     },
     {
       "number": 55,
       "label": "55",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p055.webp",
-      "bytes": 316138,
-      "zoom": "pages/hq/p055.webp",
-      "zoomBytes": 828732
+      "src": "pages/normal/p055-v10.webp",
+      "bytes": 1320050,
+      "zoom": "pages/hq/p055-v10.webp",
+      "zoomBytes": 4966298
     },
     {
       "number": 56,
       "label": "56",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p056.webp",
-      "bytes": 345496,
-      "zoom": "pages/hq/p056.webp",
-      "zoomBytes": 910534
+      "src": "pages/normal/p056-v10.webp",
+      "bytes": 1411300,
+      "zoom": "pages/hq/p056-v10.webp",
+      "zoomBytes": 5348766
     },
     {
       "number": 57,
       "label": "57",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p057.webp",
-      "bytes": 295718,
-      "zoom": "pages/hq/p057.webp",
-      "zoomBytes": 849542
+      "src": "pages/normal/p057-v10.webp",
+      "bytes": 1002120,
+      "zoom": "pages/hq/p057-v10.webp",
+      "zoomBytes": 3732814
     },
     {
       "number": 58,
       "label": "58",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p058.webp",
-      "bytes": 385784,
-      "zoom": "pages/hq/p058.webp",
-      "zoomBytes": 1044364
+      "src": "pages/normal/p058-v10.webp",
+      "bytes": 1616982,
+      "zoom": "pages/hq/p058-v10.webp",
+      "zoomBytes": 5986760
     },
     {
       "number": 59,
       "label": "59",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p059.webp",
-      "bytes": 391604,
-      "zoom": "pages/hq/p059.webp",
-      "zoomBytes": 1025396
+      "src": "pages/normal/p059-v10.webp",
+      "bytes": 1543716,
+      "zoom": "pages/hq/p059-v10.webp",
+      "zoomBytes": 5984166
     },
     {
       "number": 60,
       "label": "60",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p060.webp",
-      "bytes": 329612,
-      "zoom": "pages/hq/p060.webp",
-      "zoomBytes": 882522
+      "src": "pages/normal/p060-v10.webp",
+      "bytes": 1615230,
+      "zoom": "pages/hq/p060-v10.webp",
+      "zoomBytes": 6176374
     },
     {
       "number": 61,
       "label": "61",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p061.webp",
-      "bytes": 326616,
-      "zoom": "pages/hq/p061.webp",
-      "zoomBytes": 897292
+      "src": "pages/normal/p061-v10.webp",
+      "bytes": 1464208,
+      "zoom": "pages/hq/p061-v10.webp",
+      "zoomBytes": 5589002
     },
     {
       "number": 62,
       "label": "62",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p062.webp",
-      "bytes": 377254,
-      "zoom": "pages/hq/p062.webp",
-      "zoomBytes": 997280
+      "src": "pages/normal/p062-v10.webp",
+      "bytes": 1653988,
+      "zoom": "pages/hq/p062-v10.webp",
+      "zoomBytes": 6376398
     },
     {
       "number": 63,
       "label": "63",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p063.webp",
-      "bytes": 296300,
-      "zoom": "pages/hq/p063.webp",
-      "zoomBytes": 799448
+      "src": "pages/normal/p063-v10.webp",
+      "bytes": 1510680,
+      "zoom": "pages/hq/p063-v10.webp",
+      "zoomBytes": 5686516
     },
     {
       "number": 64,
       "label": "64",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p064.webp",
-      "bytes": 276854,
-      "zoom": "pages/hq/p064.webp",
-      "zoomBytes": 767286
+      "src": "pages/normal/p064-v10.webp",
+      "bytes": 1308740,
+      "zoom": "pages/hq/p064-v10.webp",
+      "zoomBytes": 4976280
     },
     {
       "number": 65,
       "label": "65",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p065.webp",
-      "bytes": 333820,
-      "zoom": "pages/hq/p065.webp",
-      "zoomBytes": 1132762
+      "src": "pages/normal/p065-v10.webp",
+      "bytes": 1493380,
+      "zoom": "pages/hq/p065-v10.webp",
+      "zoomBytes": 5859072
     },
     {
       "number": 66,
       "label": "66",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p066-v9.webp",
-      "bytes": 1431380,
-      "zoom": "pages/hq/p066-v9.webp",
-      "zoomBytes": 5515054
+      "src": "pages/normal/p066-v10.webp",
+      "bytes": 1411972,
+      "zoom": "pages/hq/p066-v10.webp",
+      "zoomBytes": 5489226
     },
     {
       "number": 67,
       "label": "67",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p067-v9.webp",
-      "bytes": 1435962,
-      "zoom": "pages/hq/p067-v9.webp",
-      "zoomBytes": 5393596
+      "src": "pages/normal/p067-v10.webp",
+      "bytes": 1424214,
+      "zoom": "pages/hq/p067-v10.webp",
+      "zoomBytes": 5363766
     },
     {
       "number": 68,
       "label": "68",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p068-v9.webp",
-      "bytes": 1342688,
-      "zoom": "pages/hq/p068-v9.webp",
-      "zoomBytes": 5156184
+      "src": "pages/normal/p068-v10.webp",
+      "bytes": 1321290,
+      "zoom": "pages/hq/p068-v10.webp",
+      "zoomBytes": 5083006
     },
     {
       "number": 69,
       "label": "69",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p069-v9.webp",
-      "bytes": 1214790,
-      "zoom": "pages/hq/p069-v9.webp",
-      "zoomBytes": 4387764
+      "src": "pages/normal/p069-v10.webp",
+      "bytes": 1201104,
+      "zoom": "pages/hq/p069-v10.webp",
+      "zoomBytes": 4341202
     },
     {
       "number": 70,
@@ -929,110 +929,110 @@
       "label": "93",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p093.webp",
-      "bytes": 118930,
-      "zoom": "pages/hq/p093.webp",
-      "zoomBytes": 286922
+      "src": "pages/normal/p093-v10.webp",
+      "bytes": 354192,
+      "zoom": "pages/hq/p093-v10.webp",
+      "zoomBytes": 1303014
     },
     {
       "number": 94,
       "label": "94",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p094.webp",
-      "bytes": 135036,
-      "zoom": "pages/hq/p094.webp",
-      "zoomBytes": 330996
+      "src": "pages/normal/p094-v10.webp",
+      "bytes": 398918,
+      "zoom": "pages/hq/p094-v10.webp",
+      "zoomBytes": 1477090
     },
     {
       "number": 95,
       "label": "95",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p095.webp",
-      "bytes": 100056,
-      "zoom": "pages/hq/p095.webp",
-      "zoomBytes": 237314
+      "src": "pages/normal/p095-v10.webp",
+      "bytes": 294584,
+      "zoom": "pages/hq/p095-v10.webp",
+      "zoomBytes": 1087230
     },
     {
       "number": 96,
       "label": "96",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p096.webp",
-      "bytes": 270206,
-      "zoom": "pages/hq/p096.webp",
-      "zoomBytes": 629538
+      "src": "pages/normal/p096-v10.webp",
+      "bytes": 764500,
+      "zoom": "pages/hq/p096-v10.webp",
+      "zoomBytes": 2915404
     },
     {
       "number": 97,
       "label": "97",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p097.webp",
-      "bytes": 355618,
-      "zoom": "pages/hq/p097.webp",
-      "zoomBytes": 818564
+      "src": "pages/normal/p097-v10.webp",
+      "bytes": 1022126,
+      "zoom": "pages/hq/p097-v10.webp",
+      "zoomBytes": 3878688
     },
     {
       "number": 98,
       "label": "A1",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p098.webp",
-      "bytes": 201070,
-      "zoom": "pages/hq/p098.webp",
-      "zoomBytes": 463052
+      "src": "pages/normal/p098-v10.webp",
+      "bytes": 538320,
+      "zoom": "pages/hq/p098-v10.webp",
+      "zoomBytes": 2029200
     },
     {
       "number": 99,
       "label": "A2",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p099.webp",
-      "bytes": 189674,
-      "zoom": "pages/hq/p099.webp",
-      "zoomBytes": 425540
+      "src": "pages/normal/p099-v10.webp",
+      "bytes": 509536,
+      "zoom": "pages/hq/p099-v10.webp",
+      "zoomBytes": 1897302
     },
     {
       "number": 100,
       "label": "A3",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p100.webp",
-      "bytes": 204232,
-      "zoom": "pages/hq/p100.webp",
-      "zoomBytes": 477888
+      "src": "pages/normal/p100-v10.webp",
+      "bytes": 559934,
+      "zoom": "pages/hq/p100-v10.webp",
+      "zoomBytes": 2099730
     },
     {
       "number": 101,
       "label": "A4",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p101.webp",
-      "bytes": 161464,
-      "zoom": "pages/hq/p101.webp",
-      "zoomBytes": 365746
+      "src": "pages/normal/p101-v10.webp",
+      "bytes": 431636,
+      "zoom": "pages/hq/p101-v10.webp",
+      "zoomBytes": 1593676
     },
     {
       "number": 102,
       "label": "A5",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p102.webp",
-      "bytes": 206112,
-      "zoom": "pages/hq/p102.webp",
-      "zoomBytes": 466200
+      "src": "pages/normal/p102-v10.webp",
+      "bytes": 552494,
+      "zoom": "pages/hq/p102-v10.webp",
+      "zoomBytes": 2070286
     },
     {
       "number": 103,
       "label": "A6",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p103.webp",
-      "bytes": 250716,
-      "zoom": "pages/hq/p103.webp",
-      "zoomBytes": 587532
+      "src": "pages/normal/p103-v10.webp",
+      "bytes": 687120,
+      "zoom": "pages/hq/p103-v10.webp",
+      "zoomBytes": 2581508
     },
     {
       "number": 104,
@@ -2688,6 +2688,5 @@
     "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v9/orukan-v9-high-quality.pdf",
     "pages": 107
   },
-  "revision": "v10-p92"
+  "revision": "v10-p92-white-paper-chapter-spacing"
 }
-
