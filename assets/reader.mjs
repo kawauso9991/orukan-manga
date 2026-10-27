@@ -6,6 +6,7 @@ import { createLayoutRestorer, observeLayoutChanges } from './layout.mjs';
 import { createPresentationUI } from './presentation-ui.mjs';
 import { renderDownloadLinks, visiblePages, chapterLabel } from './presentation.mjs';
 import { pageAlignment, verifiedCover } from './alignment.mjs';
+import { validateReadings, referenceName } from './references.mjs';
 
 const $ = id => document.getElementById(id);
 const documentURL = document.URL;
@@ -23,6 +24,7 @@ const scrollWork = createScrollThrottle(() => { if (!zoomDialog.open && !content
 let images = [], figures = [], pageLinks = new Map();
 let zoomPage = null, zoomOpener, pendingZoomPage = null;
 let contentsOpener, pendingContentsPage = null;
+let pendingZoomOffset = 0, pendingContentsOffset = 0;
 let skipZoomRestore = false;
 let presentation;
 
@@ -53,13 +55,15 @@ function validateBook(data) {
         !link.rect.every(value => typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 1) ||
         link.rect[2] <= 0 || link.rect[3] <= 0 || link.rect[0] + link.rect[2] > 1.001 || link.rect[1] + link.rect[3] > 1.001 ||
         !(link.type === 'external' ? externalURL(link.url) : link.type === 'internal' && parsePageHash(`#p=${link.target}`, 107))) throw Error('Invalid source link');
+    if(link.targetOffset!==undefined&&(!Number.isFinite(link.targetOffset)||link.targetOffset<0||link.targetOffset>1))throw Error('Invalid source destination');
   }
+  validateReadings(data.readings,107);
   if (!data.download || !assetURL(data.download.url, documentURL) || typeof data.download.filename !== 'string' || !Number.isFinite(data.download.bytes)) throw Error('Invalid download');
   return data;
 }
 
 function makeLink(link, hotspot = false) {
-  const name = link.type === 'internal' ? `${pageLabel(link.target)}へ` : `出典を開く：${new URL(link.url).hostname}`;
+  const name = referenceName(link,pageLabel);
   const anchor = element('a', hotspot ? 'source-hotspot' : '', hotspot ? undefined : name);
   if (link.type === 'external') {
     anchor.href = externalURL(link.url);
@@ -68,6 +72,7 @@ function makeLink(link, hotspot = false) {
   } else {
     anchor.href = `#p=${link.target}`;
     anchor.dataset.page = String(link.target);
+    if(link.targetOffset!==undefined)anchor.dataset.sourceOffset=String(link.targetOffset);
   }
   if (hotspot) {
     const [x, y, width, height] = link.rect;
@@ -80,6 +85,7 @@ function makeLink(link, hotspot = false) {
     const icon = element('span', '', link.type === 'external' ? '↗' : '→');
     icon.setAttribute('aria-hidden', 'true');
     anchor.append(icon);
+    if(link.reading)anchor.append(element('span','reference-reading-description',link.description));
     if (link.type === 'external') anchor.append(element('span', 'sr-only', '（新しいタブで開きます）'));
   }
   return anchor;
@@ -212,16 +218,17 @@ function historyWrite(method, position) {
   try { history[method]({ reader: book.version, ...position }, '', `#p=${position.page}`); } catch { /* Reading also works when history APIs are restricted. */ }
 }
 
-function go(page) {
+function go(page, offset = 0) {
   scrollWork.cancel();
   pageControl.clearDraft();
-  navigation.go(page);
+  navigation.go(page, offset);
   $('announcement').textContent = `${pageLabel(currentPage)}に移動しました。`;
 }
 
 function openContents(opener) {
   contentsOpener = opener;
   pendingContentsPage = null;
+  pendingContentsOffset = 0;
   $('chapter-select').value = '';
   contentsDialog.showModal();
 }
@@ -250,6 +257,7 @@ function openZoom(page, opener) {
   zoomPage = page;
   zoomOpener = opener;
   pendingZoomPage = null;
+  pendingZoomOffset = 0;
   skipZoomRestore = false;
   zoomDialog.setAttribute('aria-label',`${pageLabel(page)}の拡大`);
   zoomCanvas.classList.toggle('cover-view',page===1&&verifiedCover(book));
@@ -281,7 +289,7 @@ function installEvents() {
   });
   contentsDialog.addEventListener('close', () => {
     contentsOpener?.focus({ preventScroll: true });
-    if (pendingContentsPage !== null) go(pendingContentsPage);
+    if (pendingContentsPage !== null) go(pendingContentsPage,pendingContentsOffset);
     pendingContentsPage = null;
   });
   document.addEventListener('click', event => {
@@ -289,10 +297,11 @@ function installEvents() {
     if (!anchor || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     const page = parsePageHash(`#p=${anchor.dataset.page}`, book.totalPages);
     if (page === null) return;
+    const offset=Number(anchor.dataset.sourceOffset??0);
     event.preventDefault();
-    if (zoomDialog.open) { pendingZoomPage = page; zoomDialog.close(); }
-    else if (contentsDialog.open) { pendingContentsPage = page; contentsDialog.close(); }
-    else go(page);
+    if (zoomDialog.open) { pendingZoomPage = page;pendingZoomOffset=offset; zoomDialog.close(); }
+    else if (contentsDialog.open) { pendingContentsPage = page;pendingContentsOffset=offset; contentsDialog.close(); }
+    else go(page,offset);
   });
   window.addEventListener('scroll', () => {
     if (zoomDialog.open || contentsDialog.open || presentation?.transitioning) return;
@@ -325,7 +334,7 @@ function installEvents() {
     document.documentElement.style.overflow = '';
     zoomOpener?.focus({ preventScroll: true });
     layoutRestorer.closeModal({skipRestore: skipZoomRestore || pendingZoomPage !== null});
-    if (pendingZoomPage !== null) go(pendingZoomPage);
+    if (pendingZoomPage !== null) go(pendingZoomPage,pendingZoomOffset);
     pendingZoomPage = null;
   });
   zoomImage.addEventListener('error', () => {

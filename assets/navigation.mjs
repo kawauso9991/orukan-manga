@@ -23,11 +23,11 @@ export function createNavigation({ totalPages, readPosition, moveTo, push, repla
   }
   return {
     start(position) { replace(copy(position)); move(position); },
-    go(page) {
+    go(page, offset = 0) {
       const previous = locked ? copy(current) : readPosition();
       replace(copy(previous));
       save(copy(previous));
-      const next = { page: clampPage(page, totalPages), offset: 0 };
+      const next = { page: clampPage(page, totalPages), offset: Number.isFinite(offset) && offset >= 0 && offset <= 1 ? offset : 0 };
       push(copy(next));
       move(next);
     },

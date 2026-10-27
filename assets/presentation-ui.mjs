@@ -1,5 +1,6 @@
 import { visiblePages, stepPage, effectiveMode, readPreferences, writePreferences, createWheelIntent, canTurnWheel, keyDirection, presentationGeometry, fullscreenReferenceWidth, referenceGroups, createFullscreenController } from './presentation.mjs';
 import { pageAlignment, verifiedCover, alignmentBaseline, renderedAlignment } from './alignment.mjs';
+import { referenceSections, referenceCount as countReferences } from './references.mjs';
 
 // Presentation never owns the active logical page; navigation/history do.
 export function createPresentationUI({book,figures,images,getPage,getStorage,go,makeLink,reflow,persist,loadPage,observeScroll}) {
@@ -206,7 +207,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   let zoomPage=null;
   function references() {
     const numbers=visibleReferencePages();
-    const groups=referenceGroups(numbers,book.links), count=groups.reduce((sum,group)=>sum+group.links.length,0);
+    const groups=referenceSections(numbers,book.links,book.readings), count=countReferences(groups);
     referenceCount=count;
     $('open-references').textContent=count?`出典・参照 (${count})`:'出典・参照';
     $('open-references').hidden=count===0&&!pinnedReferences();
@@ -221,11 +222,18 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     for(const group of groups) {
       const section=document.createElement('section'), heading=document.createElement('h3'), list=document.createElement('ol');
       const item=book.pages[group.page-1];
-      heading.textContent=`${group.page}ページ${item.label===String(group.page)?'':`（補遺 ${item.label}）`} · ${group.links.length}件`;
+      heading.textContent=`${group.page}ページ${item.label===String(group.page)?'':`（補遺 ${item.label}）`} · ${group.links.length+group.readings.length}件`;
       section.append(heading);
-      if(!group.links.length) {const empty=document.createElement('p');empty.textContent='このページには出典・参照リンクはありません。';section.append(empty);}
+      if(!group.links.length&&!group.readings.length) {const empty=document.createElement('p');empty.textContent='このページには出典・参照リンクはありません。';section.append(empty);}
+      if(group.links.length&&group.readings.length){const label=document.createElement('h4');label.textContent='本書の出典・参照';section.append(label);}
       for(const link of group.links){const row=document.createElement('li');row.append(makeLink(link));list.append(row);}
-      section.append(list);fragment.append(section);
+      if(group.links.length)section.append(list);
+      if(group.readings.length){
+        const label=document.createElement('h4'),readings=document.createElement('ol');label.textContent='理解を助ける参考・小話';
+        for(const link of group.readings){const row=document.createElement('li');row.append(makeLink(link));readings.append(row);}
+        section.append(label,readings);
+      }
+      fragment.append(section);
     }
     content.replaceChildren(fragment);
     // Updating a spread must never unexpectedly focus the panel.

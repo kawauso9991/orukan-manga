@@ -158,20 +158,20 @@
       "label": "16",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p016.webp",
-      "bytes": 367614,
-      "zoom": "pages/hq/p016.webp",
-      "zoomBytes": 957632
+      "src": "pages/normal/p016-v11.webp",
+      "bytes": 1543824,
+      "zoom": "pages/hq/p016-v11.webp",
+      "zoomBytes": 5938254
     },
     {
       "number": 17,
       "label": "17",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p017.webp",
-      "bytes": 226158,
-      "zoom": "pages/hq/p017.webp",
-      "zoomBytes": 613156
+      "src": "pages/normal/p017-v11.webp",
+      "bytes": 886502,
+      "zoom": "pages/hq/p017-v11.webp",
+      "zoomBytes": 3500532
     },
     {
       "number": 18,
@@ -368,10 +368,10 @@
       "label": "37",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p037-v10.webp",
-      "bytes": 1382312,
-      "zoom": "pages/hq/p037-v10.webp",
-      "zoomBytes": 4972260
+      "src": "pages/normal/p037-v11.webp",
+      "bytes": 1377262,
+      "zoom": "pages/hq/p037-v11.webp",
+      "zoomBytes": 4992570
     },
     {
       "number": 38,
@@ -959,10 +959,10 @@
       "label": "96",
       "width": 1200,
       "height": 1698,
-      "src": "pages/normal/p096-v10.webp",
-      "bytes": 764500,
-      "zoom": "pages/hq/p096-v10.webp",
-      "zoomBytes": 2915404
+      "src": "pages/normal/p096-v11.webp",
+      "bytes": 738678,
+      "zoom": "pages/hq/p096-v11.webp",
+      "zoomBytes": 2828144
     },
     {
       "number": 97,
@@ -1597,14 +1597,15 @@
     {
       "page": 79,
       "rect": [
-        0.03695767137104225,
-        0.9359894846095059,
-        0.0739415910882287,
-        0.013659745016509286
+        0.03611772429442765,
+        0.9376402944898489,
+        0.032925925403292186,
+        0.011878039144790683
       ],
       "type": "external",
       "url": "https://www.chicagobooth.edu/review/are-markets-efficient",
-      "label": "出典を開く：www.chicagobooth.edu"
+      "label": "[S2] 原典を開く",
+      "marker": "S2"
     },
     {
       "page": 79,
@@ -1633,14 +1634,15 @@
     {
       "page": 83,
       "rect": [
-        0.03695767137104225,
-        0.9359894846095059,
-        0.08333193700531316,
-        0.013659745016509286
+        0.03611772429442765,
+        0.9376402944898489,
+        0.04216534324605275,
+        0.011878039144790683
       ],
       "type": "external",
       "url": "https://corporate.vanguard.com/content/dam/corp/research/pdf/partner_perspectives_unlocking_potential_spglobal_vanguard.pdf",
-      "label": "出典を開く：corporate.vanguard.com"
+      "label": "[S11] 原典を開く",
+      "marker": "S11"
     },
     {
       "page": 83,
@@ -1725,18 +1727,6 @@
       "type": "external",
       "url": "https://www.fidelity.com/webcontent/ap010098-etf-content/16.06/help/research/learn_er_glossary_3.shtml",
       "label": "出典を開く：www.fidelity.com"
-    },
-    {
-      "page": 91,
-      "rect": [
-        0.045357142137188215,
-        0.9561821867897675,
-        0.9092857157256236,
-        0.016629254802706956
-      ],
-      "type": "external",
-      "url": "https://www.investor.gov/additional-resources/general-resources/publications-research/info-sheets/beginners-guide-asset",
-      "label": "出典を開く：www.investor.gov"
     },
     {
       "page": 95,
@@ -2673,20 +2663,688 @@
       "type": "external",
       "url": "https://doi.org/10.1093/rfs/14.3.583",
       "label": "出典を開く：doi.org"
+    },
+    {
+      "page": 66,
+      "type": "internal",
+      "target": 96,
+      "targetOffset": 0.7946408187864967,
+      "rect": [
+        0.03779761844765685,
+        0.9263561573022978,
+        0.031078041834740073,
+        0.011878039144790683
+      ],
+      "marker": "S1",
+      "label": "S1の出典：96ページへ"
+    },
+    {
+      "page": 66,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.2478016719052779,
+      "rect": [
+        0.06971560735901151,
+        0.9263561573022978,
+        0.041997353830729826,
+        0.011878039144790683
+      ],
+      "marker": "N03",
+      "label": "N03の出典：104ページへ"
+    },
+    {
+      "page": 68,
+      "type": "internal",
+      "target": 96,
+      "targetOffset": 0.8587822301683665,
+      "rect": [
+        0.03779761844765685,
+        0.9548634512497954,
+        0.031078041834740073,
+        0.011878039144790683
+      ],
+      "marker": "S9",
+      "label": "S9の出典：96ページへ"
+    },
+    {
+      "page": 69,
+      "type": "internal",
+      "target": 96,
+      "targetOffset": 0.8587822301683665,
+      "rect": [
+        0.03779761844765685,
+        0.9429854121050047,
+        0.031078041834740073,
+        0.011878039144790683
+      ],
+      "marker": "S9",
+      "label": "S9の出典：96ページへ"
+    },
+    {
+      "page": 70,
+      "type": "internal",
+      "target": 96,
+      "targetOffset": 0.8374017597077432,
+      "rect": [
+        0.03779761844765685,
+        0.9382341964470885,
+        0.031078041834740073,
+        0.011878039144790683
+      ],
+      "marker": "S8",
+      "label": "S8の出典：96ページへ"
+    },
+    {
+      "page": 73,
+      "type": "internal",
+      "target": 96,
+      "targetOffset": 0.8801627006289897,
+      "rect": [
+        0.03779761844765685,
+        0.9233866475161001,
+        0.03611772429442765,
+        0.013659745016509286
+      ],
+      "marker": "S5",
+      "label": "S5の出典：96ページへ"
+    },
+    {
+      "page": 73,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.6231477088806635,
+      "rect": [
+        0.0755952368953137,
+        0.9233866475161001,
+        0.048716930443646604,
+        0.013659745016509286
+      ],
+      "marker": "N13",
+      "label": "N13の出典：104ページへ"
+    },
+    {
+      "page": 73,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.6578315831834523,
+      "rect": [
+        0.1259920614921895,
+        0.9233866475161001,
+        0.048716930443646604,
+        0.013659745016509286
+      ],
+      "marker": "N14",
+      "label": "N14の出典：104ページへ"
+    },
+    {
+      "page": 75,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.28248554620806676,
+      "rect": [
+        0.03779761844765685,
+        0.9631780786511489,
+        0.041997353830729826,
+        0.011878039144790683
+      ],
+      "marker": "N04",
+      "label": "N04の出典：104ページへ"
+    },
+    {
+      "page": 75,
+      "type": "internal",
+      "target": 105,
+      "targetOffset": 0.17843392329970031,
+      "rect": [
+        0.08063491935500128,
+        0.9631780786511489,
+        0.041997353830729826,
+        0.011878039144790683
+      ],
+      "marker": "N21",
+      "label": "N21の出典：105ページへ"
+    },
+    {
+      "page": 71,
+      "type": "internal",
+      "target": 96,
+      "targetOffset": 0.7946408187864967,
+      "rect": [
+        0.03779761844765685,
+        0.9518939414635977,
+        0.031078041834740073,
+        0.011878039144790683
+      ],
+      "marker": "S1",
+      "label": "S1の出典：96ページへ"
+    },
+    {
+      "page": 71,
+      "type": "internal",
+      "target": 96,
+      "targetOffset": 0.8374017597077432,
+      "rect": [
+        0.06971560735901151,
+        0.9518939414635977,
+        0.031078041834740073,
+        0.011878039144790683
+      ],
+      "marker": "S8",
+      "label": "S8の出典：96ページへ"
+    },
+    {
+      "page": 87,
+      "type": "internal",
+      "target": 96,
+      "targetOffset": 0.81602128924712,
+      "rect": [
+        0.07727513104854289,
+        0.9216049416443814,
+        0.041997353830729826,
+        0.011878039144790683
+      ],
+      "marker": "S16",
+      "label": "S16の出典：96ページへ"
+    },
+    {
+      "page": 87,
+      "type": "internal",
+      "target": 96,
+      "targetOffset": 0.8587822301683665,
+      "rect": [
+        0.1209523790325019,
+        0.9216049416443814,
+        0.04031745967750064,
+        0.011878039144790683
+      ],
+      "marker": "S18",
+      "label": "S18の出典：96ページへ"
+    },
+    {
+      "page": 98,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.17843392329970031,
+      "rect": [
+        0.10331349042359537,
+        0.9162598240292257,
+        0.028558200604896285,
+        0.009502431315832546
+      ],
+      "marker": "N01",
+      "label": "N01の出典：104ページへ"
+    },
+    {
+      "page": 98,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.21311779760248906,
+      "rect": [
+        0.14867063256078358,
+        0.9162598240292257,
+        0.028558200604896285,
+        0.009502431315832546
+      ],
+      "marker": "N02",
+      "label": "N02の出典：104ページへ"
+    },
+    {
+      "page": 99,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.2478016719052779,
+      "rect": [
+        0.10331349042359537,
+        0.9156659220719862,
+        0.028558200604896285,
+        0.010096333273072081
+      ],
+      "marker": "N03",
+      "label": "N03の出典：104ページへ"
+    },
+    {
+      "page": 99,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.28248554620806676,
+      "rect": [
+        0.14867063256078358,
+        0.9162598240292257,
+        0.028558200604896285,
+        0.009502431315832546
+      ],
+      "marker": "N04",
+      "label": "N04の出典：104ページへ"
+    },
+    {
+      "page": 99,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.33142306748460426,
+      "rect": [
+        0.19318782762135722,
+        0.9162598240292257,
+        0.029398147681510882,
+        0.009502431315832546
+      ],
+      "marker": "N05",
+      "label": "N05の出典：104ページへ"
+    },
+    {
+      "page": 99,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.3661069417873931,
+      "rect": [
+        0.23854496975854544,
+        0.9162598240292257,
+        0.029398147681510882,
+        0.009502431315832546
+      ],
+      "marker": "N06",
+      "label": "N06の出典：104ページへ"
+    },
+    {
+      "page": 99,
+      "type": "internal",
+      "target": 105,
+      "targetOffset": 0.17843392329970031,
+      "rect": [
+        0.28390211189573367,
+        0.9162598240292257,
+        0.028558200604896285,
+        0.009502431315832546
+      ],
+      "marker": "N21",
+      "label": "N21の出典：105ページへ"
+    },
+    {
+      "page": 100,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.40079081609018186,
+      "rect": [
+        0.10331349042359537,
+        0.9162598240292257,
+        0.028558200604896285,
+        0.009502431315832546
+      ],
+      "marker": "N07",
+      "label": "N07の出典：104ページへ"
+    },
+    {
+      "page": 100,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.4354746903929707,
+      "rect": [
+        0.14867063256078358,
+        0.9162598240292257,
+        0.028558200604896285,
+        0.009502431315832546
+      ],
+      "marker": "N08",
+      "label": "N08の出典：104ページへ"
+    },
+    {
+      "page": 100,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.47015856469575945,
+      "rect": [
+        0.19318782762135722,
+        0.9162598240292257,
+        0.029398147681510882,
+        0.009502431315832546
+      ],
+      "marker": "N09",
+      "label": "N09の出典：104ページへ"
+    },
+    {
+      "page": 101,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.7761368530655675,
+      "rect": [
+        0.10331349042359537,
+        0.9162598240292257,
+        0.028558200604896285,
+        0.009502431315832546
+      ],
+      "marker": "N17",
+      "label": "N17の出典：104ページへ"
+    },
+    {
+      "page": 101,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.8108207273683563,
+      "rect": [
+        0.14867063256078358,
+        0.9162598240292257,
+        0.028558200604896285,
+        0.009502431315832546
+      ],
+      "marker": "N18",
+      "label": "N18の出典：104ページへ"
+    },
+    {
+      "page": 101,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.845504601671145,
+      "rect": [
+        0.19318782762135722,
+        0.9156659220719862,
+        0.029398147681510882,
+        0.010096333273072081
+      ],
+      "marker": "N19",
+      "label": "N19の出典：104ページへ"
+    },
+    {
+      "page": 101,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.8801885234860904,
+      "rect": [
+        0.23854496975854544,
+        0.9162598240292257,
+        0.029398147681510882,
+        0.009502431315832546
+      ],
+      "marker": "N20",
+      "label": "N20の出典：104ページへ"
+    },
+    {
+      "page": 102,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.5190960859722971,
+      "rect": [
+        0.10331349042359537,
+        0.9162598240292257,
+        0.028558200604896285,
+        0.009502431315832546
+      ],
+      "marker": "N10",
+      "label": "N10の出典：104ページへ"
+    },
+    {
+      "page": 102,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.5537799602750859,
+      "rect": [
+        0.14867063256078358,
+        0.9162598240292257,
+        0.028558200604896285,
+        0.009502431315832546
+      ],
+      "marker": "N11",
+      "label": "N11の出典：104ページへ"
+    },
+    {
+      "page": 102,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.5884638345778748,
+      "rect": [
+        0.19318782762135722,
+        0.9162598240292257,
+        0.029398147681510882,
+        0.009502431315832546
+      ],
+      "marker": "N12",
+      "label": "N12の出典：104ページへ"
+    },
+    {
+      "page": 103,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.6231477088806635,
+      "rect": [
+        0.10331349042359537,
+        0.9162598240292257,
+        0.028558200604896285,
+        0.009502431315832546
+      ],
+      "marker": "N13",
+      "label": "N13の出典：104ページへ"
+    },
+    {
+      "page": 103,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.6578315831834523,
+      "rect": [
+        0.14867063256078358,
+        0.9162598240292257,
+        0.028558200604896285,
+        0.009502431315832546
+      ],
+      "marker": "N14",
+      "label": "N14の出典：104ページへ"
+    },
+    {
+      "page": 103,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.6925154574862411,
+      "rect": [
+        0.19318782762135722,
+        0.9162598240292257,
+        0.029398147681510882,
+        0.009502431315832546
+      ],
+      "marker": "N15",
+      "label": "N15の出典：104ページへ"
+    },
+    {
+      "page": 103,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.7271993317890298,
+      "rect": [
+        0.23854496975854544,
+        0.9162598240292257,
+        0.029398147681510882,
+        0.009502431315832546
+      ],
+      "marker": "N16",
+      "label": "N16の出典：104ページへ"
+    },
+    {
+      "page": 79,
+      "type": "internal",
+      "target": 96,
+      "targetOffset": 0.8801627006289897,
+      "rect": [
+        0.06954761794368859,
+        0.9376402944898489,
+        0.043005290322667346,
+        0.011878039144790683
+      ],
+      "marker": "S10",
+      "label": "S10の出典：96ページへ"
+    },
+    {
+      "page": 83,
+      "type": "internal",
+      "target": 96,
+      "targetOffset": 0.8374017597077432,
+      "rect": [
+        0.07878703578644916,
+        0.9376402944898489,
+        0.043005290322667346,
+        0.011878039144790683
+      ],
+      "marker": "S12",
+      "label": "S12の出典：96ページへ"
+    },
+    {
+      "page": 11,
+      "type": "internal",
+      "target": 104,
+      "targetOffset": 0.21311779760248906,
+      "rect": [
+        0.6123214188520409,
+        0.8930976476968838,
+        0.11339285534297054,
+        0.013065843059269751
+      ],
+      "guide": true,
+      "label": "個人向け国債の換金条件：巻末104頁"
+    },
+    {
+      "page": 14,
+      "type": "internal",
+      "target": 105,
+      "targetOffset": 0.21311779760248906,
+      "rect": [
+        0.03611772429442765,
+        0.9572390590787535,
+        0.5720039591745403,
+        0.01128413718755115
+      ],
+      "guide": true,
+      "label": "図のデータ出典：巻末105頁"
+    },
+    {
+      "page": 16,
+      "type": "internal",
+      "target": 100,
+      "targetOffset": 0,
+      "rect": [
+        0.035277777217813056,
+        0.9741058746643563,
+        0.23799463643394755,
+        0.013422184233613473
+      ],
+      "guide": true,
+      "label": "仕組みと試算条件：巻末100頁（A3）"
+    },
+    {
+      "page": 17,
+      "type": "internal",
+      "target": 101,
+      "targetOffset": 0,
+      "rect": [
+        0.035277777217813056,
+        0.9580705218188889,
+        0.23799463643394755,
+        0.013422184233613469
+      ],
+      "guide": true,
+      "label": "データと計算条件：巻末101頁（A4）"
+    },
+    {
+      "page": 34,
+      "type": "internal",
+      "target": 95,
+      "targetOffset": 0.2708192925012276,
+      "rect": [
+        0.035277777217813056,
+        0.9441732160194838,
+        0.9004232661308476,
+        0.041573137006767395
+      ],
+      "guide": true,
+      "label": "出典：バフェットの賭けの成績（巻末95頁）"
+    },
+    {
+      "page": 37,
+      "type": "internal",
+      "target": 95,
+      "targetOffset": 0.6449775255621342,
+      "rect": [
+        0.035277777217813056,
+        0.9723241687926377,
+        0.23623780312850046,
+        0.013422184233613473
+      ],
+      "guide": true,
+      "label": "出典：LTCM救済の経緯（巻末95頁）"
     }
   ],
   "download": {
-    "filename": "orukan-v10.pdf",
-    "bytes": 111751633,
-    "sha256": "898721b8b81b1e647232334ce6fdb37b3e2d798a23db8b1833bf9cab368aeb2a",
-    "url": "downloads/orukan-v10.pdf"
+    "filename": "orukan-v11.1.pdf",
+    "bytes": 111991201,
+    "sha256": "d95e7da2aa35798f0a93a28dd66bddf162ef68d18332a67264d54c437c900f2d",
+    "url": "downloads/orukan-v11.1.pdf"
   },
   "highQualityDownload": {
-    "filename": "orukan-v10-high-quality.pdf",
-    "bytes": 271293783,
-    "sha256": "22f691e00152e9fa7204e637f47b79b36abd64b4eadf46c2c8dddd76707f1721",
-    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v10/orukan-v10-high-quality.pdf",
+    "filename": "orukan-v11.1-high-quality.pdf",
+    "bytes": 271533351,
+    "sha256": "6e07349e3f426cbccff250f8a811f6cab99874d379ff120f57352c09b245b615",
+    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v11.1/orukan-v11.1-high-quality.pdf",
     "pages": 107
   },
-  "revision": "v10-p92-white-paper-chapter-spacing"
+  "revision": "v11.1-reference-links",
+  "readings": [
+    {
+      "page": 7,
+      "type": "external",
+      "reading": true,
+      "label": "参考・小話：「10連続的中」を作る仕掛け（英語）",
+      "url": "https://mathinvestor.org/2014/04/pseudo-mathematics-and-financial-charlatanism/",
+      "description": "当たりだけを残すと、連続的中の達人に見えてしまう。著者自身によるバックテストの解説（英語）。"
+    },
+    {
+      "page": 15,
+      "type": "external",
+      "reading": true,
+      "label": "参考：日々の倍率と長期の倍率が違う理由（金融庁）",
+      "url": "https://www.fsa.go.jp/user/20210630_levETF2.pdf",
+      "description": "日次の倍率と長期の倍率が違う理由を図解（日本語 PDF・3 頁）。SPXL の試算そのものではありません。"
+    },
+    {
+      "page": 29,
+      "type": "external",
+      "reading": true,
+      "label": "参考：資産と将来の給付を一緒に考えるALM",
+      "url": "https://www.pfa.or.jp/yogoshu/ne/ne02.html",
+      "description": "年金の資産と将来の支払いを一緒に考える ALM の用語解説。"
+    },
+    {
+      "page": 38,
+      "type": "external",
+      "reading": true,
+      "label": "参考：為替ヘッジに費用がかかる理由",
+      "url": "https://faq1.am.mufg.jp/answer/66c85ba8e17300a001af293f/",
+      "description": "為替ヘッジの仕組みと、金利差による費用を短く説明。"
+    },
+    {
+      "page": 43,
+      "type": "external",
+      "reading": true,
+      "label": "参考：大量注文で自分の売買価格が動く理由",
+      "url": "https://www.pfa.or.jp/yogoshu/ma/ma01.html",
+      "description": "自分の売買で価格が不利に動く、マーケット・インパクトの具体例。"
+    },
+    {
+      "page": 58,
+      "type": "external",
+      "reading": true,
+      "label": "参考：売却から現金受け取りまで（資産運用業協会）",
+      "url": "https://www.imaj.or.jp/study/investmenttrust/process/sell.html",
+      "description": "売却を申し込んでからお金を受け取るまでの流れ。実際の受渡日は商品・販売会社で確認します。"
+    },
+    {
+      "page": 66,
+      "type": "external",
+      "reading": true,
+      "label": "参考：アイスとおでんで分かる分散投資",
+      "url": "https://www.gpif.go.jp/gpif/diversification3.html",
+      "description": "アイスとおでんの会社を例に、値動きの違いと分散効果を説明。漫画の数値とは別の仮例です。"
+    },
+    {
+      "page": 70,
+      "type": "external",
+      "reading": true,
+      "label": "参考：シャープレシオが比べているもの",
+      "url": "https://www.pfa.or.jp/yogoshu/shi/shi22.html",
+      "description": "シャープレシオが表す、リスクあたりの超過リターンを日本語で確認。"
+    }
+  ]
 }
