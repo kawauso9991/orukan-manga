@@ -19,8 +19,8 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   let referenceCount=0;
   let manualMode=null,responsive={mode:'spread',compact:false},wideGeometry=null;
   const originalReferenceButton={hidden:$('open-references').hidden,disabled:$('open-references').disabled};
-  const normalDesktop=()=>window.innerWidth>=768&&!fullscreenActive;
-  const phoneMode=()=>window.innerWidth<(fullscreenActive?1024:768);
+  const normalDesktop=()=>window.innerWidth>=(getPage()===1?600:768)&&!fullscreenActive;
+  const phoneMode=()=>window.innerWidth<(fullscreenActive?1024:getPage()===1?600:768);
   const normalSources=()=>normalDesktop()&&panel.parentElement===$('reading-body');
   const desktopControls=createDesktopControls({shell,navigationHome:$('toolbar-navigation-home'),progressTrack:$('reading-progress')?.parentElement,displayControls:$('presentation-controls'),book,getPage,onLayout:()=>{resize();reflow();}});
   const desktopReferences=createDesktopReferences({shell,panel,getCount:()=>referenceCount});
@@ -40,7 +40,8 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   }
   function syncReferenceButton() {
     const button=$('open-references');
-    if(normalSources()){button.hidden=true;button.disabled=referenceCount===0;}
+    if(fullscreenActive){button.hidden=false;button.disabled=referenceCount===0;}
+    else if(normalSources()){button.hidden=true;button.disabled=referenceCount===0;}
     else if(!fullscreenActive&&phoneMode()){button.hidden=referenceCount===0;button.disabled=referenceCount===0;}
     else {button.hidden=originalReferenceButton.hidden;button.disabled=originalReferenceButton.disabled;}
   }
@@ -94,7 +95,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     const destinations=[['reading-status',mobile?$('mobile-menu-actions'):home],
       ['navigation-controls',mobile?$('mobile-navigation'):home],
       ['toolbar-contents',mobile?$('mobile-menu-actions'):$('navigation-controls')],
-      ['open-references',mobile?$('mobile-menu-actions'):$('presentation-controls')]];
+      ['open-references',fullscreenActive?$('fullscreen-affordance'):mobile?$('mobile-menu-actions'):$('presentation-controls')]];
     for(const [id,target] of destinations) if($(id).parentElement!==target) {
       if($(id).contains(focused)) relocatedFocus=focused;
       target.append($(id));
@@ -102,7 +103,8 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     $('mobile-navigation').hidden=!mobile;
     toolbar.hidden=mobile;
     $('toggle-fullscreen').hidden=mobile&&!fullscreenActive;
-    $('reveal-controls').hidden=mobile;
+    $('reveal-controls').hidden=!fullscreenActive;
+    if(fullscreenActive)$('fullscreen-affordance').append($('toggle-fullscreen'));
     syncReferenceButton();
     $('previous').textContent=mobile?'←':'← 前へ';
     $('next').textContent=mobile?'→':'次へ →';
@@ -310,11 +312,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     if(temporary) hideChromeSoon(2600);
   }
   $('reveal-controls').addEventListener('click',event=>{
-    if(chromeVisible) {
-      chromeHiddenByUser=true;keyboardChrome=false;clearTimeout(chromeTimer);setChrome(false);
-      if(event.detail>0) stage.focus({preventScroll:true});
-    }
-    else {chromeHiddenByUser=false;revealChrome(true);}
+    chromeHiddenByUser=false;revealChrome(true);
   });
   shell.addEventListener('pointermove',event=>{
     if(!fullscreenActive||event.pointerType!=='mouse') return;
@@ -380,7 +378,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   },{passive:true});
   stage.addEventListener('pointerdown',event=>{
     suppressTouchClickUntil=0;
-    if(event.pointerType==='touch'&&fullscreenActive&&!chromeVisible&&!excluded(event.target)) {
+    if(event.pointerType==='touch'&&fullscreenActive&&!chromeVisible&&!excluded(event.target)&&event.clientY<=shell.getBoundingClientRect().top+44) {
       suppressTouchClickUntil=performance.now()+1000;revealChrome(true);
     }
     if(event.pointerType!=='mouse'||event.button!==0||event.target.closest('a,button')||!pannable())return;
@@ -436,6 +434,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
       syncDesktopMode();
       $('toggle-fullscreen').textContent=active?'全画面を終了':'全画面';$('toggle-fullscreen').setAttribute('aria-pressed',String(active));
       (active?$('fullscreen-affordance'):$('presentation-controls')).append($('toggle-fullscreen'));
+      (active?shell:$('fullscreen-affordance')).append($('reveal-controls'));
       $('fullscreen-affordance').hidden=!active;
       topEdgeHover=false;toolbarHover=false;clearTimeout(chromeTimer);setChrome(!active);
       resize();reflow();references();

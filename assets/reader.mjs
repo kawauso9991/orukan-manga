@@ -3,11 +3,12 @@ import { createNavigation } from './navigation.mjs';
 import { createScrollThrottle } from './scroll.mjs';
 import { installPageControl } from './controls.mjs';
 import { createLayoutRestorer, observeLayoutChanges } from './layout.mjs';
-import { createPresentationUI } from './presentation-ui.mjs?v=pc-normal-3';
+import { createPresentationUI } from './presentation-ui.mjs?v=fs-door-1';
 import { renderDownloadLinks, lightDownloadURL, visiblePages, chapterLabel } from './presentation.mjs?v=pc-normal-3';
 import { pageAlignment, verifiedCover } from './alignment.mjs';
 import { validateReadings, referenceName } from './references.mjs';
 import {prefersHQ} from './reader-wide.mjs';
+import {createReaderDoor} from './reader-door.mjs';
 
 const $ = id => document.getElementById(id);
 const documentURL = document.URL;
@@ -27,7 +28,7 @@ let zoomPage = null, zoomOpener, pendingZoomPage = null;
 let contentsOpener, pendingContentsPage = null;
 let pendingZoomOffset = 0, pendingContentsOffset = 0;
 let skipZoomRestore = false;
-let presentation;
+let presentation,door,savedResume=null;
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -179,6 +180,7 @@ function loadNeighborhood(page) {
 function headerOffset() { return 0; }
 
 function positionAtScroll() {
+  if(door?.active)return {page:1,offset:0};
   const paginated = presentation?.readPosition();
   if (paginated) return paginated;
   const line = headerOffset();
@@ -195,6 +197,10 @@ function positionAtScroll() {
 function moveTo(position, settled) {
   scrollWork.cancel();
   loadNeighborhood(position.page);
+  if(door?.active) {
+    window.scrollTo({top:window.scrollY+$('reader-shell').getBoundingClientRect().top,behavior:'instant'});
+    requestAnimationFrame(()=>requestAnimationFrame(settled));return;
+  }
   if (presentation?.moveTo(position)) { requestAnimationFrame(() => requestAnimationFrame(settled)); return; }
   const image = images[position.page - 1];
   const aligned=pageAlignment(book,position.page,'vertical',window.innerWidth>=1024);
@@ -205,6 +211,8 @@ function moveTo(position, settled) {
 
 function updatePosition(position) {
   currentPage = position.page;
+  const wasDoor=door?.active;door?.sync();
+  if(wasDoor!==door?.active)presentation?.resize();
   presentation?.changed(position);
   $('current-position').textContent = `${position.page} / ${book.totalPages} ページ${book.pages[position.page - 1].label === String(position.page) ? '' : ` · 補足 ${book.pages[position.page - 1].label}`}`;
   pageControl.update(position.page);
@@ -283,6 +291,20 @@ function openZoom(page, opener) {
   $('close-zoom').focus({ preventScroll: true });
 }
 
+function closeZoomFromContextMenu(event) {
+  if(!zoomDialog.open||!zoomCanvas.contains(event.target)||event.target.closest('a,button,input,select,textarea,[contenteditable]'))return;
+  event.preventDefault();
+  zoomDialog.close();
+}
+
+function saveReadingPosition(position) {
+  // Visiting the door must not erase a reader's saved place inside the book.
+  if(position.page===1)return false;
+  const saved=writeProgress(getStorage,storageKey,book.version,position,book.totalPages);
+  if(saved)savedResume={...position};
+  return saved;
+}
+
 function installEvents() {
   $('previous').addEventListener('click', () => presentation.turn(-1));
   $('next').addEventListener('click', () => presentation.turn(1));
@@ -310,7 +332,7 @@ function installEvents() {
     else go(page,offset);
   });
   window.addEventListener('scroll', () => {
-    if (zoomDialog.open || contentsDialog.open || presentation?.transitioning) return;
+    if (zoomDialog.open || contentsDialog.open || door?.active || presentation?.transitioning) return;
     navigation.observe();
     scrollWork.schedule();
   }, { passive: true });
@@ -331,6 +353,7 @@ function installEvents() {
   window.addEventListener('pagehide', () => { if (!zoomDialog.open) navigation.persist(); });
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && !zoomDialog.open) navigation.persist(); });
   $('close-zoom').addEventListener('click', () => zoomDialog.close());
+  zoomViewport.addEventListener('contextmenu',closeZoomFromContextMenu);
   zoomDialog.addEventListener('close', () => {
     scrollWork.cancel();
     zoomImage.removeAttribute('src');
@@ -388,6 +411,7 @@ async function start() {
     const response = await fetch(assetURL('data/book.json', documentURL));
     if (!response.ok) throw Error('Book unavailable');
     book = validateBook(await response.json());
+    savedResume=readProgress(getStorage,storageKey,book.version,book.totalPages);
     document.title = `${book.title}｜kawauso`;
     renderPages();
     renderContents();
@@ -400,7 +424,7 @@ async function start() {
     try { history.scrollRestoration = 'manual'; } catch { /* Optional in restricted browsers. */ }
     navigation = createNavigation({ totalPages: book.totalPages, readPosition: positionAtScroll, moveTo,
       push: position => historyWrite('pushState', position), replace: position => historyWrite('replaceState', position),
-      save: position => writeProgress(getStorage, storageKey, book.version, position, book.totalPages), onChange: updatePosition });
+      save: saveReadingPosition, onChange: updatePosition });
     layoutRestorer = createLayoutRestorer({ navigation, cancelPassive: () => scrollWork.cancel(),
       updateLayout: () => {
         presentation.resize();
@@ -411,9 +435,13 @@ async function start() {
     presentation = createPresentationUI({book,figures,images,getPage:()=>currentPage,getStorage,go,makeLink,
       reflow:()=>navigation.reflow(),persist:()=>navigation.persist(),loadPage,
       observeScroll:()=>{navigation.observe();scrollWork.schedule();}});
+    door=createReaderDoor({shell:$('reader-shell'),book,getPage:()=>currentPage,getResume:()=>savedResume,
+      getFullscreen:()=>presentation.fullscreen,coverURL:assetURL('assets/orukan-cover-square-protected-web.webp',documentURL),
+      portraitCoverURL:assetURL('assets/orukan-cover-A4-fullbleed-web.webp',documentURL),onNavigate:go,
+      onContents:()=>openContents($('reader-door-contents'))});
     installEvents();
     const initialHash = location.hash;
-    const saved = readProgress(getStorage, storageKey, book.version, book.totalPages);
+    const saved = savedResume;
     const initial = chooseStart(initialHash, saved, book.totalPages);
     // Keep the introduction visible on a fresh visit; explicit/resumed locations align below the toolbar.
     if (!initialHash && !saved) {

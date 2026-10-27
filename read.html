@@ -7,10 +7,11 @@
   <meta name="description" content="kawauso 作『オルカンに勝てん！』全107ページを、縦スクロールで読めます。">
   <title>オルカンに勝てん！｜kawauso</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="assets/reader.css">
-  <link rel="stylesheet" href="assets/desktop-controls.css?v=pc-normal-4">
+  <link rel="stylesheet" href="assets/reader.css?v=fs-door-1">
+  <link rel="stylesheet" href="assets/desktop-controls.css?v=fs-door-1">
   <link rel="stylesheet" href="assets/desktop-reader.css?v=pc-normal-2">
-  <script type="module" src="assets/reader.mjs?v=pc-normal-3"></script>
+  <link rel="stylesheet" href="assets/reader-door.css?v=fs-door-1">
+  <script type="module" src="assets/reader.mjs?v=fs-door-1"></script>
 </head>
 <body>
   <a class="skip-link" href="#reader">本文へ進む</a>
@@ -48,6 +49,7 @@
       </div>
       </div>
       <div id="presentation-controls" class="presentation-controls">
+        <p class="enlargement-help">漫画をクリックで拡大／Esc・右クリックで元に戻す</p>
         <label for="display-mode">表示 <select id="display-mode"><option value="spread">見開き</option><option value="single">1ページ</option><option value="vertical">縦読み</option></select></label>
         <div id="size-controls" class="size-controls">
           <label for="fit-mode" class="sr-only">画面に合わせる方向</label><select id="fit-mode"><option value="height">高さに合わせる</option><option value="width">幅に合わせる</option></select>

@@ -4,7 +4,7 @@
   .reader-shell.desktop-controls-active.desktop-controls-compact{--desktop-sidebar-width:44px}
   .desktop-controls-active>.reader-toolbar{display:none}
   .desktop-controls-active>.desktop-controls-sidebar{position:sticky;top:0;align-self:flex-start;flex:0 0 var(--desktop-sidebar-width);width:var(--desktop-sidebar-width);height:100dvh;overflow:auto;border-right:1px solid var(--line);background:var(--paper)}
-  .desktop-controls-active .desktop-controls-body{display:flex;flex-direction:column;gap:14px;min-height:100%;padding:16px 12px}
+  .desktop-controls-active .desktop-controls-body{display:flex;flex-direction:column;gap:14px;min-height:100%;padding:16px 12px 24px}
   .desktop-controls-active.desktop-controls-responsive:not(.desktop-controls-compact) .desktop-controls-body{padding-top:60px}
   .desktop-controls-active .desktop-controls-toggle{position:absolute;top:0;right:0;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;font-size:1rem;border-radius:0}
   .desktop-controls-active .desktop-controls-strip{display:flex;flex-direction:column;align-items:center;gap:12px;padding:56px 2px 12px;width:100%;min-width:0}
@@ -27,9 +27,9 @@
   .desktop-controls-active #page-form button{padding-inline:8px}
   .desktop-controls-active #toolbar-contents{grid-area:contents}
   .desktop-controls-active #navigation-controls>button{width:100%;min-width:0;margin:0;padding-inline:4px;white-space:normal}
-  .desktop-controls-active .desktop-next-chapter{order:3;display:block;margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:.72rem;line-height:1.5;overflow-wrap:anywhere}
-  .desktop-controls-active>.desktop-controls-corner{position:fixed;right:8px;bottom:8px;z-index:10;display:flex;flex-direction:row;align-items:center;gap:6px}
-  .desktop-controls-active>.desktop-display-panel{position:fixed;z-index:12;right:8px;bottom:70px;width:min(360px,calc(100vw - 24px));max-height:calc(100dvh - 90px);overflow:auto;padding:14px;background:var(--paper);border:1px solid var(--line);border-radius:9px;box-shadow:0 4px 24px #0006}
+  .desktop-controls-active .desktop-next-chapter{order:3;display:block;flex:0 0 6rem;height:6rem;overflow:auto;margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:.72rem;line-height:1.5;overflow-wrap:anywhere;overscroll-behavior:contain}
+  .desktop-controls-active>.desktop-controls-corner{position:fixed;right:8px;bottom:24px;z-index:10;display:flex;flex-direction:row;align-items:center;gap:6px}
+  .desktop-controls-active>.desktop-display-panel{position:fixed;z-index:12;right:8px;bottom:86px;width:min(360px,calc(100vw - 24px));max-height:calc(100dvh - 106px);overflow:auto;padding:14px;background:var(--paper);border:1px solid var(--line);border-radius:9px;box-shadow:0 4px 24px #0006}
   .desktop-controls-active .desktop-display-panel .presentation-controls{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:12px;width:100%;margin:0}
   .desktop-controls-active .desktop-display-panel .presentation-controls>label{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;width:100%}
   .desktop-controls-active .desktop-display-panel select{min-width:0;max-width:100%;width:100%}

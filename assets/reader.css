@@ -81,6 +81,12 @@ button{min-width:44px}
 .reader-shell:fullscreen[data-mode="spread"] .reader,.reader-shell:fullscreen[data-mode="single"] .reader{gap:4px;padding:2px;align-items:safe center}
 .reader-shell:fullscreen[data-mode="spread"] .page-caption,.reader-shell:fullscreen[data-mode="single"] .page-caption{display:none}
 .reader-shell:fullscreen.chrome-hidden>.reader-toolbar{visibility:hidden;pointer-events:none}
+.reader-shell:fullscreen>#fullscreen-affordance{flex-direction:column;align-items:stretch}
+.reader-shell:fullscreen>#reveal-controls{position:absolute;z-index:10;top:0;left:0;width:100%;height:12px;min-height:0;padding:0;border:0;border-radius:0;background:transparent;color:transparent;font-size:0;box-shadow:none}
+.reader-shell:fullscreen:not(.chrome-hidden)>#reveal-controls{height:4px}
+.reader-shell:fullscreen>#reveal-controls:focus-visible{height:44px;width:44px;outline:2px solid var(--accent);background:var(--paper)}
+.enlargement-help{margin:0;font-size:.72rem;line-height:1.5;color:var(--muted)}
+@media(pointer:coarse){.reader-shell:fullscreen.chrome-hidden>#reveal-controls{height:44px}}
 .reader-shell:fullscreen .navigation-rail,.reader-shell:fullscreen.references-open>.reading-body>.reference-panel{bottom:72px}
 @media(min-width:1200px){.reader-shell #toolbar-navigation-home{grid-column:1;align-self:center}.reader-shell .presentation-controls{align-self:center}}
 @media(max-width:1023px){.reader-shell:fullscreen>.reader-toolbar{top:4px;width:calc(100% - 8px)}.fullscreen-affordance{bottom:max(4px,env(safe-area-inset-bottom));right:4px}}

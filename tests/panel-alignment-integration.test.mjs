@@ -29,7 +29,7 @@ test('resume fractions still reference the full image when page and image origin
   let imageWorld=1000,height=200;
   const figures=Array.from({length:107},(_,i)=>({getBoundingClientRect:()=>({top:(i<72?0:i===72?imageWorld:2000)-window.scrollY})}));
   const images=Array.from({length:107},()=>({getBoundingClientRect:()=>({top:imageWorld-window.scrollY,height})}));
-  const context={window,book,pageAlignment,figures,images,scrollWork:{cancel(){}},loadNeighborhood(){},presentation:{moveTo:()=>false,readPosition:()=>null},requestAnimationFrame:fn=>fn()};
+  const context={window,book,door:null,pageAlignment,figures,images,scrollWork:{cancel(){}},loadNeighborhood(){},presentation:{moveTo:()=>false,readPosition:()=>null},requestAnimationFrame:fn=>fn()};
   vm.runInNewContext(method('headerOffset')+'\n'+method('positionAtScroll')+'\n'+method('moveTo')+'\nmoveTo({page:73,offset:.37},()=>{});',context);
   assert.equal(window.scrollY,1074);
   const position=vm.runInNewContext('positionAtScroll();',context);assert.equal(position.page,73);assert.equal(position.offset,.37);
