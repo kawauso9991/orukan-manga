@@ -1,4 +1,4 @@
-import { assetURL, externalURL, parsePageHash, chooseStart, readProgress, writeProgress } from './state.mjs?v=release-1';
+import { assetURL, externalURL, parsePageHash, chooseStart, readProgress, writeProgress } from './state.mjs?v=release-3';
 import { createNavigation } from './navigation.mjs';
 import { createScrollThrottle } from './scroll.mjs';
 import { installPageControl } from './controls.mjs';
@@ -129,6 +129,7 @@ function renderPages() {
     retry.addEventListener('click', () => { image.removeAttribute('src'); loadPage(page.number); });
     loadError.append(retry);
     image.addEventListener('error', () => {
+      if (image.dataset.res === '1600') { book.pages[page.number - 1].srcWide = undefined; loadPage(page.number); return; }
       if (image.dataset.quality === 'high') { delete image.dataset.hq; delete image.dataset.qualityLoaded; loadPage(page.number,{preferHQ:false}); return; }
       loadError.hidden = false;delete image.dataset.hq;delete image.dataset.qualityLoaded;
     });
@@ -170,13 +171,24 @@ function renderContents() {
   }
 }
 
+// Normal quality only: use the 1600px file when the physical target (CSS width x DPR) exceeds the 1200px file.
+// Hidden pages keep the last measured decision so a page turn does not swap files.
+let wideNeeded=false;
+function wantsWide(image) {
+  const width=image.getBoundingClientRect().width;
+  if(width>0)wideNeeded=width*(window.devicePixelRatio||1)>1200.5;
+  return wideNeeded;
+}
+
 function loadPage(page,{preferHQ}={}) {
   const image = images[page - 1];
   if (image) {
     const high=preferHQ??(presentation?.quality==='high');
     const item=book.pages[page-1];
-    const url=assetURL(high?item.zoom:item.src,documentURL);
+    const wide=!high&&Boolean(assetURL(item.srcWide,documentURL))&&wantsWide(image);
+    const url=assetURL(high?item.zoom:wide?item.srcWide:item.src,documentURL);
     if(image.getAttribute('src')===url)return;
+    image.dataset.res=high?'2800':wide?'1600':'1200';
     image.dataset.quality=high?'high':'normal';delete image.dataset.qualityLoaded;
     if(high)image.dataset.hq='loading';else delete image.dataset.hq;
     image.src=url;
@@ -257,6 +269,14 @@ function openContents(opener) {
   contentsDialog.showModal();
 }
 
+// Zoom dialog follows the same normal-quality rule as the page view (1600px only beyond 1200 physical px); HQ stays manual.
+function zoomURL(item) {
+  if (presentation.quality === 'high') { zoomImage.dataset.res = '2800'; return assetURL(item.zoom, documentURL); }
+  const wide = Boolean(assetURL(item.srcWide, documentURL)) && zoomCanvas.getBoundingClientRect().width * (window.devicePixelRatio || 1) > 1200.5;
+  zoomImage.dataset.res = wide ? '1600' : '1200';
+  return assetURL(wide ? item.srcWide : item.src, documentURL);
+}
+
 function zoomLayout(preserveCenter = false) {
   if (!zoomPage) return;
   const previousWidth = zoomCanvas.getBoundingClientRect().width;
@@ -272,6 +292,10 @@ function zoomLayout(preserveCenter = false) {
   } else {
     zoomViewport.scrollLeft = 0;
     zoomViewport.scrollTop = 0;
+  }
+  if (zoomImage.getAttribute('src') && presentation.quality !== 'high') {
+    const url = zoomURL(page);
+    if (zoomImage.getAttribute('src') !== url) zoomImage.src = url;
   }
 }
 
@@ -298,7 +322,7 @@ function openZoom(page, opener) {
   zoomDialog.showModal();
   zoomLayout();
   zoomImage.dataset.quality=presentation.quality;
-  zoomImage.src = assetURL(presentation.quality==='high'?item.zoom:item.src, documentURL);
+  zoomImage.src = zoomURL(item);
   $('close-zoom').focus({ preventScroll: true });
 }
 
@@ -379,6 +403,7 @@ function installEvents() {
   });
   zoomImage.addEventListener('error', () => {
     if (!zoomPage) return;
+    if (zoomImage.dataset.res === '1600') { book.pages[zoomPage-1].srcWide = undefined; zoomImage.src = zoomURL(book.pages[zoomPage-1]); return; }
     if (zoomImage.dataset.quality === 'high') {
       zoomImage.dataset.quality = 'normal';
       zoomImage.src = assetURL(book.pages[zoomPage-1].src,documentURL);
@@ -424,7 +449,7 @@ function installEvents() {
 
 async function start() {
   try {
-    const response = await fetch(`${assetURL('data/book.json', documentURL)}?v=release-2`);
+    const response = await fetch(`${assetURL('data/book.json', documentURL)}?v=release-3`);
     if (!response.ok) throw Error('Book unavailable');
     book = validateBook(await response.json());
     savedResume=readProgress(getStorage,storageKey,book.version,book.totalPages);
