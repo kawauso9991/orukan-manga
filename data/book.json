@@ -3268,19 +3268,20 @@
     }
   ],
   "download": {
-    "filename": "orukan-v11.1.pdf",
-    "bytes": 111991201,
-    "sha256": "d95e7da2aa35798f0a93a28dd66bddf162ef68d18332a67264d54c437c900f2d",
-    "url": "downloads/orukan-v11.1.pdf"
-  },
-  "highQualityDownload": {
-    "filename": "orukan-v11.1-high-quality.pdf",
-    "bytes": 271533351,
-    "sha256": "6e07349e3f426cbccff250f8a811f6cab99874d379ff120f57352c09b245b615",
-    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v11.1/orukan-v11.1-high-quality.pdf",
+    "filename": "orukan-v12.pdf",
+    "bytes": 114162335,
+    "sha256": "2c9b487bb594e48344043b2d69a7d5baeeec2e24b141c8f7f8f01abe972ed140",
+    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v12/orukan-v12.pdf",
     "pages": 107
   },
-  "revision": "v11.1-reference-links",
+  "highQualityDownload": {
+    "filename": "orukan-v12-high-quality.pdf",
+    "bytes": 273704485,
+    "sha256": "8ef92cbb82a2e5e96eb29f5129b29b4b32b14ebba88c37aa00864644c60862cb",
+    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v12/orukan-v12-high-quality.pdf",
+    "pages": 107
+  },
+  "revision": "v12-sixpage-artwork",
   "readings": [
     {
       "page": 7,
