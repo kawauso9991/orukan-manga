@@ -10,13 +10,10 @@ function inspected(book,page) {
 
 export function verifiedCover(book) {return Boolean(inspected(book,1));}
 
-export function pageAlignment(book,page,mode='spread',desktop=true) {
-  const pages=page===1?[1]:[page-page%2,page-page%2+1];
-  if(!pages.every(number=>inspected(book,number)))return null;
-  const record=inspected(book,page),inset=baseline-record.anchorY;
-  return {anchorY:record.anchorY,inset,baseline,width:page===1&&desktop?1142:1200,
-    sourceWidth:1200,sourceHeight:1698,envelopeHeight:1838,
-    frameHeight:mode==='vertical'?1698+inset:1838};
+export function pageAlignment() {
+  // Internal panel spacing belongs to the images. Keep every complete page
+  // on its original outer bounds instead of translating it to a panel anchor.
+  return null;
 }
 
 export function alignmentBaseline(width,height,{mode='spread',fullscreen=false,fit='height',scale=1}={}) {
