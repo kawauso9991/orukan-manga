@@ -424,7 +424,7 @@ function installEvents() {
 
 async function start() {
   try {
-    const response = await fetch(`${assetURL('data/book.json', documentURL)}?v=release-1`);
+    const response = await fetch(`${assetURL('data/book.json', documentURL)}?v=release-2`);
     if (!response.ok) throw Error('Book unavailable');
     book = validateBook(await response.json());
     savedResume=readProgress(getStorage,storageKey,book.version,book.totalPages);
