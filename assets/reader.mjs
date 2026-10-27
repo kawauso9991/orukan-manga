@@ -85,7 +85,7 @@ function makeLink(link, hotspot = false) {
     const icon = element('span', '', link.type === 'external' ? '↗' : '→');
     icon.setAttribute('aria-hidden', 'true');
     anchor.append(icon);
-    if(link.reading)anchor.append(element('span','reference-reading-description',link.description));
+    if(link.reading){anchor.classList.add('reference-reading');anchor.append(element('span','reference-reading-description',link.description));}
     if (link.type === 'external') anchor.append(element('span', 'sr-only', '（新しいタブで開きます）'));
   }
   return anchor;
