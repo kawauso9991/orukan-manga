@@ -369,9 +369,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p037-v11.webp",
-      "bytes": 1377684,
+      "bytes": 1386664,
       "zoom": "pages/hq/p037-v11.webp",
-      "zoomBytes": 4993158
+      "zoomBytes": 4954648
     },
     {
       "number": 38,
@@ -589,9 +589,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p059-v10.webp",
-      "bytes": 1543716,
+      "bytes": 1526814,
       "zoom": "pages/hq/p059-v10.webp",
-      "zoomBytes": 5984166
+      "zoomBytes": 5861284
     },
     {
       "number": 60,
@@ -970,9 +970,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p097-v10.webp",
-      "bytes": 1022126,
+      "bytes": 1013908,
       "zoom": "pages/hq/p097-v10.webp",
-      "zoomBytes": 3878688
+      "zoomBytes": 3860368
     },
     {
       "number": 98,
@@ -3268,20 +3268,20 @@
     }
   ],
   "download": {
-    "filename": "orukan-v13.pdf",
-    "bytes": 114426591,
-    "sha256": "6d897cd19cdc34ba23897cf5f7c44ed64ae4e219cd336faa8ef1737ddc10a9f4",
-    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v13/orukan-v13.pdf",
+    "filename": "orukan-v14-light.pdf",
+    "bytes": 117100149,
+    "sha256": "aac9bca4b346362734b7ffac1a4e0f00d478a919ea8f3847ec3567830da919dd",
+    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v14/orukan-v14-light.pdf",
     "pages": 107
   },
   "highQualityDownload": {
-    "filename": "orukan-v13-high-quality.pdf",
-    "bytes": 273968741,
-    "sha256": "57c37dac8dbae4369de6909fe5532513a2da8e749bab8fa2620ec6332ace1baa",
-    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v13/orukan-v13-high-quality.pdf",
+    "filename": "orukan-v14-high-quality.pdf",
+    "bytes": 276642299,
+    "sha256": "77e7b80737a2abe1271544eb53b557d92ea7f0d2d45778212d25aef1effbb047",
+    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v14/orukan-v14-high-quality.pdf",
     "pages": 107
   },
-  "revision": "v13-annotation-frame",
+  "revision": "v14-page-border",
   "readings": [
     {
       "page": 7,
