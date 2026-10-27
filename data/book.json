@@ -1279,10 +1279,14 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p092-v10.webp",
-      "bytes": 397302,
+      "bytes": 1774542,
       "zoom": "pages/hq/p092-v10.webp",
-      "zoomBytes": 1088870,
-      "title": "それぞれの目標に、世界の力を"
+      "zoomBytes": 6672448,
+      "title": "それぞれの目標に、世界の力を",
+      "srcWide": "https://github.com/kawauso9991/orukan-manga/releases/download/v14-web-1600/p092-w1600-837e6d89.webp",
+      "wideBytes": 1019530,
+      "wideWidth": 1600,
+      "wideHeight": 2264
     },
     {
       "number": 93,
@@ -1360,9 +1364,13 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p098-v10.webp",
-      "bytes": 538320,
+      "bytes": 127322,
       "zoom": "pages/hq/p098-v10.webp",
-      "zoomBytes": 2029200
+      "zoomBytes": 303266,
+      "srcWide": "https://github.com/kawauso9991/orukan-manga/releases/download/v14-web-1600/p098-w1600-4a0a15fe.webp",
+      "wideBytes": 376148,
+      "wideWidth": 1600,
+      "wideHeight": 2264
     },
     {
       "number": 99,
@@ -1370,9 +1378,13 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p099-v10.webp",
-      "bytes": 509536,
+      "bytes": 121564,
       "zoom": "pages/hq/p099-v10.webp",
-      "zoomBytes": 1897302
+      "zoomBytes": 295352,
+      "srcWide": "https://github.com/kawauso9991/orukan-manga/releases/download/v14-web-1600/p099-w1600-87f874ee.webp",
+      "wideBytes": 348108,
+      "wideWidth": 1600,
+      "wideHeight": 2264
     },
     {
       "number": 100,
@@ -1380,9 +1392,13 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p100-v10.webp",
-      "bytes": 559934,
+      "bytes": 129970,
       "zoom": "pages/hq/p100-v10.webp",
-      "zoomBytes": 2099730
+      "zoomBytes": 329796,
+      "srcWide": "https://github.com/kawauso9991/orukan-manga/releases/download/v14-web-1600/p100-w1600-24b6445b.webp",
+      "wideBytes": 387622,
+      "wideWidth": 1600,
+      "wideHeight": 2264
     },
     {
       "number": 101,
@@ -1390,9 +1406,13 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p101-v10.webp",
-      "bytes": 431636,
+      "bytes": 121382,
       "zoom": "pages/hq/p101-v10.webp",
-      "zoomBytes": 1593676
+      "zoomBytes": 313730,
+      "srcWide": "https://github.com/kawauso9991/orukan-manga/releases/download/v14-web-1600/p101-w1600-ad8fdc0d.webp",
+      "wideBytes": 296058,
+      "wideWidth": 1600,
+      "wideHeight": 2264
     },
     {
       "number": 102,
@@ -1400,9 +1420,13 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p102-v10.webp",
-      "bytes": 552494,
+      "bytes": 130488,
       "zoom": "pages/hq/p102-v10.webp",
-      "zoomBytes": 2070286
+      "zoomBytes": 330678,
+      "srcWide": "https://github.com/kawauso9991/orukan-manga/releases/download/v14-web-1600/p102-w1600-d4243e97.webp",
+      "wideBytes": 386234,
+      "wideWidth": 1600,
+      "wideHeight": 2264
     },
     {
       "number": 103,
@@ -1410,9 +1434,13 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p103-v10.webp",
-      "bytes": 687120,
+      "bytes": 158794,
       "zoom": "pages/hq/p103-v10.webp",
-      "zoomBytes": 2581508
+      "zoomBytes": 386008,
+      "srcWide": "https://github.com/kawauso9991/orukan-manga/releases/download/v14-web-1600/p103-w1600-c3e09665.webp",
+      "wideBytes": 479886,
+      "wideWidth": 1600,
+      "wideHeight": 2264
     },
     {
       "number": 104,
@@ -1420,9 +1448,13 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p104.webp",
-      "bytes": 264422,
+      "bytes": 108168,
       "zoom": "pages/hq/p104.webp",
-      "zoomBytes": 620472
+      "zoomBytes": 342844,
+      "srcWide": "https://github.com/kawauso9991/orukan-manga/releases/download/v14-web-1600/p104-w1600-7036f17b.webp",
+      "wideBytes": 546842,
+      "wideWidth": 1600,
+      "wideHeight": 2264
     },
     {
       "number": 105,
@@ -1430,9 +1462,13 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p105.webp",
-      "bytes": 330816,
+      "bytes": 134184,
       "zoom": "pages/hq/p105.webp",
-      "zoomBytes": 725412
+      "zoomBytes": 467150,
+      "srcWide": "https://github.com/kawauso9991/orukan-manga/releases/download/v14-web-1600/p105-w1600-0a4cd385.webp",
+      "wideBytes": 651744,
+      "wideWidth": 1600,
+      "wideHeight": 2264
     },
     {
       "number": 106,
