@@ -1,0 +1,37 @@
+/* These rules only affect PC normal reading. Fullscreen and mobile retain
+   their existing page fitting, source panels and controls. */
+@media(min-width:768px){
+  .reader-shell.desktop-windowed{--desktop-source-width:234px;display:flex;flex-direction:row;align-items:stretch;min-height:100dvh}
+  .reader-shell.desktop-windowed>.reading-body{display:flex;flex:1;min-width:0;min-height:0;padding-bottom:60px}
+  .reader-shell.desktop-windowed .reading-stage{flex:1;min-width:0;min-height:0}
+  .reader-shell.desktop-windowed .page-caption{display:none}
+  .reader-shell.desktop-windowed>.reading-body>.reference-panel{position:sticky;inset:auto;top:0;align-self:flex-start;display:flex;flex:0 0 var(--desktop-source-width);width:var(--desktop-source-width);height:calc(100dvh - 60px);max-height:calc(100dvh - 60px);border:0;border-left:1px solid #303944;background:#151a20;color:#b4beca;--accent:#b9cbd3;border-radius:0;box-shadow:none;z-index:8}
+  .reader-shell.desktop-windowed .reference-heading{padding:10px 12px;min-height:44px;border-bottom:1px solid #303944}
+  .reader-shell.desktop-windowed .reference-heading h2{font-size:.76rem;font-weight:500;color:#89939f}
+  .reader-shell.desktop-windowed .reference-heading button,.reader-shell.desktop-windowed #open-references{display:none}
+  .reader-shell.desktop-windowed .reference-content{padding:0 12px 16px;font-size:.75rem}
+  .reader-shell.desktop-windowed .reference-content h3{font-size:.7rem;font-weight:500;color:#8c96a1;margin:12px 0 4px}
+  .reader-shell.desktop-windowed .reference-content h4{display:none}
+  .reader-shell.desktop-windowed .reference-content a{min-height:36px;padding:7px 0;gap:6px;line-height:1.4;align-items:start}
+  .reader-shell.desktop-windowed .reference-content a>span:last-child{font-size:.68rem;flex:none}
+  .reader-shell.desktop-windowed .desktop-source-tab{display:none}
+  .reader-shell.desktop-windowed[data-mode="spread"] .reading-stage,.reader-shell.desktop-windowed[data-mode="single"] .reading-stage{container-type:size}
+  .reader-shell.desktop-windowed[data-mode="spread"] .page,.reader-shell.desktop-windowed[data-mode="single"] .page{--desktop-paper-ratio:calc(1200 / 1698);--desktop-page-width:min(var(--desktop-available-width),calc((100cqh - 18px) * var(--desktop-paper-ratio)));width:calc(var(--desktop-page-width) * var(--desktop-scale,1))!important;flex-basis:calc(var(--desktop-page-width) * var(--desktop-scale,1))!important}
+  .reader-shell.desktop-windowed[data-mode="spread"] .page{--desktop-available-width:calc((100cqw - 36px) / 2)}
+  .reader-shell.desktop-windowed[data-mode="single"] .page,.reader-shell.desktop-windowed #page-1{--desktop-available-width:calc(100cqw - 24px)}
+  .reader-shell.desktop-windowed #page-1{--desktop-paper-ratio:calc(1144 / 1698)}
+  .reader-shell.desktop-windowed[data-desktop-fit="width"] .page{--desktop-page-width:var(--desktop-available-width)}
+  .reader-shell.desktop-windowed.desktop-wide-layout{width:var(--desktop-group-width);margin-left:var(--desktop-group-left);margin-right:0}
+  .reader-shell.desktop-windowed.desktop-wide-layout::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:calc(-1 * var(--desktop-group-left));width:var(--desktop-viewport-width);background:#0d1014;pointer-events:none}
+  .reader-shell.desktop-windowed.desktop-wide-layout>.reading-body{flex:0 0 calc(var(--desktop-wide-stage-width) + var(--desktop-source-width));width:calc(var(--desktop-wide-stage-width) + var(--desktop-source-width))}
+  .reader-shell.desktop-windowed.desktop-wide-layout .reading-stage{flex:0 0 var(--desktop-wide-stage-width);width:var(--desktop-wide-stage-width)}
+  .reader-shell.desktop-windowed.desktop-wide-layout .reader{padding-inline:0}
+  .reader-shell.desktop-windowed.desktop-wide-layout .page{width:var(--desktop-wide-page-width)!important;flex-basis:var(--desktop-wide-page-width)!important}
+}
+@media(min-width:768px){
+  .reader-shell.desktop-windowed.desktop-responsive-compact{--desktop-source-width:28px}
+  .reader-shell.desktop-windowed.desktop-responsive-compact .reference-heading{display:none}
+  .reader-shell.desktop-windowed.desktop-responsive-compact .desktop-source-tab{display:block;writing-mode:vertical-rl;align-self:flex-start;width:100%;min-width:0;min-height:72px;padding:10px 3px;border:0;border-radius:0;background:transparent;font-size:.72rem;font-weight:400}
+  .reader-shell.desktop-windowed.desktop-responsive-compact .reference-content{position:fixed;inset:0 28px 60px auto;display:none;width:234px;max-height:none;background:#151a20;border:1px solid #303944;box-shadow:-3px 0 16px #0002}
+  .reader-shell.desktop-windowed.desktop-responsive-compact.desktop-sources-open .reference-content{display:block}
+}

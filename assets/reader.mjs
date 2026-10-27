@@ -3,10 +3,11 @@ import { createNavigation } from './navigation.mjs';
 import { createScrollThrottle } from './scroll.mjs';
 import { installPageControl } from './controls.mjs';
 import { createLayoutRestorer, observeLayoutChanges } from './layout.mjs';
-import { createPresentationUI } from './presentation-ui.mjs';
-import { renderDownloadLinks, visiblePages, chapterLabel } from './presentation.mjs';
+import { createPresentationUI } from './presentation-ui.mjs?v=pc-normal-3';
+import { renderDownloadLinks, lightDownloadURL, visiblePages, chapterLabel } from './presentation.mjs?v=pc-normal-3';
 import { pageAlignment, verifiedCover } from './alignment.mjs';
 import { validateReadings, referenceName } from './references.mjs';
+import {prefersHQ} from './reader-wide.mjs';
 
 const $ = id => document.getElementById(id);
 const documentURL = document.URL;
@@ -58,7 +59,7 @@ function validateBook(data) {
     if(link.targetOffset!==undefined&&(!Number.isFinite(link.targetOffset)||link.targetOffset<0||link.targetOffset>1))throw Error('Invalid source destination');
   }
   validateReadings(data.readings,107);
-  if (!data.download || !assetURL(data.download.url, documentURL) || typeof data.download.filename !== 'string' || !Number.isFinite(data.download.bytes)) throw Error('Invalid download');
+  if (!data.download || !lightDownloadURL(data.download, documentURL) || typeof data.download.filename !== 'string' || !Number.isFinite(data.download.bytes)) throw Error('Invalid download');
   return data;
 }
 
@@ -161,9 +162,14 @@ function renderContents() {
   }
 }
 
-function loadPage(page) {
+function loadPage(page,{preferHQ}={}) {
   const image = images[page - 1];
-  if (image && !image.hasAttribute('src')) image.src = assetURL(book.pages[page - 1].src, documentURL);
+  if (image && !image.hasAttribute('src')) {
+    const high=preferHQ??prefersHQ(presentation?.desiredPageWidth?.(page));
+    const item=book.pages[page-1];
+    if(high)image.dataset.hq='ready';
+    image.src=assetURL(high?item.zoom:item.src,documentURL);
+  }
 }
 
 function loadNeighborhood(page) {

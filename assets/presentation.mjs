@@ -80,6 +80,19 @@ export function createFullscreenController({element,getElement,request,exit,onCh
     async toggle() { try { if (getElement() === element) await exit(); else await request(); } catch (error) { onError(error); } }
   };
 }
+// Page assets stay same-origin; only light PDFs gain this narrow Release route.
+export function lightDownloadURL(download,documentURL) {
+  const local=assetURL(download?.url,documentURL);
+  if(local)return local;
+  try {
+    if(typeof download?.url!=='string')return null;
+    const match=/^https:\/\/github\.com\/kawauso9991\/orukan-manga\/releases\/download\/(v[1-9]\d*(?:\.(?:0|[1-9]\d*))*)\/orukan-\1\.pdf$/.exec(download.url);
+    if(!match||download.filename!==`orukan-${match[1]}.pdf`||!Number.isSafeInteger(download.bytes)||download.bytes<=0||
+       !/^[a-f0-9]{64}$/i.test(download.sha256)||download.pages!==107)return null;
+    const url=new URL(download.url);
+    return url.href===download.url&&!url.username&&!url.password&&!url.search&&!url.hash?url.href:null;
+  } catch {return null;}
+}
 export function downloadOptions(book) {
   const high=book.highQualityDownload;
   let safe=false;
@@ -94,13 +107,13 @@ export function downloadOptions(book) {
 }
 export function renderDownloadLinks(book,{primary,secondary,size},documentURL) {
   const downloads=downloadOptions(book);
-  primary.href=downloads.highQuality?downloads.primary.url:assetURL(downloads.primary.url,documentURL);
+  primary.href=downloads.highQuality?downloads.primary.url:lightDownloadURL(downloads.primary,documentURL);
   primary.download=downloads.primary.filename;
   size.textContent=`（約${(downloads.primary.bytes/1e6).toFixed(1)} MB）`;
   primary.replaceChildren(`${downloads.highQuality?'高画質':'軽量'}PDFをダウンロード `,size);
   secondary.hidden=!downloads.highQuality;
   if(downloads.secondary) {
-    secondary.href=assetURL(downloads.secondary.url,documentURL);
+    secondary.href=lightDownloadURL(downloads.secondary,documentURL);
     secondary.download=downloads.secondary.filename;
     secondary.textContent=`軽量PDF（約${(downloads.secondary.bytes/1e6).toFixed(1)} MB）`;
   }
