@@ -12,19 +12,20 @@ export function stepPage(page, direction, mode, total) {
   if (direction > 0 && pages.at(-1) === total || direction < 0 && pages[0] === 1) return page;
   return clampPage(direction > 0 ? pages.at(-1) + 1 : mode === 'spread' ? Math.max(1, pages[0] - 2) : page - 1, total);
 }
-const defaults = () => ({ mode: 'spread', fit: 'height', scale: 1 });
+const defaults = () => ({ mode: 'spread', fit: 'height', scale: 1, quality: 'normal' });
 const key = 'orukan-manga:display:v1';
+const qualities = ['normal','high'];
 function valid(value) {
   return value && ['spread','single','vertical'].includes(value.mode) && ['height','width'].includes(value.fit) &&
     typeof value.scale === 'number' && Number.isFinite(value.scale) && value.scale >= .5 && value.scale <= 3;
 }
 export function readPreferences(getStorage) {
-  try { const value = JSON.parse(getStorage()?.getItem(key) ?? 'null'); return valid(value) ? {mode:value.mode,fit:value.fit,scale:value.scale} : defaults(); }
+  try { const value = JSON.parse(getStorage()?.getItem(key) ?? 'null'); return valid(value) ? {mode:value.mode,fit:value.fit,scale:value.scale,quality:qualities.includes(value.quality)?value.quality:'normal'} : defaults(); }
   catch { return defaults(); }
 }
 export function writePreferences(getStorage, value) {
-  try { if (!valid(value)) return false; const storage = getStorage(); if (!storage) return false;
-    storage.setItem(key, JSON.stringify({mode:value.mode,fit:value.fit,scale:value.scale})); return true;
+  try { if (!valid(value)||(value.quality!==undefined&&!qualities.includes(value.quality))) return false; const storage = getStorage(); if (!storage) return false;
+    storage.setItem(key, JSON.stringify({mode:value.mode,fit:value.fit,scale:value.scale,quality:value.quality??'normal'})); return true;
   } catch { return false; }
 }
 export function createWheelIntent({ threshold = 64, quiet = 220 } = {}) {

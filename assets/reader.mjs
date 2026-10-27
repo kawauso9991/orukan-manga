@@ -3,11 +3,10 @@ import { createNavigation } from './navigation.mjs';
 import { createScrollThrottle } from './scroll.mjs';
 import { installPageControl } from './controls.mjs';
 import { createLayoutRestorer, observeLayoutChanges } from './layout.mjs';
-import { createPresentationUI } from './presentation-ui.mjs?v=fs-door-1';
-import { renderDownloadLinks, lightDownloadURL, visiblePages, chapterLabel } from './presentation.mjs?v=pc-normal-3';
+import { createPresentationUI } from './presentation-ui.mjs?v=quality-2';
+import { renderDownloadLinks, lightDownloadURL, visiblePages, chapterLabel } from './presentation.mjs?v=quality-2';
 import { pageAlignment, verifiedCover } from './alignment.mjs';
 import { validateReadings, referenceName } from './references.mjs';
-import {prefersHQ} from './reader-wide.mjs';
 import {createReaderDoor} from './reader-door.mjs';
 
 const $ = id => document.getElementById(id);
@@ -129,8 +128,13 @@ function renderPages() {
     retry.type = 'button';
     retry.addEventListener('click', () => { image.removeAttribute('src'); loadPage(page.number); });
     loadError.append(retry);
-    image.addEventListener('error', () => { loadError.hidden = false; });
-    image.addEventListener('load', () => { loadError.hidden = true; });
+    image.addEventListener('error', () => { loadError.hidden = false;delete image.dataset.hq;delete image.dataset.qualityLoaded; });
+    image.addEventListener('load', () => {
+      loadError.hidden = true;
+      if(image.currentSrc!==image.src)return;
+      image.dataset.qualityLoaded=image.dataset.quality;
+      if(image.dataset.quality==='high')image.dataset.hq='ready';
+    });
     art.append(image);
     const links = pageLinks.get(page.number) ?? [];
     if (links.length) {
@@ -165,11 +169,14 @@ function renderContents() {
 
 function loadPage(page,{preferHQ}={}) {
   const image = images[page - 1];
-  if (image && !image.hasAttribute('src')) {
-    const high=preferHQ??prefersHQ(presentation?.desiredPageWidth?.(page));
+  if (image) {
+    const high=preferHQ??(presentation?.quality==='high');
     const item=book.pages[page-1];
-    if(high)image.dataset.hq='ready';
-    image.src=assetURL(high?item.zoom:item.src,documentURL);
+    const url=assetURL(high?item.zoom:item.src,documentURL);
+    if(image.getAttribute('src')===url)return;
+    image.dataset.quality=high?'high':'normal';delete image.dataset.qualityLoaded;
+    if(high)image.dataset.hq='loading';else delete image.dataset.hq;
+    image.src=url;
   }
 }
 
@@ -287,7 +294,8 @@ function openZoom(page, opener) {
   document.documentElement.style.overflow = 'hidden';
   zoomDialog.showModal();
   zoomLayout();
-  zoomImage.src = assetURL(item.zoom, documentURL);
+  zoomImage.dataset.quality=presentation.quality;
+  zoomImage.src = assetURL(presentation.quality==='high'?item.zoom:item.src, documentURL);
   $('close-zoom').focus({ preventScroll: true });
 }
 
@@ -372,7 +380,7 @@ function installEvents() {
     message.replaceChildren(document.createTextNode('拡大画像を読み込めませんでした。'));
     const retry = element('button', '', '再読み込み');
     retry.type = 'button';
-    retry.addEventListener('click', () => { zoomImage.src = assetURL(book.pages[zoomPage - 1].zoom, documentURL); message.hidden = true; });
+    retry.addEventListener('click', () => {const item=book.pages[zoomPage-1];zoomImage.src=assetURL(presentation.quality==='high'?item.zoom:item.src,documentURL);message.hidden=true;});
     message.append(retry); message.hidden = false;
   });
   zoomImage.addEventListener('load', () => { $('zoom-message').hidden = true; });
@@ -433,7 +441,7 @@ async function start() {
       }, readScrollY: () => window.scrollY,
       restoreScrollY: top => window.scrollTo({top, behavior:'instant'}) });
     presentation = createPresentationUI({book,figures,images,getPage:()=>currentPage,getStorage,go,makeLink,
-      reflow:()=>navigation.reflow(),persist:()=>navigation.persist(),loadPage,
+      reflow:()=>{if(presentation)navigation.reflow();},persist:()=>navigation.persist(),loadPage,
       observeScroll:()=>{navigation.observe();scrollWork.schedule();}});
     door=createReaderDoor({shell:$('reader-shell'),book,getPage:()=>currentPage,getResume:()=>savedResume,
       getFullscreen:()=>presentation.fullscreen,coverURL:assetURL('assets/orukan-cover-square-protected-web.webp',documentURL),

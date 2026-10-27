@@ -2,8 +2,8 @@ import { referenceSections, referenceCount as countReferences } from './referenc
 import {createDesktopControls} from './desktop-controls.mjs';
 import {createDesktopReferences,compactDesktopReference} from './desktop-reference-ui.mjs';
 import {resolveNormalReaderLayout,createReaderSwipeController} from './reader-responsive.mjs?v=pc-normal-3';
-import {wideReaderGeometry,prefersHQ} from './reader-wide.mjs';
-import { visiblePages, stepPage, effectiveMode, readPreferences, writePreferences, createWheelIntent, canTurnWheel, keyDirection, presentationGeometry, referenceGroups, createFullscreenController } from './presentation.mjs';
+import {wideReaderGeometry} from './reader-wide.mjs';
+import { visiblePages, stepPage, effectiveMode, readPreferences, writePreferences, createWheelIntent, canTurnWheel, keyDirection, presentationGeometry, referenceGroups, createFullscreenController } from './presentation.mjs?v=quality-2';
 
 // Presentation never owns the active logical page; navigation/history do.
 export function createPresentationUI({book,figures,images,getPage,getStorage,go,makeLink,reflow,persist,loadPage,observeScroll}) {
@@ -95,7 +95,8 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     const destinations=[['reading-status',mobile?$('mobile-menu-actions'):home],
       ['navigation-controls',mobile?$('mobile-navigation'):home],
       ['toolbar-contents',mobile?$('mobile-menu-actions'):$('navigation-controls')],
-      ['open-references',fullscreenActive?$('fullscreen-affordance'):mobile?$('mobile-menu-actions'):$('presentation-controls')]];
+      ['open-references',fullscreenActive?$('fullscreen-affordance'):mobile?$('mobile-menu-actions'):$('presentation-controls')],
+      ['image-quality-control',mobile?$('mobile-menu-actions'):$('presentation-controls')]];
     for(const [id,target] of destinations) if($(id).parentElement!==target) {
       if($(id).contains(focused)) relocatedFocus=focused;
       target.append($(id));
@@ -156,6 +157,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     $('display-mode').disabled=phoneMode();
     $('display-mode').title=window.innerWidth<1024?'この画面幅では縦読みで表示します':'';
     $('fit-mode').value=view().fit;
+    $('image-quality').value=preferences.quality;
     $('size-slider').value=String(Math.round(view().scale*100));
     $('size-level').textContent=`${Math.round(view().scale*100)}%`;
     $('size-out').disabled=view().scale<=.5;
@@ -207,23 +209,11 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
         if(width===stage.clientWidth&&height===stage.clientHeight&&(fullscreenActive||caption===captionHeight()))break;
       }
       selected.forEach(number=>{
-        loadPage(number,{preferHQ:prefersHQ(desiredPageWidth(number))});
-        // Existing normal images also need HQ after a large viewport resize.
-        if(view().scale>1 || view().fit==='width' || prefersHQ(desiredPageWidth(number)))
-          upgrade(number);
+        loadPage(number,{preferHQ:preferences.quality==='high'});
       });
     } else {railWidth=0;updateWideGeometry();}
     layoutRails();
     stage.classList.toggle('can-pan',pannable());
-  }
-  function upgrade(number) {
-    const image=images[number-1], item=book.pages[number-1];
-    if(image.dataset.hq==='ready'||image.dataset.hq==='loading') return;
-    image.dataset.hq='loading';
-    const high=new Image(); high.decoding='async';
-    high.onload=()=>{ image.dataset.hq='ready';image.src=high.src; };
-    high.onerror=()=>{ delete image.dataset.hq; };
-    high.src=new URL(item.zoom,document.URL).href;
   }
   function visibleReferencePages() {
     if(zoomPage!==null) return [zoomPage];
@@ -288,6 +278,14 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   const excluded=target=>Boolean(target.closest('input,select,textarea,button,a,summary,[contenteditable]:not([contenteditable="false"]),#reference-panel,dialog'));
   $('display-mode').addEventListener('change',event=>changePreference({mode:event.target.value}));
   $('fit-mode').addEventListener('change',event=>changePreference({fit:event.target.value}));
+  $('image-quality').addEventListener('change',event=>{
+    const quality=event.target.value;if(!['normal','high'].includes(quality))return;
+    preferences.quality=quality;if(fullscreenPreferences)fullscreenPreferences.quality=quality;
+    writePreferences(getStorage,preferences);
+    // Source-only updates preserve the existing page, geometry and pan position.
+    const nearby=[Math.max(1,getPage()-1),getPage(),Math.min(book.totalPages,getPage()+1)];
+    for(const number of new Set([...pages(),...nearby]))loadPage(number,{preferHQ:quality==='high'});
+  });
   $('size-out').addEventListener('click',()=>changePreference({scale:Math.max(.5,Math.round((view().scale-.25)*100)/100)}));
   $('size-in').addEventListener('click',()=>changePreference({scale:Math.min(3,Math.round((view().scale+.25)*100)/100)}));
   $('size-slider').addEventListener('input',event=>changePreference({scale:Number(event.target.value)/100}));
@@ -448,7 +446,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
   document.addEventListener('fullscreenerror',()=>{$('reader-message').textContent='全画面表示を変更できませんでした。このままお読みいただけます。';});
   resize();
   return {
-    get mode(){return mode;},get fullscreen(){return fullscreenActive;},get transitioning(){return transitioning();}, turn, resize,desiredPageWidth,
+    get mode(){return mode;},get quality(){return preferences.quality;},get fullscreen(){return fullscreenActive;},get transitioning(){return transitioning();}, turn, resize,desiredPageWidth,
     readPosition(){return paginated()?{page:getPage(),offset}:null;},
     changed(position){offset=position.offset;renderPages();layoutPanel();references();},
     moveTo(position){

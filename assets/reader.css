@@ -86,6 +86,7 @@ button{min-width:44px}
 .reader-shell:fullscreen:not(.chrome-hidden)>#reveal-controls{height:4px}
 .reader-shell:fullscreen>#reveal-controls:focus-visible{height:44px;width:44px;outline:2px solid var(--accent);background:var(--paper)}
 .enlargement-help{margin:0;font-size:.72rem;line-height:1.5;color:var(--muted)}
+.mobile-menu-actions #image-quality-control{display:flex;align-items:center;gap:8px;min-height:44px}
 @media(pointer:coarse){.reader-shell:fullscreen.chrome-hidden>#reveal-controls{height:44px}}
 .reader-shell:fullscreen .navigation-rail,.reader-shell:fullscreen.references-open>.reading-body>.reference-panel{bottom:72px}
 @media(min-width:1200px){.reader-shell #toolbar-navigation-home{grid-column:1;align-self:center}.reader-shell .presentation-controls{align-self:center}}

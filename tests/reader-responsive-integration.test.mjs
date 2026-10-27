@@ -15,19 +15,20 @@ test('an explicit operation-mode choice wins over later orientation changes',()=
   f.window.innerWidth=1080;f.window.innerHeight=1920;f.ui.resize();assert.equal(f.ui.mode,'spread');assert.equal(f.page(),86);
   f.window.innerWidth=390;f.window.innerHeight=844;f.ui.resize();assert.equal(f.ui.mode,'vertical');
 });
-test('normal HQ prediction uses each page width and returns no normal override inside fullscreen',async()=>{
+test('normal page-width geometry stays available without controlling the manual quality selection',async()=>{
   const f=fixture(3840);f.window.innerHeight=2160;f.doc.documentElement.clientWidth=3840;f.ui.resize();assert.ok(f.ui.desiredPageWidth(86)>1200);
   f.window.innerWidth=1920;f.window.innerHeight=1080;f.doc.documentElement.clientWidth=1920;f.ui.resize();assert.ok(f.ui.desiredPageWidth(86)<1200);
   await f.enter();assert.equal(f.ui.desiredPageWidth(86),0);
 });
 
-test('resizing an already loaded normal page beyond 1200 CSS pixels requests HQ',()=>{
+test('a4K resize keeps normal quality until the reader explicitly chooses high',()=>{
   const f=fixture(1920);f.window.innerHeight=1080;f.doc.documentElement.clientWidth=1920;f.ui.resize();
   assert.equal(f.images[85].dataset.hq,undefined);
   f.window.innerWidth=3840;f.window.innerHeight=2160;f.doc.documentElement.clientWidth=3840;f.ui.resize();
   assert.ok(f.ui.desiredPageWidth(86)>1200);
-  assert.equal(f.images[85].dataset.hq,'loading');
-  assert.equal(f.images[86].dataset.hq,'loading');
+  assert.equal(f.ui.quality,'normal');assert.ok(f.loads.every(x=>x.preferHQ===false));
+  f.nodes.get('image-quality').value='high';f.nodes.get('image-quality').dispatch('change');
+  assert.equal(f.ui.quality,'high');assert.ok(f.loads.slice(-3).every(x=>x.preferHQ===true));
 });
 
 test('wide background uses fractional content width rather than rounded clientWidth',()=>{

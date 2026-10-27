@@ -29,16 +29,17 @@ export function fixture(width=1600,links=[],providedBook=null) {
   stage.ownerDocument=doc;
   shell.append(toolbar,body,affordance,mobile);toolbar.append(home,presentation);body.append(rail,stage,panel);stage.append(deck);mobile.append(actions);panel.hidden=true;
   presentation.append(node('fullscreen-control-group'));
-  const ids=['reading-status','navigation-controls','toolbar-contents','open-references','toggle-fullscreen','reveal-controls','mobile-menu-toggle','previous','next','page-number','display-mode','fit-mode','size-slider','size-level','size-out','size-in','size-controls','zoom-show-references','close-references','reference-content','contents-dialog','zoom-dialog','reader-message'];
-  for(const id of ids)node(id,id.endsWith('dialog')?'dialog':id==='page-number'?'input':/mode$/.test(id)?'select':/controls$|content$|status$|level$/.test(id)?'div':'button');
+  const ids=['reading-status','navigation-controls','toolbar-contents','open-references','toggle-fullscreen','reveal-controls','mobile-menu-toggle','previous','next','page-number','display-mode','fit-mode','image-quality','image-quality-control','size-slider','size-level','size-out','size-in','size-controls','zoom-show-references','close-references','reference-content','contents-dialog','zoom-dialog','reader-message'];
+  for(const id of ids)node(id,id.endsWith('dialog')?'dialog':id==='page-number'?'input':/mode$/.test(id)||id==='image-quality'?'select':/controls$|content$|status$|level$/.test(id)?'div':'button');
+  presentation.append(nodes.get('image-quality-control'));nodes.get('image-quality-control').append(nodes.get('image-quality'));
   home.append(nodes.get('reading-status'),nodes.get('navigation-controls'));nodes.get('navigation-controls').append(nodes.get('previous'),nodes.get('page-number'),nodes.get('next'),nodes.get('toolbar-contents'));presentation.append(...['open-references','toggle-fullscreen','display-mode','fit-mode','size-slider','size-out','size-in','size-controls','size-level'].map(id=>nodes.get(id)));affordance.append(nodes.get('reveal-controls'));panel.append(nodes.get('close-references'),nodes.get('reference-content'));shell.append(nodes.get('contents-dialog'),nodes.get('zoom-dialog'));
   const win={innerWidth:width,getComputedStyle:()=>({fontSize:'16px',overflowY:'visible',overflowX:'visible'}),scrollTo(){},scrollY:0};
   Object.assign(globalThis,{window:win,document:doc,requestAnimationFrame:()=>0,Image:class{}});
   shell.requestFullscreen=async()=>{doc.fullscreenElement=shell;doc.dispatch('fullscreenchange');};doc.exitFullscreen=async()=>{doc.fullscreenElement=null;doc.dispatch('fullscreenchange');};
-  let page=86;const turns=[];const figures=[],images=[];
+  let page=86;const turns=[],loads=[];const figures=[],images=[];
   const book=providedBook??{totalPages:107,pages:Array.from({length:107},(_,i)=>({number:i+1,label:String(i+1),width:1200,height:1698})),links};
   for(const item of book.pages){const figure=new Node(`page-${item.number}`),caption=new Node(),art=new Node(),image=new Node();const frame=new Node();frame.dataset.alignmentFrame='true';figure.append(frame);frame.append(art);art.append(image);deck.append(figure);figures.push(figure);images.push(image);}
-  let ui;ui=createPresentationUI({book,figures,images,getPage:()=>page,getStorage:()=>null,go:next=>{page=next;turns.push(next);ui.changed({page,offset:0});},makeLink:()=>new Node('', 'a'),reflow(){},persist(){},loadPage(){},observeScroll(){}});
-  return {nodes,doc,window:win,figures,images,book,shell,toolbar,stage,panel,ui,turns,page:()=>page,enter:async()=>{nodes.get('toggle-fullscreen').dispatch('click');await Promise.resolve();},hidden:()=>shell.classList.contains('chrome-hidden')};
+  let ui;ui=createPresentationUI({book,figures,images,getPage:()=>page,getStorage:()=>null,go:next=>{page=next;turns.push(next);ui.changed({page,offset:0});},makeLink:()=>new Node('', 'a'),reflow(){},persist(){},loadPage:(number,options)=>loads.push({number,...options}),observeScroll(){}});
+  return {nodes,doc,window:win,figures,images,book,shell,toolbar,stage,panel,ui,turns,loads,page:()=>page,enter:async()=>{nodes.get('toggle-fullscreen').dispatch('click');await Promise.resolve();},hidden:()=>shell.classList.contains('chrome-hidden')};
 }
 

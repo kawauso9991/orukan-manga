@@ -198,3 +198,22 @@ test('normal desktop enhancement leaves the original fullscreen corner and hover
   await f.enter();assert.equal(f.shell.classList.contains('desktop-windowed'),false);
   assert.equal(f.nodes.get('toggle-fullscreen').parentElement.id,'fullscreen-affordance');assert.equal(f.hidden(),true);
 });
+
+test('manual quality changes only image requests and survives fullscreen, resize and scale changes',async()=>{
+  const f=fixture(3840);f.window.innerHeight=2160;f.window.devicePixelRatio=2;f.ui.resize();
+  assert.equal(f.ui.quality,'normal');assert.ok(f.loads.every(x=>x.preferHQ===false));
+  f.stage.scrollTop=37;f.stage.scrollLeft=19;const before=f.figures.map(x=>x.style.width),mode=f.ui.mode,page=f.page();
+  const quality=f.nodes.get('image-quality');quality.value='high';quality.dispatch('change');
+  assert.equal(f.ui.quality,'high');assert.equal(f.page(),page);assert.equal(f.ui.mode,mode);assert.equal(f.stage.scrollTop,37);assert.equal(f.stage.scrollLeft,19);assert.deepEqual(f.figures.map(x=>x.style.width),before);
+  assert.ok(f.loads.slice(-2).every(x=>x.preferHQ));await f.enter();assert.equal(f.ui.quality,'high');
+  f.nodes.get('toggle-fullscreen').dispatch('click');await Promise.resolve();assert.equal(f.ui.quality,'high');
+  quality.value='normal';quality.dispatch('change');const start=f.loads.length;
+  f.nodes.get('size-slider').value='200';f.nodes.get('size-slider').dispatch('input');f.ui.resize();
+  assert.equal(f.ui.quality,'normal');assert.ok(f.loads.slice(start).every(x=>x.preferHQ===false));
+});
+
+test('phone quality is in the existing menu without moving bottom navigation or changing vertical reading',()=>{
+  const f=fixture(390);assert.equal(f.nodes.get('image-quality-control').parentElement.id,'mobile-menu-actions');
+  const quality=f.nodes.get('image-quality');quality.value='high';quality.dispatch('change');assert.equal(f.ui.quality,'high');
+  assert.equal(f.ui.mode,'vertical');assert.equal(f.nodes.get('navigation-controls').parentElement.id,'mobile-navigation');assert.equal(f.page(),86);
+});
