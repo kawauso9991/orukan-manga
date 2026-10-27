@@ -159,9 +159,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p016-v11.webp",
-      "bytes": 1543824,
+      "bytes": 1544188,
       "zoom": "pages/hq/p016-v11.webp",
-      "zoomBytes": 5938254
+      "zoomBytes": 5939270
     },
     {
       "number": 17,
@@ -169,9 +169,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p017-v11.webp",
-      "bytes": 886502,
+      "bytes": 886210,
       "zoom": "pages/hq/p017-v11.webp",
-      "zoomBytes": 3500532
+      "zoomBytes": 3501302
     },
     {
       "number": 18,
@@ -259,9 +259,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p026.webp",
-      "bytes": 368278,
+      "bytes": 1476328,
       "zoom": "pages/hq/p026.webp",
-      "zoomBytes": 980976
+      "zoomBytes": 5732748
     },
     {
       "number": 27,
@@ -279,9 +279,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p028.webp",
-      "bytes": 361402,
+      "bytes": 1468502,
       "zoom": "pages/hq/p028.webp",
-      "zoomBytes": 970838
+      "zoomBytes": 5684740
     },
     {
       "number": 29,
@@ -369,9 +369,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p037-v11.webp",
-      "bytes": 1377262,
+      "bytes": 1377684,
       "zoom": "pages/hq/p037-v11.webp",
-      "zoomBytes": 4992570
+      "zoomBytes": 4993158
     },
     {
       "number": 38,
@@ -389,9 +389,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p039.webp",
-      "bytes": 221796,
-      "zoom": "pages/hq/p039.webp",
-      "zoomBytes": 590056
+      "bytes": 1013792,
+      "zoom": "https://github.com/kawauso9991/orukan-manga/releases/download/v13/p039-hq.webp",
+      "zoomBytes": 3704236
     },
     {
       "number": 40,
@@ -409,9 +409,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p041.webp",
-      "bytes": 315718,
-      "zoom": "pages/hq/p041.webp",
-      "zoomBytes": 954118
+      "bytes": 1215620,
+      "zoom": "https://github.com/kawauso9991/orukan-manga/releases/download/v13/p041-hq.webp",
+      "zoomBytes": 4416194
     },
     {
       "number": 42,
@@ -699,9 +699,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p070-v9.webp",
-      "bytes": 1259386,
+      "bytes": 1257532,
       "zoom": "pages/hq/p070-v9.webp",
-      "zoomBytes": 4500446
+      "zoomBytes": 4536598
     },
     {
       "number": 71,
@@ -709,9 +709,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p071-v9.webp",
-      "bytes": 1202160,
+      "bytes": 1205380,
       "zoom": "pages/hq/p071-v9.webp",
-      "zoomBytes": 4338098
+      "zoomBytes": 4379398
     },
     {
       "number": 72,
@@ -729,9 +729,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p073-v9.webp",
-      "bytes": 1132160,
+      "bytes": 1135614,
       "zoom": "pages/hq/p073-v9.webp",
-      "zoomBytes": 4151484
+      "zoomBytes": 4155242
     },
     {
       "number": 74,
@@ -849,9 +849,9 @@
       "width": 1200,
       "height": 1698,
       "src": "pages/normal/p085-v9.webp",
-      "bytes": 1297554,
+      "bytes": 1283434,
       "zoom": "pages/hq/p085-v9.webp",
-      "zoomBytes": 4947448
+      "zoomBytes": 4835668
     },
     {
       "number": 86,
@@ -3268,20 +3268,20 @@
     }
   ],
   "download": {
-    "filename": "orukan-v12.pdf",
-    "bytes": 114162335,
-    "sha256": "2c9b487bb594e48344043b2d69a7d5baeeec2e24b141c8f7f8f01abe972ed140",
-    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v12/orukan-v12.pdf",
+    "filename": "orukan-v13.pdf",
+    "bytes": 114426591,
+    "sha256": "6d897cd19cdc34ba23897cf5f7c44ed64ae4e219cd336faa8ef1737ddc10a9f4",
+    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v13/orukan-v13.pdf",
     "pages": 107
   },
   "highQualityDownload": {
-    "filename": "orukan-v12-high-quality.pdf",
-    "bytes": 273704485,
-    "sha256": "8ef92cbb82a2e5e96eb29f5129b29b4b32b14ebba88c37aa00864644c60862cb",
-    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v12/orukan-v12-high-quality.pdf",
+    "filename": "orukan-v13-high-quality.pdf",
+    "bytes": 273968741,
+    "sha256": "57c37dac8dbae4369de6909fe5532513a2da8e749bab8fa2620ec6332ace1baa",
+    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v13/orukan-v13-high-quality.pdf",
     "pages": 107
   },
-  "revision": "v12-sixpage-artwork",
+  "revision": "v13-annotation-frame",
   "readings": [
     {
       "page": 7,

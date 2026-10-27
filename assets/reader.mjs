@@ -1,4 +1,4 @@
-import { assetURL, externalURL, parsePageHash, chooseStart, readProgress, writeProgress } from './state.mjs';
+import { assetURL, externalURL, parsePageHash, chooseStart, readProgress, writeProgress } from './state.mjs?v=release-1';
 import { createNavigation } from './navigation.mjs';
 import { createScrollThrottle } from './scroll.mjs';
 import { installPageControl } from './controls.mjs';
@@ -128,7 +128,10 @@ function renderPages() {
     retry.type = 'button';
     retry.addEventListener('click', () => { image.removeAttribute('src'); loadPage(page.number); });
     loadError.append(retry);
-    image.addEventListener('error', () => { loadError.hidden = false;delete image.dataset.hq;delete image.dataset.qualityLoaded; });
+    image.addEventListener('error', () => {
+      if (image.dataset.quality === 'high') { delete image.dataset.hq; delete image.dataset.qualityLoaded; loadPage(page.number,{preferHQ:false}); return; }
+      loadError.hidden = false;delete image.dataset.hq;delete image.dataset.qualityLoaded;
+    });
     image.addEventListener('load', () => {
       loadError.hidden = true;
       if(image.currentSrc!==image.src)return;
@@ -376,6 +379,11 @@ function installEvents() {
   });
   zoomImage.addEventListener('error', () => {
     if (!zoomPage) return;
+    if (zoomImage.dataset.quality === 'high') {
+      zoomImage.dataset.quality = 'normal';
+      zoomImage.src = assetURL(book.pages[zoomPage-1].src,documentURL);
+      return;
+    }
     const message = $('zoom-message');
     message.replaceChildren(document.createTextNode('拡大画像を読み込めませんでした。'));
     const retry = element('button', '', '再読み込み');
@@ -416,7 +424,7 @@ function installEvents() {
 
 async function start() {
   try {
-    const response = await fetch(assetURL('data/book.json', documentURL));
+    const response = await fetch(`${assetURL('data/book.json', documentURL)}?v=release-1`);
     if (!response.ok) throw Error('Book unavailable');
     book = validateBook(await response.json());
     savedResume=readProgress(getStorage,storageKey,book.version,book.totalPages);

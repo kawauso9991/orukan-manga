@@ -46,6 +46,8 @@ export function writeProgress(getStorage, key, version, position, totalPages) {
 
 export function assetURL(relative, documentURL) {
   try {
+    if (relative === 'https://github.com/kawauso9991/orukan-manga/releases/download/v13/p039-hq.webp' ||
+        relative === 'https://github.com/kawauso9991/orukan-manga/releases/download/v13/p041-hq.webp') return relative;
     if (typeof relative !== 'string' || !relative || /[\s\\]/.test(relative) || relative.startsWith('/') || /^[a-z][a-z\d+.-]*:/i.test(relative)) return null;
     const base = new URL('.', documentURL);
     const url = new URL(relative, base);
