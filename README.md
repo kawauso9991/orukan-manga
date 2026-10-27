@@ -13,7 +13,7 @@ kawauso 作『オルカンに勝てん！』全107ページのWebリーダーで
 
 [高画質PDFをダウンロード](https://github.com/kawauso9991/orukan-manga/releases/download/v11.1/orukan-v11.1-high-quality.pdf)（全107ページ、271,533,351 bytes・約271.5 MB）。原本の画質を保持しています。
 
-[軽量PDFをダウンロード](https://kawauso9991.github.io/orukan-manga/downloads/orukan-v11.1.pdf)（全107ページ、111,991,201 bytes・約112.0 MB）。どちらの公開用PDFにも添付ファイルは含みません。
+[軽量PDFをダウンロード](https://github.com/kawauso9991/orukan-manga/releases/download/v11.1/orukan-v11.1.pdf)（全107ページ、111,991,201 bytes・約112.0 MB）。どちらの公開用PDFにも添付ファイルは含みません。
 
 高画質PDFのSHA256：`22f691e00152e9fa7204e637f47b79b36abd64b4eadf46c2c8dddd76707f1721`
 
