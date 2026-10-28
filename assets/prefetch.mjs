@@ -2,13 +2,14 @@ export function areCurrentImagesReady({images,current,doorImage}) {
   if(doorImage&&!doorImage.hidden&&doorImage.getAttribute('src')&&!doorImage.complete)return false;
   return current.every(number=>images[number-1]?.getAttribute('src')&&images[number-1].complete);
 }
-// Keep only one low-priority speculative request alive, with no retained images.
+// Keep only one low-priority speculative request alive.
 export function createPrefetcher({isReady,start,defer,isFetched=()=>false,isPrimed=()=>false}) {
   let key='', queue=[], cancelTimer=null, cancelRequest=null, generation=0;
   const completed=new Set();
   function wake() {
     if(cancelTimer||cancelRequest||!queue.length||!isReady())return;
     const version=generation;
+    const delay=queue[0]?.attempt?2000*2**(queue[0].attempt-1):300;
     cancelTimer=defer(()=>{
       cancelTimer=null;
       if(version!==generation||!isReady())return;
@@ -23,9 +24,10 @@ export function createPrefetcher({isReady,start,defer,isFetched=()=>false,isPrim
         if(version!==generation)return;
         cancelRequest=null;
         if(success)completed.add(item.url);
+        else if(item.attempt<2)queue.push({...item,attempt:item.attempt+1});
         wake();
       },{decode:item.decode});
-    });
+    },delay);
   }
   return {
     update({current,urls,decodeNext=false}) {
@@ -34,7 +36,7 @@ export function createPrefetcher({isReady,start,defer,isFetched=()=>false,isPrim
       key=nextKey;generation++;
       cancelTimer?.();cancelTimer=null;cancelRequest?.();cancelRequest=null;
       const low=Math.min(...current),high=Math.max(...current);
-      queue=urls.map((url,index)=>({url,page:index+1,decode:decodeNext&&index+1>high&&index+1<=high+2}))
+      queue=urls.map((url,index)=>({url,page:index+1,decode:decodeNext&&index+1>high&&index+1<=high+2,attempt:0}))
         .filter(x=>x.url&&!current.includes(x.page)&&(!(completed.has(x.url)||isFetched(x.url,x.page))||(x.decode&&!isPrimed(x.url))))
         .sort((a,b)=>{
           const distance=x=>x.page>high?x.page-high:low-x.page;

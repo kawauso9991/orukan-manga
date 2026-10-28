@@ -8,8 +8,8 @@ import { renderDownloadLinks, lightDownloadURL, visiblePages, chapterLabel } fro
 import { pageAlignment, verifiedCover } from './alignment.mjs';
 import { validateReadings, referenceName } from './references.mjs';
 import {createReaderDoor} from './reader-door.mjs?v=2';
-import {createPrefetcher,areCurrentImagesReady} from './prefetch.mjs?v=3';
-import {createImagePreloader} from './prefetch-image.mjs?v=1';
+import {createPrefetcher,areCurrentImagesReady} from './prefetch.mjs?v=4';
+import {createImagePreloader} from './prefetch-image.mjs?v=2';
 
 const $ = id => document.getElementById(id);
 const documentURL = document.URL;
@@ -33,13 +33,13 @@ let presentation,door,savedResume=null;
 const imagePreloader=createImagePreloader();
 const prefetch=createPrefetcher({
   isReady:()=>{
-    if(!book||!presentation||document.hidden||navigator.connection?.saveData)return false;
+    if(!book||!presentation||navigator.connection?.saveData)return false;
     const selected=visiblePages(currentPage,presentation.mode,book.totalPages);
     return areCurrentImagesReady({images,current:selected,doorImage:door?.active?$('reader-door-image'):null});
   },
   start:imagePreloader.start,isPrimed:imagePreloader.isPrimed,
   isFetched:(url,page)=>{const image=images[page-1];return image?.getAttribute('src')===url&&image.complete&&image.naturalWidth>0;},
-  defer:fn=>{const timer=setTimeout(fn,300);return ()=>clearTimeout(timer);}
+  defer:(fn,delay=300)=>{const timer=setTimeout(fn,delay);return ()=>clearTimeout(timer);}
 });
 
 function element(tag, className, text) {
@@ -371,6 +371,7 @@ function saveReadingPosition(position) {
 
 function installEvents() {
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)prefetch.wake();});
+  navigator.connection?.addEventListener?.('change',()=>prefetch.wake());
   $('previous').addEventListener('click', () => presentation.turn(-1));
   $('next').addEventListener('click', () => presentation.turn(1));
   pageControl = installPageControl({ form: $('page-form'), input: $('page-number'), totalPages: book.totalPages, onNavigate: go });
@@ -479,7 +480,7 @@ function installEvents() {
 
 async function start() {
   try {
-    const response = await fetch(`${assetURL('data/book.json', documentURL)}?v=release-5`);
+    const response = await fetch(`${assetURL('data/book.json', documentURL)}?v=release-6`);
     if (!response.ok) throw Error('Book unavailable');
     book = validateBook(await response.json());
     savedResume=readProgress(getStorage,storageKey,book.version,book.totalPages);
