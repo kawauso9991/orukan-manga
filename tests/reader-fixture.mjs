@@ -9,6 +9,7 @@ export function fixture(width=1600,links=[],providedBook=null) {
     replaceChildren(...children){this.children=[];this.append(...children);}
     contains(node){for(;node;node=node.parentElement)if(node===this)return true;return false;}
     get firstElementChild(){return this.children[0];}
+    get lastElementChild(){return this.children.at(-1)??null;}
     setAttribute(name,value){this.attributes[name]=String(value);}
     removeAttribute(name){delete this.attributes[name];}
     getAttribute(name){return this.attributes[name]??null;}
@@ -25,11 +26,11 @@ export function fixture(width=1600,links=[],providedBook=null) {
   const doc=new Node('document');doc.body=node('body','body');doc.append(doc.body);doc.documentElement=node('html','html');doc.activeElement=doc.body;doc.URL='https://example.test/read.html';doc.getElementById=id=>nodes.get(id);doc.createElement=tag=>new Node('',tag);doc.createDocumentFragment=()=>new Node();doc.querySelector=()=>[...nodes.values()].find(n=>n.tagName==='DIALOG'&&n.open)??null;
   doc.documentElement.getBoundingClientRect=()=>({width:doc.documentElement.clientWidth});
   const shell=node('reader-shell');doc.body.append(shell);
-  const toolbar=node('reader-toolbar','nav'),body=node('reading-body'),rail=node('navigation-rail','nav'),stage=node('reading-stage'),deck=node('reader'),panel=node('reference-panel','aside'),home=node('toolbar-navigation-home'),presentation=node('presentation-controls'),affordance=node('fullscreen-affordance'),mobile=node('mobile-navigation','nav'),actions=node('mobile-menu-actions');
+  const toolbar=node('reader-toolbar','nav'),body=node('reading-body'),rail=node('navigation-rail','nav'),stage=node('reading-stage'),deck=node('reader'),panel=node('reference-panel','aside'),home=node('toolbar-navigation-home'),presentation=node('presentation-controls'),affordance=node('fullscreen-affordance'),mobile=node('mobile-navigation','nav'),menu=node('mobile-menu','details'),actions=node('mobile-menu-actions');
   stage.ownerDocument=doc;
-  shell.append(toolbar,body,affordance,mobile);toolbar.append(home,presentation);body.append(rail,stage,panel);stage.append(deck);mobile.append(actions);panel.hidden=true;
+  shell.append(toolbar,body,affordance,mobile);toolbar.append(home,presentation);body.append(rail,stage,panel);stage.append(deck);mobile.append(menu);menu.append(node('mobile-menu-toggle','summary'),actions);actions.append(node('mobile-menu-close','button'));panel.hidden=true;
   presentation.append(node('fullscreen-control-group'));
-  const ids=['reading-status','navigation-controls','toolbar-contents','open-references','toggle-fullscreen','reveal-controls','mobile-menu-toggle','previous','next','page-number','display-mode','fit-mode','image-quality','image-quality-control','size-slider','size-level','size-out','size-in','size-controls','zoom-show-references','close-references','reference-content','contents-dialog','zoom-dialog','reader-message'];
+  const ids=['reading-status','navigation-controls','toolbar-contents','open-references','toggle-fullscreen','reveal-controls','previous','next','page-number','display-mode','fit-mode','image-quality','image-quality-control','size-slider','size-level','size-out','size-in','size-controls','zoom-show-references','close-references','reference-content','contents-dialog','zoom-dialog','reader-message'];
   for(const id of ids)node(id,id.endsWith('dialog')?'dialog':id==='page-number'?'input':/mode$/.test(id)||id==='image-quality'?'select':/controls$|content$|status$|level$/.test(id)?'div':'button');
   presentation.append(nodes.get('image-quality-control'));nodes.get('image-quality-control').append(nodes.get('image-quality'));
   home.append(nodes.get('reading-status'),nodes.get('navigation-controls'));nodes.get('navigation-controls').append(nodes.get('previous'),nodes.get('page-number'),nodes.get('next'),nodes.get('toolbar-contents'));presentation.append(...['open-references','toggle-fullscreen','display-mode','fit-mode','size-slider','size-out','size-in','size-controls','size-level'].map(id=>nodes.get(id)));affordance.append(nodes.get('reveal-controls'));panel.append(nodes.get('close-references'),nodes.get('reference-content'));shell.append(nodes.get('contents-dialog'),nodes.get('zoom-dialog'));

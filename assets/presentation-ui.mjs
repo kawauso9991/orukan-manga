@@ -101,6 +101,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
       if($(id).contains(focused)) relocatedFocus=focused;
       target.append($(id));
     }
+    if(mobile&&$('mobile-menu-actions').lastElementChild!==$('mobile-menu-close')) $('mobile-menu-actions').append($('mobile-menu-close'));
     $('mobile-navigation').hidden=!mobile;
     toolbar.hidden=mobile;
     $('toggle-fullscreen').hidden=mobile&&!fullscreenActive;
@@ -109,7 +110,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     syncReferenceButton();
     $('previous').textContent=mobile?'←':'← 前へ';
     $('next').textContent=mobile?'→':'次へ →';
-    if(!mobile&&focused===$('mobile-menu-toggle'))relocatedFocus=$('page-number');
+    if(!mobile&&(focused===$('mobile-menu-toggle')||focused===$('mobile-menu-close')))relocatedFocus=$('page-number');
     document.documentElement.style.setProperty('--mobile-nav-height',mobile?`${$('mobile-navigation').getBoundingClientRect().height}px`:'0px');
     if(fullscreenActive&&docked()&&referenceChoice===null&&panel.hidden) {
       panel.hidden=false;autoReferences=true;
@@ -440,6 +441,10 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
       settleFullscreen(generation);
     },
     onError:()=>{transitionPending=false;pendingAnchor=null;$('reader-message').textContent='全画面表示を変更できませんでした。このままお読みいただけます。';}});
+  $('mobile-menu-close').addEventListener('click',()=>{
+    $('mobile-menu').open=false;
+    $('mobile-menu-toggle').focus({preventScroll:true});
+  });
   $('toggle-fullscreen').addEventListener('click',()=>fullscreen.toggle());
   createReaderSwipeController({element:stage,getState:()=>({normal:normalDesktop(),width:window.innerWidth,mode,scale:view().scale,nativePinchScale:window.visualViewport?.scale??1,pannable:pannable(),zoomed:Boolean($('zoom-dialog')?.open)}),onTurn:turn});
   document.addEventListener('fullscreenchange',()=>fullscreen.changed());

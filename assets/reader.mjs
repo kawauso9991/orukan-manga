@@ -3,7 +3,7 @@ import { createNavigation } from './navigation.mjs';
 import { createScrollThrottle } from './scroll.mjs';
 import { installPageControl } from './controls.mjs';
 import { createLayoutRestorer, observeLayoutChanges } from './layout.mjs';
-import { createPresentationUI } from './presentation-ui.mjs?v=quality-2';
+import { createPresentationUI } from './presentation-ui.mjs?v=mobile-close-1';
 import { renderDownloadLinks, lightDownloadURL, visiblePages, chapterLabel } from './presentation.mjs?v=quality-2';
 import { pageAlignment, verifiedCover } from './alignment.mjs';
 import { validateReadings, referenceName } from './references.mjs';
@@ -480,7 +480,7 @@ function installEvents() {
 
 async function start() {
   try {
-    const response = await fetch(`${assetURL('data/book.json', documentURL)}?v=release-6`);
+    const response = await fetch(`${assetURL('data/book.json', documentURL)}?v=v18-approved-candidate`);
     if (!response.ok) throw Error('Book unavailable');
     book = validateBook(await response.json());
     savedResume=readProgress(getStorage,storageKey,book.version,book.totalPages);
