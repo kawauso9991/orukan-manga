@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {createNavigation} from '../assets/navigation.mjs';
 const module=await import('../assets/reader-door.mjs').catch(()=>null);
 
 function fixture({width=1440,height=900,touch=false,resume=null,portraitCoverURL='assets/a4.webp',coverURL='assets/square.webp'}={}){
@@ -26,10 +27,32 @@ function fixture({width=1440,height=900,touch=false,resume=null,portraitCoverURL
   const door=module.createReaderDoor({shell,book,getPage:()=>page,getResume:()=>resume,getFullscreen:()=>fullscreen,coverURL,portraitCoverURL,onNavigate:(p,o)=>navigations.push([p,o]),onContents:()=>contents++,now:()=>100});
   return {doc,view,shell,original,door,book,navigations,contents:()=>contents,setPage:p=>page=p,setFullscreen:v=>fullscreen=v,get:id=>doc.getElementById(id)};
 }
-test('normal P1 door mounts without moving core DOM or navigating, and disables on P2/fullscreen',()=>{
+test('P1 door mounts without moving core DOM or navigating, including fullscreen, and disables on P2',()=>{
   const f=fixture();f.door.sync();assert.equal(f.door.active,true);assert.equal(f.shell.classList.contains('door-open'),true);assert.equal(f.original.parentElement,f.shell);assert.equal(f.get('reader-door-image').getAttribute('src'),'assets/square.webp');assert.deepEqual(f.navigations,[]);
-  f.setFullscreen(true);f.door.sync();assert.equal(f.door.active,false);assert.equal(f.shell.classList.contains('door-open'),false);
+  f.setFullscreen(true);f.door.sync();assert.equal(f.door.active,true);assert.equal(f.shell.classList.contains('door-open'),true);
   f.setFullscreen(false);f.setPage(2);f.door.sync();assert.equal(f.door.active,false);f.door.destroy();assert.equal(f.original.parentElement,f.shell);
+});
+test('repeated returns to P1 restore the door in either fullscreen state without navigating',()=>{
+  const f=fixture();
+  for(const fullscreen of [false,true,false,true]) {
+    f.setFullscreen(fullscreen);f.setPage(2);f.door.sync();assert.equal(f.door.active,false);
+    f.setPage(1);f.door.sync();assert.equal(f.door.active,true);assert.equal(f.get('reader-door-image').getAttribute('src'),'assets/square.webp');
+  }
+  assert.deepEqual(f.navigations,[]);
+});
+test('fullscreen rapid navigation and history restores keep the latest page and its door state',()=>{
+  const f=fixture();f.setFullscreen(true);let page=1;const settled=[],history=[];
+  const nav=createNavigation({totalPages:107,readPosition:()=>({page,offset:0}),
+    push:position=>history.push(position.page),replace(){},save(){},
+    onChange:position=>{page=position.page;f.setPage(page);f.door.sync();},
+    moveTo:(position,done)=>settled.push(done)});
+  nav.start({page:1,offset:0});nav.go(2);nav.go(1);nav.go(4);nav.go(1);
+  assert.deepEqual(history,[2,1,4,1]);assert.equal(page,1);assert.equal(f.door.active,true);
+  for(const done of settled)done();
+  assert.equal(page,1);assert.equal(f.door.active,true);
+  nav.restore('#p=2');assert.equal(page,2);assert.equal(f.door.active,false);
+  nav.restore('#p=1');assert.equal(page,1);assert.equal(f.door.active,true);
+  assert.deepEqual(f.navigations,[]);
 });
 test('resume button preserves saved offset and chapter while start/image/key always begin P2',()=>{
   const f=fixture({resume:{page:53,offset:.27}});f.door.sync();

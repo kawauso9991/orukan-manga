@@ -166,9 +166,23 @@ test('desktop artwork replaces visible page captions with Enter and Space enlarg
   assert.equal(enter.defaultPrevented,true);assert.equal(space.defaultPrevented,true);assert.equal(opened.length,2);assert.equal(opened[0].opener,images[0]);
   f.window.innerWidth=390;images[0].dispatch('keydown',{key:'Enter'});assert.equal(opened.length,2);
 });
+test('loading page uses a neutral placeholder until the current image completes',()=>{
+  const f=fixture(),figures=[],images=[];f.nodes.get('reader').replaceChildren();
+  const context={document:f.doc,window:f.window,pageAlignment,verifiedCover,book:{title:'Book',links:[],pages:[{number:1,label:'1',width:1200,height:1698,src:'page.webp'}]},pageLinks:new Map(),reader:f.nodes.get('reader'),figures,images,pageLabel:()=> '1',openZoom(){},presentation:{quality:'normal'},assetURL:x=>x??null,documentURL:'https://example.test/read.html',wantsWide:()=>false,prefetch:{wake(){}}};
+  vm.runInNewContext(method('element')+'\n'+method('renderPages')+'\n'+method('loadPage')+'\nrenderPages();loadPage(1);',context);
+  const image=images[0],art=image.parentElement;assert.equal(art.classList.contains('page-loading'),true);
+  image.currentSrc='obsolete.webp';image.dispatch('load');assert.equal(art.classList.contains('page-loading'),true);
+  image.currentSrc=image.src;image.dispatch('load');assert.equal(art.classList.contains('page-loading'),false);
+  const css=fs.readFileSync(new URL('../assets/reader.css',import.meta.url),'utf8');assert.match(css,/\.page-art\.page-loading\s*\{\s*background:\s*var\(--paper\)/);
+});
+test('door does not eagerly request its neighboring page ahead of the cover',()=>{
+  const loads=[],context={door:{active:true},book:{totalPages:107},loadPage:page=>loads.push(page)};
+  vm.runInNewContext(method('loadNeighborhood'),context);context.loadNeighborhood(1);assert.deepEqual(loads,[1]);
+  loads.length=0;context.door.active=false;context.loadNeighborhood(2);assert.deepEqual(loads,[2,3,1]);
+});
 test('enlargement uses all viewport width at original ratio with natural vertical overflow',()=>{
   const zoomCanvas={style:{},getBoundingClientRect:()=>({width:480})};
-  const context={zoomPage:1,zoomCanvas,zoomViewport:{clientWidth:960,clientHeight:500,scrollLeft:0,scrollTop:0},book:{pages:[{width:1200,height:1698}]}};
+  const context={zoomPage:1,zoomCanvas,zoomImage:{getAttribute:()=>null},presentation:{quality:'normal'},zoomViewport:{clientWidth:960,clientHeight:500,scrollLeft:0,scrollTop:0},book:{pages:[{width:1200,height:1698}]}};
   vm.runInNewContext(method('zoomLayout')+'\nzoomLayout();',context);
   assert.equal(zoomCanvas.style.width,'960px');assert.equal(zoomCanvas.style.height,'1358.4px');assert.equal(context.zoomViewport.scrollTop,0);
 });
