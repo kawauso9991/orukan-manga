@@ -34,7 +34,7 @@ export function createReaderDoor({shell,book,getPage,getResume,getFullscreen,cov
   function sync(options={}) {
     if(destroyed)return;
     if(Object.hasOwn(options,'resume')){hasOverride=true;override=options.resume;}
-    active=Number(getPage?.())===1&&!Boolean(getFullscreen?getFullscreen():doc.fullscreenElement);
+    active=Number(getPage?.())===1;
     door.hidden=!active;shell.classList[active?'add':'remove']('door-open');
     if(!active){delete shell.dataset.doorLayout;candidate=null;touches.clear();return;}
     const kind=layout();door.dataset.layout=kind;shell.dataset.doorLayout=kind;

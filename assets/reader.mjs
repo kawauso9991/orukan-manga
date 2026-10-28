@@ -7,7 +7,9 @@ import { createPresentationUI } from './presentation-ui.mjs?v=quality-2';
 import { renderDownloadLinks, lightDownloadURL, visiblePages, chapterLabel } from './presentation.mjs?v=quality-2';
 import { pageAlignment, verifiedCover } from './alignment.mjs';
 import { validateReadings, referenceName } from './references.mjs';
-import {createReaderDoor} from './reader-door.mjs';
+import {createReaderDoor} from './reader-door.mjs?v=2';
+import {createPrefetcher,areCurrentImagesReady} from './prefetch.mjs?v=3';
+import {createImagePreloader} from './prefetch-image.mjs?v=1';
 
 const $ = id => document.getElementById(id);
 const documentURL = document.URL;
@@ -28,6 +30,17 @@ let contentsOpener, pendingContentsPage = null;
 let pendingZoomOffset = 0, pendingContentsOffset = 0;
 let skipZoomRestore = false;
 let presentation,door,savedResume=null;
+const imagePreloader=createImagePreloader();
+const prefetch=createPrefetcher({
+  isReady:()=>{
+    if(!book||!presentation||document.hidden||navigator.connection?.saveData)return false;
+    const selected=visiblePages(currentPage,presentation.mode,book.totalPages);
+    return areCurrentImagesReady({images,current:selected,doorImage:door?.active?$('reader-door-image'):null});
+  },
+  start:imagePreloader.start,isPrimed:imagePreloader.isPrimed,
+  isFetched:(url,page)=>{const image=images[page-1];return image?.getAttribute('src')===url&&image.complete&&image.naturalWidth>0;},
+  defer:fn=>{const timer=setTimeout(fn,300);return ()=>clearTimeout(timer);}
+});
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -131,13 +144,15 @@ function renderPages() {
     image.addEventListener('error', () => {
       if (image.dataset.res === '1600') { book.pages[page.number - 1].srcWide = undefined; loadPage(page.number); return; }
       if (image.dataset.quality === 'high') { delete image.dataset.hq; delete image.dataset.qualityLoaded; loadPage(page.number,{preferHQ:false}); return; }
-      loadError.hidden = false;delete image.dataset.hq;delete image.dataset.qualityLoaded;
+      loadError.hidden = false;delete image.dataset.hq;delete image.dataset.qualityLoaded;prefetch.wake();
     });
     image.addEventListener('load', () => {
       loadError.hidden = true;
       if(image.currentSrc!==image.src)return;
+      art.classList.remove('page-loading');
       image.dataset.qualityLoaded=image.dataset.quality;
       if(image.dataset.quality==='high')image.dataset.hq='ready';
+      prefetch.wake();
     });
     art.append(image);
     const links = pageLinks.get(page.number) ?? [];
@@ -191,12 +206,25 @@ function loadPage(page,{preferHQ}={}) {
     image.dataset.res=high?'2800':wide?'1600':'1200';
     image.dataset.quality=high?'high':'normal';delete image.dataset.qualityLoaded;
     if(high)image.dataset.hq='loading';else delete image.dataset.hq;
+    image.parentElement.classList.add('page-loading');
     image.src=url;
   }
 }
 
 function loadNeighborhood(page) {
-  for (let number = Math.max(1, page - 1); number <= Math.min(book.totalPages, page + 1); number++) loadPage(number);
+  const numbers=door?.active?[page]:[page,page+1,page-1];
+  for (const number of numbers) if(number>=1&&number<=book.totalPages)loadPage(number);
+}
+
+function schedulePrefetch() {
+  if(!presentation)return;
+  const current=visiblePages(currentPage,presentation.mode,book.totalPages);
+  const high=presentation.quality==='high';
+  // The door has no visible page geometry; estimate the first spread instead.
+  const estimated=door?.active&&presentation.desiredPageWidth(2)*(window.devicePixelRatio||1)>1200.5;
+  const wide=door?.active?(wideNeeded||estimated):wideNeeded;
+  const urls=book.pages.map(item=>high?assetURL(item.zoom,documentURL):(wide&&assetURL(item.srcWide,documentURL))||assetURL(item.src,documentURL));
+  prefetch.update({current,urls,decodeNext:!high});
 }
 
 function headerOffset() { return 0; }
@@ -248,6 +276,7 @@ function updatePosition(position) {
   $('reading-progress').style.width = `${((position.page - 1 + position.offset) / book.totalPages) * 100}%`;
   $('current-chapter').textContent = chapterLabel(visiblePages(position.page,presentation?.mode??'vertical',book.totalPages),book.chapters);
   loadNeighborhood(position.page);
+  schedulePrefetch();
 }
 
 function historyWrite(method, position) {
@@ -341,6 +370,7 @@ function saveReadingPosition(position) {
 }
 
 function installEvents() {
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)prefetch.wake();});
   $('previous').addEventListener('click', () => presentation.turn(-1));
   $('next').addEventListener('click', () => presentation.turn(1));
   pageControl = installPageControl({ form: $('page-form'), input: $('page-number'), totalPages: book.totalPages, onNavigate: go });
@@ -449,7 +479,7 @@ function installEvents() {
 
 async function start() {
   try {
-    const response = await fetch(`${assetURL('data/book.json', documentURL)}?v=release-4`);
+    const response = await fetch(`${assetURL('data/book.json', documentURL)}?v=release-5`);
     if (!response.ok) throw Error('Book unavailable');
     book = validateBook(await response.json());
     savedResume=readProgress(getStorage,storageKey,book.version,book.totalPages);
@@ -480,6 +510,8 @@ async function start() {
       getFullscreen:()=>presentation.fullscreen,coverURL:assetURL('assets/orukan-cover-square-protected-web.webp',documentURL),
       portraitCoverURL:assetURL('assets/orukan-cover-A4-fullbleed-web.webp',documentURL),onNavigate:go,
       onContents:()=>openContents($('reader-door-contents'))});
+    $('reader-door-image')?.addEventListener?.('load',prefetch.wake);
+    $('reader-door-image')?.addEventListener?.('error',prefetch.wake);
     installEvents();
     const initialHash = location.hash;
     const saved = savedResume;

@@ -162,4 +162,7 @@ button{min-width:44px}
 .reader-shell .zoom-close{position:absolute;z-index:12;right:8px;top:8px;width:44px;height:44px;padding:0;border-radius:50%;background:#171b21bb;border-color:#ffffff66;color:#fff;font-size:1.4rem;line-height:1}
 .reader-shell .zoom-canvas.cover-view{background:#0d1014}
 .reader-shell .zoom-canvas.cover-view img{clip-path:inset(0 2.5%)}
+
+/* While an image is being fetched, match the surrounding reader surface. */
+.page-art.page-loading{background:var(--paper)}
 .reference-reading-description { display:block; grid-column:1 / -1; font-size:.9em; line-height:1.5; }
