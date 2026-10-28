@@ -3692,20 +3692,20 @@
     }
   ],
   "download": {
-    "filename": "orukan-v14.pdf",
-    "bytes": 117100149,
-    "sha256": "aac9bca4b346362734b7ffac1a4e0f00d478a919ea8f3847ec3567830da919dd",
-    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v14/orukan-v14.pdf",
+    "filename": "orukan-v15.pdf",
+    "bytes": 115941047,
+    "sha256": "632b2ddff0b83d98dc87c399a6621713625cbb3434c04dd5f4264732491b987a",
+    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v15/orukan-v15.pdf",
     "pages": 107
   },
   "highQualityDownload": {
-    "filename": "orukan-v14-high-quality.pdf",
-    "bytes": 276642299,
-    "sha256": "77e7b80737a2abe1271544eb53b557d92ea7f0d2d45778212d25aef1effbb047",
-    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v14/orukan-v14-high-quality.pdf",
+    "filename": "orukan-v15-high-quality.pdf",
+    "bytes": 275483197,
+    "sha256": "95bd59c17c1bf06349acb690875d166db1f9435a9ef2d82e7953b3c9f5952d65",
+    "url": "https://github.com/kawauso9991/orukan-manga/releases/download/v15/orukan-v15-high-quality.pdf",
     "pages": 107
   },
-  "revision": "v14-web-1600",
+  "revision": "v15-pdf",
   "readings": [
     {
       "page": 7,
