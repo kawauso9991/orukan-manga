@@ -31,7 +31,7 @@ test('navigation cancels stale work and ignores its completion, reprioritizing t
   f.prefetch.update({current:[6,7],urls:['1','2','3','4','5','6','7','8']});assert.equal(old.cancelled,true);old.done(true);f.tick();assert.deepEqual(f.requests.map(x=>x.url),['4','8']);
 });
 
-test('failed background loads do not stop later pages or repeat in the same generation',()=>{
+test('failed background loads do not stop later pages',()=>{
   const f=fixture();f.ready();f.prefetch.update({current:[2],urls:['1','2','3','4']});f.tick();f.requests[0].done(false);f.tick();assert.deepEqual(f.requests.map(x=>x.url),['3','1']);
 });
 
