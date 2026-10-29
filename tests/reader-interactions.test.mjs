@@ -159,7 +159,7 @@ const readerSource=fs.readFileSync(new URL('../assets/reader.mjs',import.meta.ur
 function method(name){const start=readerSource.indexOf(`function ${name}(`),end=readerSource.indexOf('\nfunction ',start+1);return readerSource.slice(start,end);}
 test('desktop artwork replaces visible page captions with Enter and Space enlargement on the image',()=>{
   const f=fixture(),figures=[],images=[],opened=[];f.nodes.get('reader').replaceChildren();
-  const context={document:f.doc,window:f.window,pageAlignment,verifiedCover,book:{title:'作品',links:[],pages:[{number:1,label:'1',width:1200,height:1698}]},pageLinks:new Map(),reader:f.nodes.get('reader'),figures,images,pageLabel:()=> '1ページ',openZoom:(page,opener)=>opened.push({page,opener}),loadPage(){}};
+  const context={holdSpread(){},scheduleSpread(){},document:f.doc,window:f.window,pageAlignment,verifiedCover,book:{title:'作品',links:[],pages:[{number:1,label:'1',width:1200,height:1698}]},pageLinks:new Map(),reader:f.nodes.get('reader'),figures,images,pageLabel:()=> '1ページ',openZoom:(page,opener)=>opened.push({page,opener}),loadPage(){}};
   vm.runInNewContext(method('element')+'\n'+method('renderPages')+'\nrenderPages();',context);
   assert.equal(figures[0].children.some(node=>node.tagName==='FIGCAPTION'),false);
   const enter=images[0].dispatch('keydown',{key:'Enter'}),space=images[0].dispatch('keydown',{key:' '});
@@ -168,7 +168,7 @@ test('desktop artwork replaces visible page captions with Enter and Space enlarg
 });
 test('loading page uses a neutral placeholder until the current image completes',()=>{
   const f=fixture(),figures=[],images=[];f.nodes.get('reader').replaceChildren();
-  const context={document:f.doc,window:f.window,pageAlignment,verifiedCover,book:{title:'Book',links:[],pages:[{number:1,label:'1',width:1200,height:1698,src:'page.webp'}]},pageLinks:new Map(),reader:f.nodes.get('reader'),figures,images,pageLabel:()=> '1',openZoom(){},presentation:{quality:'normal'},assetURL:x=>x??null,documentURL:'https://example.test/read.html',wantsWide:()=>false,prefetch:{wake(){}}};
+  const context={holdSpread(){},scheduleSpread(){},document:f.doc,window:f.window,pageAlignment,verifiedCover,book:{title:'Book',links:[],pages:[{number:1,label:'1',width:1200,height:1698,src:'page.webp'}]},pageLinks:new Map(),reader:f.nodes.get('reader'),figures,images,pageLabel:()=> '1',openZoom(){},presentation:{quality:'normal'},assetURL:x=>x??null,documentURL:'https://example.test/read.html',wantsWide:()=>false,prefetch:{wake(){}}};
   vm.runInNewContext(method('element')+'\n'+method('renderPages')+'\n'+method('loadPage')+'\nrenderPages();loadPage(1);',context);
   const image=images[0],art=image.parentElement;assert.equal(art.classList.contains('page-loading'),true);
   image.currentSrc='obsolete.webp';image.dispatch('load');assert.equal(art.classList.contains('page-loading'),true);
@@ -182,13 +182,13 @@ test('door does not eagerly request its neighboring page ahead of the cover',()=
 });
 test('enlargement uses all viewport width at original ratio with natural vertical overflow',()=>{
   const zoomCanvas={style:{},getBoundingClientRect:()=>({width:480})};
-  const context={zoomPage:1,zoomCanvas,zoomImage:{getAttribute:()=>null},presentation:{quality:'normal'},zoomViewport:{clientWidth:960,clientHeight:500,scrollLeft:0,scrollTop:0},book:{pages:[{width:1200,height:1698}]}};
+  const context={holdSpread(){},scheduleSpread(){},zoomPage:1,zoomCanvas,zoomImage:{getAttribute:()=>null},presentation:{quality:'normal'},zoomViewport:{clientWidth:960,clientHeight:500,scrollLeft:0,scrollTop:0},book:{pages:[{width:1200,height:1698}]}};
   vm.runInNewContext(method('zoomLayout')+'\nzoomLayout();',context);
   assert.equal(zoomCanvas.style.width,'960px');assert.equal(zoomCanvas.style.height,'1358.4px');assert.equal(context.zoomViewport.scrollTop,0);
 });
 test('right click closes only an open enlargement artwork area without intercepting sources or normal reading',()=>{
   let closed=0;const canvas={contains:target=>target.art};
-  const context={zoomDialog:{open:true,close(){closed++;}},zoomCanvas:canvas};
+  const context={holdSpread(){},scheduleSpread(){},zoomDialog:{open:true,close(){closed++;}},zoomCanvas:canvas};
   vm.runInNewContext(method('closeZoomFromContextMenu'),context);
   const event=(art,link=false)=>({target:{art,closest:()=>link?{}:null},defaultPrevented:false,preventDefault(){this.defaultPrevented=true;}});
   for(const e of [event(false),event(true,true)]){context.closeZoomFromContextMenu(e);assert.equal(e.defaultPrevented,false);}
@@ -203,7 +203,7 @@ test('visiting P1 never overwrites saved progress while actual reading remains s
 });
 test('door reflow aligns the shell rather than the hidden vertical comic at600–767px',()=>{
   const window={scrollY:100,scrollTo({top}){this.scrollY=top;}};let settled=false;
-  const context={door:{active:true},window,$:()=>({getBoundingClientRect:()=>({top:250})}),scrollWork:{cancel(){}},loadNeighborhood(){},presentation:{moveTo(){throw Error('hidden artwork must not determine door scroll');}},requestAnimationFrame:fn=>fn()};
+  const context={holdSpread(){},scheduleSpread(){},door:{active:true},window,$:()=>({getBoundingClientRect:()=>({top:250})}),scrollWork:{cancel(){}},loadNeighborhood(){},presentation:{moveTo(){throw Error('hidden artwork must not determine door scroll');}},requestAnimationFrame:fn=>fn()};
   vm.runInNewContext(method('moveTo'),context);context.moveTo({page:1,offset:0},()=>settled=true);
   assert.equal(window.scrollY,350);assert.equal(settled,true);
 });

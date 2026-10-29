@@ -99,9 +99,10 @@ test('reader allows background tabs while still respecting data saver and visibl
   const ctx={createPrefetcher:o=>(options=o,{}),book:{totalPages:2},presentation:{mode:'spread'},
     document:{hidden:false},navigator:{connection:{saveData:false}},currentPage:1,door:null,images:[],
     visiblePages:()=>[1,2],areCurrentImagesReady:()=>imagesReady,
-    imagePreloader:{start(){},isPrimed(){}},setTimeout,clearTimeout};
+    spreadTransition:{pending:false},imagePreloader:{start(){},isPrimed(){}},setTimeout,clearTimeout};
   vm.runInNewContext(source.slice(start,end),ctx);
   assert.equal(options.isReady(),true);
+  ctx.spreadTransition.pending=true;assert.equal(options.isReady(),false);ctx.spreadTransition.pending=false;
   ctx.navigator.connection.saveData=true;assert.equal(options.isReady(),false);
   ctx.navigator.connection.saveData=false;ctx.document.hidden=true;assert.equal(options.isReady(),true);
   ctx.document.hidden=false;imagesReady=false;assert.equal(options.isReady(),false);

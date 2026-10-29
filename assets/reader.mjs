@@ -3,13 +3,14 @@ import { createNavigation } from './navigation.mjs';
 import { createScrollThrottle } from './scroll.mjs';
 import { installPageControl } from './controls.mjs';
 import { createLayoutRestorer, observeLayoutChanges } from './layout.mjs';
-import { createPresentationUI } from './presentation-ui.mjs?v=mobile-close-1';
+import { createPresentationUI } from './presentation-ui.mjs?v=smooth-turn-1';
 import { renderDownloadLinks, lightDownloadURL, visiblePages, chapterLabel } from './presentation.mjs?v=quality-2';
 import { pageAlignment, verifiedCover } from './alignment.mjs';
 import { validateReadings, referenceName } from './references.mjs';
 import {createReaderDoor} from './reader-door.mjs?v=2';
-import {createPrefetcher,areCurrentImagesReady} from './prefetch.mjs?v=4';
-import {createImagePreloader} from './prefetch-image.mjs?v=2';
+import {createPrefetcher,areCurrentImagesReady} from './prefetch.mjs?v=5';
+import {createImagePreloader} from './prefetch-image.mjs?v=3';
+import {createSpreadTransition} from './spread-transition.mjs';
 
 const $ = id => document.getElementById(id);
 const documentURL = document.URL;
@@ -30,10 +31,20 @@ let contentsOpener, pendingContentsPage = null;
 let pendingZoomOffset = 0, pendingContentsOffset = 0;
 let skipZoomRestore = false;
 let presentation,door,savedResume=null;
-const imagePreloader=createImagePreloader();
+const spreadTransition=createSpreadTransition({stage:$('reading-stage'),deck:reader,figures,images,onCommit:()=>prefetch.wake()});
+let spreadQueued=false;
+function holdSpread(page){if(presentation&&presentation.mode!=='vertical'&&!door?.active&&(page===undefined||visiblePages(currentPage,presentation.mode,book.totalPages).includes(page)))spreadTransition.capture();}
+function scheduleSpread(){
+  if(spreadQueued)return;spreadQueued=true;
+  queueMicrotask(()=>{spreadQueued=false;if(!presentation)return;
+    const selected=visiblePages(currentPage,presentation.mode,book.totalPages).map(number=>images[number-1]);
+    spreadTransition.prepare(selected,{enabled:presentation.mode!=='vertical'&&!door?.active});
+  });
+}
+const imagePreloader=createImagePreloader({maxImages:6,maxBytes:(window.innerWidth>=768?96:32)*1024*1024});
 const prefetch=createPrefetcher({
   isReady:()=>{
-    if(!book||!presentation||navigator.connection?.saveData)return false;
+    if(!book||!presentation||navigator.connection?.saveData||spreadTransition.pending)return false;
     const selected=visiblePages(currentPage,presentation.mode,book.totalPages);
     return areCurrentImagesReady({images,current:selected,doorImage:door?.active?$('reader-door-image'):null});
   },
@@ -203,11 +214,13 @@ function loadPage(page,{preferHQ}={}) {
     const wide=!high&&Boolean(assetURL(item.srcWide,documentURL))&&wantsWide(image);
     const url=assetURL(high?item.zoom:wide?item.srcWide:item.src,documentURL);
     if(image.getAttribute('src')===url)return;
+    holdSpread(page);
     image.dataset.res=high?'2800':wide?'1600':'1200';
     image.dataset.quality=high?'high':'normal';delete image.dataset.qualityLoaded;
     if(high)image.dataset.hq='loading';else delete image.dataset.hq;
     image.parentElement.classList.add('page-loading');
     image.src=url;
+    scheduleSpread();
   }
 }
 
@@ -224,7 +237,10 @@ function schedulePrefetch() {
   const estimated=door?.active&&presentation.desiredPageWidth(2)*(window.devicePixelRatio||1)>1200.5;
   const wide=door?.active?(wideNeeded||estimated):wideNeeded;
   const urls=book.pages.map(item=>high?assetURL(item.zoom,documentURL):(wide&&assetURL(item.srcWide,documentURL))||assetURL(item.src,documentURL));
-  prefetch.update({current,urls,decodeNext:!high});
+  const low=Math.min(...current),last=Math.max(...current);
+  const decodeAhead=window.innerWidth>=768?4:2,decodeBehind=window.innerWidth>=768?2:1;
+  imagePreloader.setRetention(high?[]:urls.filter((_,index)=>(index+1>last&&index+1<=last+decodeAhead)||(index+1<low&&index+1>=low-decodeBehind)));
+  prefetch.update({current,urls,decodeNext:!high,decodeAhead,decodeBehind,aheadFirst:4});
 }
 
 function headerOffset() { return 0; }
@@ -506,6 +522,8 @@ async function start() {
       restoreScrollY: top => window.scrollTo({top, behavior:'instant'}) });
     presentation = createPresentationUI({book,figures,images,getPage:()=>currentPage,getStorage,go,makeLink,
       reflow:()=>{if(presentation)navigation.reflow();},persist:()=>navigation.persist(),loadPage,
+        onQualityChange:()=>{schedulePrefetch();scheduleSpread();},
+        onRenderStart:({paginated})=>{if(paginated&&!door?.active)spreadTransition.capture();else spreadTransition.clear();},onRenderEnd:scheduleSpread,
       observeScroll:()=>{navigation.observe();scrollWork.schedule();}});
     door=createReaderDoor({shell:$('reader-shell'),book,getPage:()=>currentPage,getResume:()=>savedResume,
       getFullscreen:()=>presentation.fullscreen,coverURL:assetURL('assets/orukan-cover-square-protected-web.webp',documentURL),

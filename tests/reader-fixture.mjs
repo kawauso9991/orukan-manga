@@ -1,7 +1,7 @@
 import {createPresentationUI} from '../assets/presentation-ui.mjs';
 // Browser layout/fullscreen are supplied here; the real presentation UI owns
 // all event handlers, page decisions, toolbar visibility and focus behavior.
-export function fixture(width=1600,links=[],providedBook=null) {
+export function fixture(width=1600,links=[],providedBook=null,callbacks={}) {
   const nodes=new Map();
   class Node {
     constructor(id='',tag='div'){this.id=id;this.tagName=tag.toUpperCase();this.children=[];this.hidden=false;this.disabled=false;this.inert=false;this.open=false;this.dataset={};this.attributes={};this.listeners={};this.scrollLeft=0;this.scrollTop=0;this.clientWidth=1600;this.clientHeight=900;this.scrollWidth=1600;this.scrollHeight=900;this.style={setProperty(name,value){this[name]=value;}};this.classes=new Set();this.classList={toggle:(name,on)=>on?this.classes.add(name):this.classes.delete(name),add:name=>this.classes.add(name),remove:name=>this.classes.delete(name),contains:name=>this.classes.has(name)};}
@@ -40,7 +40,7 @@ export function fixture(width=1600,links=[],providedBook=null) {
   let page=86;const turns=[],loads=[];const figures=[],images=[];
   const book=providedBook??{totalPages:107,pages:Array.from({length:107},(_,i)=>({number:i+1,label:String(i+1),width:1200,height:1698})),links};
   for(const item of book.pages){const figure=new Node(`page-${item.number}`),caption=new Node(),art=new Node(),image=new Node();const frame=new Node();frame.dataset.alignmentFrame='true';figure.append(frame);frame.append(art);art.append(image);deck.append(figure);figures.push(figure);images.push(image);}
-  let ui;ui=createPresentationUI({book,figures,images,getPage:()=>page,getStorage:()=>null,go:next=>{page=next;turns.push(next);ui.changed({page,offset:0});},makeLink:()=>new Node('', 'a'),reflow(){},persist(){},loadPage:(number,options)=>loads.push({number,...options}),observeScroll(){}});
+  let ui;ui=createPresentationUI({book,figures,images,getPage:()=>page,getStorage:()=>null,go:next=>{page=next;turns.push(next);ui.changed({page,offset:0});},makeLink:()=>new Node('', 'a'),reflow(){},persist(){},loadPage:(number,options)=>loads.push({number,...options}),observeScroll(){},...callbacks});
   return {nodes,doc,window:win,figures,images,book,shell,toolbar,stage,panel,ui,turns,loads,page:()=>page,enter:async()=>{nodes.get('toggle-fullscreen').dispatch('click');await Promise.resolve();},hidden:()=>shell.classList.contains('chrome-hidden')};
 }
 

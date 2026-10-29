@@ -6,7 +6,7 @@ import {wideReaderGeometry} from './reader-wide.mjs';
 import { visiblePages, stepPage, effectiveMode, readPreferences, writePreferences, createWheelIntent, canTurnWheel, keyDirection, presentationGeometry, referenceGroups, createFullscreenController } from './presentation.mjs?v=quality-2';
 
 // Presentation never owns the active logical page; navigation/history do.
-export function createPresentationUI({book,figures,images,getPage,getStorage,go,makeLink,reflow,persist,loadPage,observeScroll}) {
+export function createPresentationUI({book,figures,images,getPage,getStorage,go,makeLink,reflow,persist,loadPage,observeScroll,onQualityChange=()=>{},onRenderStart=()=>{},onRenderEnd=()=>{}}) {
   const $ = id => document.getElementById(id);
   const shell=$('reader-shell'), stage=$('reading-stage'), deck=$('reader'), panel=$('reference-panel');
   const preferences=readPreferences(getStorage), wheel=createWheelIntent();
@@ -177,6 +177,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
       if(i+1===getPage()) figures[i].setAttribute('aria-current','page'); else figures[i].removeAttribute('aria-current');
     }
     if(!force && displayed===key) return;
+    onRenderStart({selected,paginated:paginated()});
     displayed=key;
     for(let i=0;i<figures.length;i++) {
       const figure=figures[i];
@@ -215,6 +216,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     } else {railWidth=0;updateWideGeometry();}
     layoutRails();
     stage.classList.toggle('can-pan',pannable());
+    onRenderEnd({selected,paginated:paginated()});
   }
   function visibleReferencePages() {
     if(zoomPage!==null) return [zoomPage];
@@ -286,6 +288,7 @@ export function createPresentationUI({book,figures,images,getPage,getStorage,go,
     // Source-only updates preserve the existing page, geometry and pan position.
     const nearby=[Math.max(1,getPage()-1),getPage(),Math.min(book.totalPages,getPage()+1)];
     for(const number of new Set([...pages(),...nearby]))loadPage(number,{preferHQ:quality==='high'});
+    onQualityChange();
   });
   $('size-out').addEventListener('click',()=>changePreference({scale:Math.max(.5,Math.round((view().scale-.25)*100)/100)}));
   $('size-in').addEventListener('click',()=>changePreference({scale:Math.min(3,Math.round((view().scale+.25)*100)/100)}));

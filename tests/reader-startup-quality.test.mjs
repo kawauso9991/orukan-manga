@@ -10,7 +10,7 @@ test('saved fit controls cannot reflow navigation before presentation initializa
   const nodes=new Map(),starts=[],alerts=[];let earlyReflows=0;
   const node=id=>{if(!nodes.has(id))nodes.set(id,{hidden:true,style:{setProperty(){}},replaceChildren(){},setAttribute(k,v){if(v==='alert')alerts.push(id);}});return nodes.get(id);};
   const location={hash:'#p=73',href:'https://example.test/read.html#p=73'};
-  const context={document:{documentElement:node('html'),createTextNode:x=>x},toolbar:node('reader-toolbar'),window:{scrollY:0,scrollTo(){}},history:{},location,$:node,
+  const context={scheduleSpread(){},document:{documentElement:node('html'),createTextNode:x=>x},toolbar:node('reader-toolbar'),window:{scrollY:0,scrollTo(){}},history:{},location,$:node,
     documentURL:location.href,storageKey:'reading',getStorage:()=>null,presentation:undefined,savedResume:null,currentPage:1,figures:[],images:[],
     fetch:async()=>({ok:true,json:async()=>({title:'Book',version:'v8',totalPages:107})}),validateBook:x=>x,assetURL:x=>x,readProgress:()=>({page:73,offset:.2}),chooseStart,
     renderPages(){},renderContents(){},renderDownloadLinks(){},positionAtScroll(){},moveTo(){},historyWrite(){},saveReadingPosition(){},updatePosition(){},go(){},openContents(){},installEvents(){},loadPage(){},makeLink(){},
